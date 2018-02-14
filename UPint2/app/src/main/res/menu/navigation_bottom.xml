@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_upcoming"
+        android:enabled="true"
+        android:icon="@drawable/ic_featured_play_list"
+        android:title="@string/tab_upcoming"
+        app:showAsAction="withText">
+    </item>
+    <item
+        android:id="@+id/action_listening"
+        android:enabled="true"
+        android:icon="@drawable/ic_assignment"
+        android:title="@string/tab_listening"
+        app:showAsAction="withText"/>
+    <item
+        android:id="@+id/action_schedule"
+        android:enabled="true"
+        android:icon="@drawable/ic_date_range"
+        android:title="@string/tab_schedule"
+        app:showAsAction="withText"/>
+    <item
+        android:id="@+id/action_static"
+        android:enabled="true"
+        android:icon="@drawable/ic_assessment"
+        android:title="@string/tab_static"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_setting"
+        android:enabled="true"
+        android:icon="@drawable/ic_brightness_high"
+        android:title="@string/tab_setting"
+        app:showAsAction="ifRoom"/>
+</menu>

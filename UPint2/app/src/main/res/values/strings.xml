@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">UPint2</string>
+    <string name="facebook_app_id">381162788998709</string>
+    <string name="fb_login_protocol_scheme">94cb5fa4cb2b690c6e88f3ede0456b2c</string>
+
+    <string name="tab_upcoming">Upcoming</string>
+    <string name="tab_listening">Your listening</string>
+    <string name="tab_schedule">Schedule</string>
+    <string name="tab_static">Static</string>
+    <string name="tab_setting">Setting</string>
+
+    <!--Action Bar-->
+    <string name="action_bar_location">Show Location</string>
+    <string name="action_bar_jobs">My Job</string>
+    <string name="action_bar_jobs_sub">Job Assignment</string>
+    <string name="action_bar_profile">Profile</string>
+    <string name="action_bar_upcoming">upcoming</string>
+    <string name="action_bar_listening">Your listening</string>
+    <string name="action_bar_schedule">Schedule</string>
+    <string name="action_bar_static">Static</string>
+    <string name="action_bar_setting">Setting</string>
+</resources>

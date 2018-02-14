@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context="com.example.bee.upint2.Register">
+
+    <RelativeLayout
+        android:id="@+id/relay1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/yourname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="What is your name ?"
+            android:textSize="32dp" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/firstnameTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/yourname"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="80dp">
+
+            <EditText
+                android:id="@+id/firstnameEt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#268434"
+                android:hint="First name"
+                android:inputType="textPersonName"
+                android:textSize="22dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/lastnameTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/firstnameTextlayout"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            >
+
+            <EditText
+                android:id="@+id/lastnameEt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#268434"
+                android:hint="Last name"
+                android:inputType="textPersonName"
+                android:textSize="22dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/nextbt1"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/lastnameTextlayout"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/next_icon" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relay2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/youremail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="50dp"
+            android:text="Your e-mail will be ID on UPint"
+            android:textSize="32dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/emailTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/youremail"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="30dp">
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#268434"
+                android:hint="e-mail"
+                android:inputType="textEmailAddress"
+                android:textSize="22dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/passwordTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/emailTextlayout"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#268434"
+                android:hint="Password"
+                android:inputType="textWebPassword"
+                android:textSize="22dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/passwordagainTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/passwordTextlayout"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/passwordagain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#268434"
+                android:hint="Password again"
+                android:inputType="textWebPassword"
+                android:textSize="22dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/nextbt2"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/passwordagainTextlayout"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/next_icon" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relay3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
+
+        <TextView
+            android:id="@+id/yournumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="50dp"
+            android:text="What is your
+phonenumber"
+            android:textSize="32dp" />
+
+        <TextView
+            android:id="@+id/needcerification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/yournumber"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="8dp"
+            android:text="You need to cerification. Plase ....."
+            android:textSize="20dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/phonenumberTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/needcerification"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="40dp"
+            >
+            <EditText
+                android:id="@+id/phonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#268434"
+                android:paddingLeft="17dp"
+                android:singleLine="true"
+                android:hint="+66"
+                android:inputType="phone"
+                android:textSize="22dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/cerification"
+            android:layout_width="160dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/phonenumberTextlayout"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/cerification_button"
+            android:text="Cetification"
+            android:textColor="#268434"
+            android:textSize="16dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/cerificationcodeTextlayout"
+            android:layout_width="160dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/phonenumberTextlayout"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="30dp">
+            <EditText
+                android:id="@+id/cerificationcode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#268434"
+                android:hint="Cerification code"
+                android:inputType="number"
+                android:textSize="20dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/nextbt3"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/phonenumberTextlayout"
+            android:layout_marginTop="40dp"
+            android:layout_toRightOf="@+id/cerification"
+            android:background="@drawable/next_icon" />
+        <!--<Button-->
+        <!--android:id="@+id/resendcode"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_below="@+id/nextbt3"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:background="@drawable/cerification_button"-->
+        <!--android:text="Resend code"-->
+        <!--android:textColor="#268434"-->
+        <!--android:textSize="13dp"-->
+        <!--android:visibility="invisible"-->
+        <!--android:onClick="resendCode"/>-->
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relay4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/tellus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="50dp"
+            android:text="Tell us about
+your education"
+            android:textSize="32dp" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/schoolTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/tellus"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="30dp">
+
+            <EditText
+                android:id="@+id/school"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="School"
+                android:inputType="textPersonName"
+                android:textSize="22dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/dateandyear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/schoolTextlayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="10dp"
+            android:text="Date and Year"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_below="@+id/dateandyear"
+            android:layout_centerHorizontal="true"
+            android:addStatesFromChildren="false"
+            android:backgroundTint="@color/UPgreen"
+            android:backgroundTintMode="add"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:theme="@style/MyDatePickerSpinnerStyle" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/majorTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/datePicker"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="5dp">
+
+            <EditText
+                android:id="@+id/major"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#268434"
+                android:hint="Major"
+                android:inputType="textPersonName"
+                android:textSize="22dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/nextbt4"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/majorTextlayout"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/next_icon" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relay5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/pleaseupload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="50dp"
+            android:text="Please upload a portrait that clealy shows your face"
+            android:textSize="30dp" />
+
+
+        <RelativeLayout
+            android:id="@+id/picturerelay"
+            android:layout_width="230dp"
+            android:layout_height="260dp"
+            android:layout_below="@+id/pleaseupload"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/layout_upload_picture">
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="230dp"
+                android:layout_height="260dp"
+                android:id="@+id/cardview"
+                app:cardCornerRadius="70dp"
+                android:layout_margin="3dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/upload_picture_shape">
+
+            <ImageView
+                android:id="@+id/profileimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"/>
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/uploadlibrary"
+                android:layout_width="230dp"
+                android:layout_height="130dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/upload_library_button"
+                android:focusable="true"
+                android:text="Library"
+                android:textColor="#269900"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/takepicture"
+                android:layout_width="230dp"
+                android:layout_height="130dp"
+                android:layout_below="@+id/uploadlibrary"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/upload_library_button2"
+                android:focusable="true"
+                android:text="Take a picture"
+                android:textColor="#269900"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/nextbt5"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/picturerelay"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/next_icon" />
+
+    </RelativeLayout>
+</RelativeLayout>

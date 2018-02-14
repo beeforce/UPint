@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bee.upint2.MakeclassActivity">
+
+    <RelativeLayout
+        android:id="@+id/makeclassrelay1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/PriceperStudentTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="50dp">
+
+            <EditText
+                android:id="@+id/PriceperStudent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#268434"
+                android:hint="Price per 1 Student"
+                android:inputType="number"
+                android:textSize="22dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <EditText
+            android:id="@+id/Schdule"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/PriceperStudentTextlayout"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="#268434"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Schedule"
+            android:inputType="text"
+            android:textSize="20dp" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/PlaceTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/Schdule"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="5dp">
+
+            <EditText
+                android:id="@+id/Place"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#268434"
+                android:hint="Place"
+                android:inputType="text"
+                android:textSize="20dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/makeclassrelay2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/calendarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="223dp"
+            android:layout_marginTop="40dp">
+        <com.squareup.timessquare.CalendarPickerView
+            android:id="@+id/calendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:tsquare_dayTextColor="#268434"
+            app:tsquare_dividerColor="#268434"
+            app:tsquare_titleTextColor="#268434" />
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:id="@+id/starttimelayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/calendarlayout"
+            android:background="@drawable/border_settopnbot">
+
+
+            <TimePicker
+                android:id="@+id/timepickerMakeclass"
+                android:layout_width="250dp"
+                android:layout_height="150dp"
+                android:layout_alignParentRight="true"
+                android:timePickerMode="spinner"></TimePicker>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/timepickerMakeclass"
+                android:text="Start time"
+                android:textColor="#56ab28"
+                android:textSize="23dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/finitimelayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/starttimelayout"
+            android:background="@drawable/border_setbottom">
+
+
+            <TimePicker
+                android:id="@+id/timepickerMakeclass2"
+                android:layout_width="250dp"
+                android:layout_height="150dp"
+                android:layout_alignParentRight="true"
+                android:timePickerMode="spinner"></TimePicker>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/timepickerMakeclass2"
+                android:text="Finish time"
+                android:textColor="#56ab28"
+                android:textSize="23dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/savetime"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/finitimelayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/my_login_button"
+            android:text="Set time"
+            android:textStyle="bold" />
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/showtimebooking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/calendarlayout"
+            android:background="@drawable/border_settopnbot">
+
+
+            <ImageView
+                android:id="@+id/imageGen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                />
+
+            <TextView
+                android:id="@+id/datetimemakeclass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageGen"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:text="date"
+                android:textSize="17dp"
+                android:layout_marginLeft="18dp"
+                android:textColor="#6dd634"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/bookingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/datetimemakeclass"
+                android:layout_alignParentRight="true"
+                android:text="time"
+                android:textSize="17dp"
+                android:layout_marginRight="18dp"
+                android:textColor="#6dd634"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:background="@drawable/mydefault_button_login"
+            android:layout_below="@+id/showtimebooking"
+            android:text="Save"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

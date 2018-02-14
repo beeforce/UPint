@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bee.upint2.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/rela1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:id="@+id/i"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="i"
+            android:textSize="50dp"
+            android:textStyle="italic"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:textColor="#269900"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/i"
+            android:textStyle="bold"
+            android:textSize="50dp"
+            android:text="UP"
+            android:textColor="#269900"
+            android:layout_alignBaseline="@+id/i"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/i"
+            android:textStyle="italic"
+            android:textSize="52dp"
+            android:text="nt"
+            android:textColor="#269900"
+            android:layout_alignBaseline="@+id/i"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rela1"
+        android:layout_marginTop="10dp"
+        android:text="UP you intelligence!"/>
+
+    <TextView
+        android:id="@+id/uphelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="UPint helps that"
+        android:layout_below="@+id/up"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="you can get the great grade"
+        android:layout_below="@+id/uphelp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:id="@+id/textView" />
+
+    <TextView
+        android:id="@+id/iam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView"
+        android:text="I am a"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="#262525" />
+    <TextView
+        android:id="@+id/center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true" />
+
+
+    <Button
+        android:id="@+id/studentBt"
+        android:layout_width="110dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/iam"
+        android:layout_toLeftOf="@+id/center"
+        android:text="Student"
+        android:focusable="true"
+        android:background="@drawable/my_button_bg2"/>
+
+    <Button
+        android:id="@+id/teacherBt"
+        android:layout_width="110dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/iam"
+        android:layout_toRightOf="@+id/studentBt"
+        android:text="Teacher"
+        android:background="@drawable/my_button_bg"/>
+
+
+    <Button
+        android:id="@+id/signin"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/teacherBt"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="45dp"
+        android:text="Sign in"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textColor="#ffff"
+        android:textSize="16dp"
+        android:background="@drawable/my_login_button"/>
+
+    <Button
+        android:id="@+id/facebookLog"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:text="Connect with Facebook"
+        android:textStyle="bold"
+        android:textColor="#ffff"
+        android:layout_below="@+id/signin"
+        android:layout_marginTop="7dp"
+        android:textSize="16dp"
+        android:background="@drawable/my_login_fb"/>
+
+    <TextView
+        android:id="@+id/signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Signup for UPint"
+        android:textStyle="italic"
+        android:layout_below="@+id/facebookLog"
+        android:textColor="#269900"
+        android:textSize="17dp" />
+
+    <TextView
+        android:id="@+id/agree"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView"
+        android:layout_below="@+id/signup"
+        android:text="I agree to the term of Service and Privacy Policy including Cookies use"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="13dp" />
+
+</RelativeLayout>
