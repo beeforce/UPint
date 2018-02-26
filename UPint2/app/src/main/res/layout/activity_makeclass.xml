@@ -11,12 +11,264 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:id="@+id/photomakeclass"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/centerbefore"
+            android:background="#8f8f8f">
+
+            <ImageView
+                android:id="@+id/makeclassuploadpicture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <RelativeLayout
+                android:id="@+id/relayuploadpicture"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/background_oval_border">
+            <Button
+                android:id="@+id/uploadpicturemakeclass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_camera_alt_white_24dp"
+                android:layout_margin="16dp"
+                />
+            </RelativeLayout>
+
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/centerbefore"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_alignBottom="@+id/center"
+            android:layout_marginBottom="35dp" />
+
+        <TextView
+            android:id="@+id/center"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/ClassnameTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/photomakeclass"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp">
+
+            <EditText
+                android:id="@+id/Classname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#268434"
+                android:hint="Class Title"
+                android:inputType="text"
+                android:textSize="16dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/Target"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ClassnameTextlayout"
+            android:layout_marginLeft="39dp"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="#80817f"
+            android:text="Target"
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/UniversityTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Target"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp">
+
+            <EditText
+                android:id="@+id/University"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#268434"
+                android:hint="University"
+                android:inputType="text"
+                android:textSize="16dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/MajormakeclassTextlayout"
+            android:layout_width="216dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/UniversityTextlayout"
+            android:layout_marginLeft="35dp">
+
+            <EditText
+                android:id="@+id/Majormakeclass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#268434"
+                android:hint="Major"
+                android:inputType="text"
+                android:textSize="16dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/yearmakeclass"
+                android:layout_width="75dp"
+                android:layout_height="50dp"
+                android:layout_toRightOf="@+id/MajormakeclassTextlayout"
+                android:layout_alignBottom="@+id/MajormakeclassTextlayout"
+                android:layout_marginRight="35dp"
+                android:backgroundTint="#268434" />
+
+
+        <Button
+            android:id="@+id/nextmakeclass1"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/next_icon" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/makeclassrelay2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+
+
+            <EditText
+                android:id="@+id/termmakeclass"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="35dp"
+                android:backgroundTint="#268434"
+                android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:hint="Term"
+                android:inputType="text"
+                android:textSize="16dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/levelTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/termmakeclass"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            >
+
+            <EditText
+                android:id="@+id/levelclass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#268434"
+                android:hint="Level of difficult"
+                android:inputType="text"
+                android:textSize="16dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/totalnumberstudentTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/levelTextlayout"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            >
+
+            <EditText
+                android:id="@+id/totalnumberstudent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#268434"
+                android:hint="Total number of student"
+                android:inputType="number"
+                android:textSize="16dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/totalnumberstudentTextlayout"
+                android:layout_marginRight="35dp"
+                android:layout_marginLeft="35dp"
+                android:backgroundTint="#268434"
+                android:hint="@string/description_hint"
+                android:singleLine="false"
+                android:scrollbars="vertical"
+                android:minLines="2"
+                android:maxLines="3"
+                android:imeOptions="actionNext"
+                android:inputType="textMultiLine"
+                android:textSize="16dp" />
+
+        <EditText
+            android:id="@+id/tagmakeclass"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_below="@+id/description"
+            android:backgroundTint="#268434"
+            android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:hint="Tag"
+            android:inputType="text"
+            android:textSize="16dp" />
+
+
+        <Button
+            android:id="@+id/nextmakeclass2"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="35dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/next_icon" />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/makeclassrelay3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/PriceperStudentTextlayout"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
             android:layout_marginTop="50dp">
 
             <EditText
@@ -26,7 +278,7 @@
                 android:backgroundTint="#268434"
                 android:hint="Price per 1 Student"
                 android:inputType="number"
-                android:textSize="22dp" />
+                android:textSize="16dp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -36,8 +288,8 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_below="@+id/PriceperStudentTextlayout"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
             android:layout_marginTop="5dp"
             android:backgroundTint="#268434"
             android:clickable="false"
@@ -47,7 +299,8 @@
             android:focusableInTouchMode="false"
             android:hint="Schedule"
             android:inputType="text"
-            android:textSize="20dp" />
+            android:textStyle="bold"
+            android:textSize="16dp" />
 
 
         <android.support.design.widget.TextInputLayout
@@ -55,8 +308,8 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_below="@+id/Schdule"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
             android:layout_marginTop="5dp">
 
             <EditText
@@ -66,17 +319,32 @@
                 android:backgroundTint="#268434"
                 android:hint="Place"
                 android:inputType="text"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
 
         </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/confirmsetschedule"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="30dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:text="Confirm"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:background="#56ab28"
+            />
 
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/makeclassrelay2"
+        android:id="@+id/makeclassrelay4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
 
         <RelativeLayout

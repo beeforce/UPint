@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                   dismissProgressDialog();
               }else {
                   Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                  intent.putExtra("Usertype", type);
+                  intent.putExtra("Usertype_login", type);
                   startActivity(intent);
               }
           }

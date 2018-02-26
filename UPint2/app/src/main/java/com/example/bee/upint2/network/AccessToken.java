@@ -1,5 +1,7 @@
 package com.example.bee.upint2.network;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.squareup.moshi.Json;
 
 /**
@@ -12,10 +14,68 @@ public class AccessToken {
     String tokenType;
     @Json(name = "expires_in")
     int expiresIn;
-    @Json(name = "token")
+    @SerializedName("token")
+    @Expose
     String accessToken;
     @Json(name = "refresh_token")
     String refreshToken;
+    @SerializedName("id")
+    @Expose
+    String user_id;
+    @SerializedName("status")
+    @Expose
+    String status;
+    @SerializedName("meeting_id")
+    @Expose
+    String meeting_id;
+    @SerializedName("course_name")
+    @Expose
+    String course_name;
+    @SerializedName("user_id")
+    @Expose
+    String user_id_addclass;
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setMeeting_id(String meeting_id) {
+        this.meeting_id = meeting_id;
+    }
+
+    public void setCourse_name(String course_name) {
+        this.course_name = course_name;
+    }
+
+    public void setUser_id_addclass(String user_id_addclass) {
+        this.user_id_addclass = user_id_addclass;
+    }
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getMeeting_id() {
+        return meeting_id;
+    }
+
+    public String getCourse_name() {
+        return course_name;
+    }
+
+    public String getUser_id_addclass() {
+        return user_id_addclass;
+    }
+
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
 
     public String getTokenType() {
         return tokenType;

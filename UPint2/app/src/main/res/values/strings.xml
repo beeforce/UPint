@@ -19,4 +19,12 @@
     <string name="action_bar_schedule">Schedule</string>
     <string name="action_bar_static">Static</string>
     <string name="action_bar_setting">Setting</string>
+    <string name="description_hint">Description\nabout your class</string>
+    <string-array name="years">
+        <item>Year</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 </resources>

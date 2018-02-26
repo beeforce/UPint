@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#6dd634">
 
     <FrameLayout
         android:id="@+id/contentContainer2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,41 +20,17 @@
                 android:id="@+id/tvProjectName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Upcmoming"
-                android:textSize="16dp" />
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ivAvatar"
-                android:layout_centerHorizontal="true"
-                android:text="Hello World"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvTruckId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvName"
-                android:layout_centerHorizontal="true"
-                android:text="\@LSLS" />
-
-            <TextView
-                android:id="@+id/tvAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvTruckId"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="6dp"
-                android:gravity="center"
-                android:text="Chiang Mai" />
+                android:layout_marginLeft="20dp"
+                android:text="Upcoming Classes"
+                android:textSize="26dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"/>
 
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/refresh"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView"

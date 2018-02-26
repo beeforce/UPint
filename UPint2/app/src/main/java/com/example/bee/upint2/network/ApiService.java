@@ -2,7 +2,10 @@ package com.example.bee.upint2.network;
 
 
 
+import com.example.bee.upint2.model.Course;
 import com.example.bee.upint2.model.UserProfile;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -24,7 +27,7 @@ public interface ApiService {
 
     @POST("register")
     @Multipart
-    Call<AccessToken> register(@Part("first_name") RequestBody first_name, @Part("last_name") RequestBody RequestBody, @Part("email") RequestBody email,
+    Call<AccessToken> register(@Part("first_name") RequestBody first_name, @Part("last_name") RequestBody last_name, @Part("email") RequestBody email,
                                @Part("password") RequestBody password, @Part("c_password") RequestBody repassword, @Part("phone_number") RequestBody phonenumber,
                                @Part("school") RequestBody school, @Part("major") RequestBody major, @Part("state") RequestBody state,
                                @Part("Date_graduated") RequestBody date_gradated, @Part MultipartBody.Part photo);
@@ -41,10 +44,22 @@ public interface ApiService {
 //    Call<AccessToken> login(@Field("email") String email, @Field("password") String password);
 
 
+    @POST("addClass")
+    @Multipart
+    Call<AccessToken> addClass(@Part("course_name") RequestBody course_name, @Part("date") RequestBody date, @Part("description") RequestBody description,
+                               @Part("start_time") RequestBody start_time, @Part("finish_time") RequestBody finish_time, @Part("user_id") RequestBody user_id,
+                               @Part("price_per_student") RequestBody price_per_student, @Part("target_university") RequestBody target_university,
+                               @Part("target_major") RequestBody target_major, @Part("target_years") RequestBody target_years, @Part("terms") RequestBody terms,
+                               @Part("level_of_difficult") RequestBody level_of_difficult, @Part("total_student") RequestBody total_student,
+                               @Part("tags") RequestBody tags, @Part("place") RequestBody place, @Part MultipartBody.Part photo);
+
 
     @POST("login")
     @Multipart
     Call<AccessToken> login(@Part("email") RequestBody email, @Part("password") RequestBody password);
+
+    @GET("Allcoursedetail")
+    Call<List<Course>> getCoursedetail();
 
 
     //ยังไม่เสด

@@ -41,7 +41,6 @@
                 android:id="@+id/tvTruckId2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvName"
                 android:layout_centerHorizontal="true"
                 android:text="\@LSLS2" />
 

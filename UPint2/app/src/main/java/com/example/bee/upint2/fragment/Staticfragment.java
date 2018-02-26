@@ -29,7 +29,7 @@ public class Staticfragment extends android.support.v4.app.Fragment implements S
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragement_upcoming, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_static, container, false);
 
         initInstances(rootView);
         return rootView;
@@ -42,16 +42,9 @@ public class Staticfragment extends android.support.v4.app.Fragment implements S
 
     private void initInstances(View rootView) {
 
-        swipeRefreshLayout = rootView.findViewById(R.id.refresh);
-        swipeRefreshLayout.setOnRefreshListener(this);
 
-        TextView tvProjectName = rootView.findViewById(R.id.tvProjectName);
+        TextView tvProjectName = rootView.findViewById(R.id.tvProjectName3);
         tvProjectName.setText(Html.fromHtml("<b>Static</b>"));
-
-        recyclerView = rootView.findViewById(R.id.recyclerView);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setHasFixedSize(true);
 
 
     }

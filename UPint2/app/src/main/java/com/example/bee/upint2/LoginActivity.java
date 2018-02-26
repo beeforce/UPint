@@ -16,7 +16,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import com.example.bee.upint2.fragment.Schedulefragment;
 import com.example.bee.upint2.fragment.Upcomingfragment;
+import com.example.bee.upint2.model.sendOject;
 import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
@@ -46,6 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+        Bundle bundle = getIntent().getExtras();
+        String user_type = bundle.getString("Usertype_login");
         login = (Button) findViewById(R.id.btn_login);
         tillemail = (TextInputLayout) findViewById(R.id.til_email2);
         tillpassword = (TextInputLayout) findViewById(R.id.til_password2);
@@ -79,6 +84,11 @@ public class LoginActivity extends AppCompatActivity {
                             dismissProgressDialog();
                             if (response.isSuccessful()) {
                                 Log.w(TAG, "onResponse: " + response.body().getAccessToken());
+                                Log.w(TAG, "user id: " + response.body().getUser_id());
+                                sendOject se = new sendOject();
+                                se.setAccesstoken(response.body().getAccessToken());
+                                sendOject se2 = new sendOject();
+                                se2.setUser_id(response.body().getUser_id());
                                 dismissProgressDialog();
                                 showProgressDialogSuccess();
                             } else {
