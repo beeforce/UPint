@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bee.upint2.SeachclassActivity">
+
+
+    <EditText
+        android:id="@+id/searchclasset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:singleLine="true"
+        android:hint="Search class"
+        />
+
+    <TextView
+        android:id="@+id/textViewPasswordStrengthIndiactor"
+        android:layout_below="@+id/searchclasset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Strange"
+        />
+
+    <TextView
+        android:id="@+id/center"
+        android:layout_width="@dimen/common_0_dp"
+        android:layout_height="@dimen/common_0_dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+    <ListView
+        android:id="@+id/course_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/center"></ListView>
+
+</RelativeLayout>

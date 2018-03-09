@@ -7,7 +7,7 @@
                 android:endColor="#af6a44"
                 android:angle="270" />
             <corners android:radius="3dp" />
-            <stroke android:width="3px" android:color="#268434" />
+            <stroke android:width="3px" android:color="#98c428" />
             <corners
                 android:bottomLeftRadius="75dp"
                 android:bottomRightRadius="75dp"
@@ -24,7 +24,7 @@
                 android:endColor="#FFFFFF"
                 android:angle="270" />
             <corners android:radius="3dp" />
-            <stroke android:width="3px" android:color="#268434" />
+            <stroke android:width="3px" android:color="#98c428" />
             <corners
                 android:bottomLeftRadius="75dp"
                 android:bottomRightRadius="75dp"

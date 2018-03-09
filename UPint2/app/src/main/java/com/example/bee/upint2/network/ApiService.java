@@ -3,6 +3,7 @@ package com.example.bee.upint2.network;
 
 
 import com.example.bee.upint2.model.Course;
+import com.example.bee.upint2.model.Course_user;
 import com.example.bee.upint2.model.UserProfile;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -61,13 +63,25 @@ public interface ApiService {
     @GET("Allcoursedetail")
     Call<List<Course>> getCoursedetail();
 
+    @GET("courseDetailsOfuser/{user_id}")
+    Call<List<Course>> courseDetailsOfuser(@Path("user_id") int user_id);
 
     //ยังไม่เสด
-    @GET("userDetails/")
+    @GET("userDetails")
     Call<UserProfile> userDetail(@Query("email") String email);
 
     @POST("refresh")
     @FormUrlEncoded
     Call<AccessToken> refresh(@Field("refresh_token") String refreshToken);
+
+    @POST("bookClass")
+    @Multipart
+    Call<AccessToken> bookClass(@Part("user_id") RequestBody user_id, @Part("course_id") RequestBody course_id);
+
+    @GET("courseEnroll/{user_id}")
+    Call<List<Course_user>> searchclassEnroll(@Path("user_id") int user_id);
+
+    @GET("courseDetails/{course_id}")
+    Call<Course> courseDetailswithId(@Path("course_id") int course_id);
 
 }

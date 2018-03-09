@@ -25,22 +25,33 @@ public class AccessToken {
     @SerializedName("status")
     @Expose
     String status;
-    @SerializedName("meeting_id")
+    @SerializedName("course_id")
     @Expose
-    String meeting_id;
+    String course_id;
     @SerializedName("course_name")
     @Expose
     String course_name;
     @SerializedName("user_id")
     @Expose
     String user_id_addclass;
+    @SerializedName("success")
+    @Expose
+    boolean success;
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public void setMeeting_id(String meeting_id) {
-        this.meeting_id = meeting_id;
+    public void setcourse_id(String course_id) {
+        this.course_id = course_id;
     }
 
     public void setCourse_name(String course_name) {
@@ -56,8 +67,8 @@ public class AccessToken {
         return status;
     }
 
-    public String getMeeting_id() {
-        return meeting_id;
+    public String getcourse_id() {
+        return course_id;
     }
 
     public String getCourse_name() {

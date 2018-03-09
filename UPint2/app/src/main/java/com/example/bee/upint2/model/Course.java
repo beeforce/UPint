@@ -21,6 +21,9 @@ public class Course implements Serializable {
     @SerializedName("course_name")
     @Expose
     String course_name;
+    @SerializedName("course_id")
+    @Expose
+    int course_id;
     @SerializedName("description")
     @Expose
     String description;
@@ -63,6 +66,56 @@ public class Course implements Serializable {
     @SerializedName("course_image")
     @Expose
     String course_image_path;
+
+    boolean success = true;
+
+    public Course(Integer id, String course_name){
+        this.id = id;
+        this.course_name = course_name;
+    }
+
+    public Course(Integer id, String user_id, String course_name, int course_id,String description,
+                  String price_per_student, String date, String start_time, String finish_time,
+                  String target_university, String target_major, String target_years, String terms,
+                  String level_of_difficult, Integer total_student, String tags, String place, String course_image_path ){
+
+        this.id = id;
+        this.user_id = user_id;
+        this.course_name = course_name;
+        this.course_id = course_id;
+        this.description = description;
+        this.price_per_student = price_per_student;
+        this.date = date;
+        this.start_time = start_time;
+        this.finish_time = finish_time;
+        this.target_university = target_university;
+        this.target_major = target_major;
+        this.target_years = target_years;
+        this.terms = terms;
+        this.level_of_difficult = level_of_difficult;
+        this.total_student = total_student;
+        this.tags = tags;
+        this.place = place;
+        this.course_image_path = course_image_path;
+
+    }
+
+
+    public void setsuccess(){
+        this.success = false;
+    }
+
+    public boolean getsuccess(){
+        return success;
+    }
+
+    public void setCourse_id(int course_id) {
+        this.course_id = course_id;
+    }
+
+    public int getCourse_id() {
+        return course_id;
+    }
 
     public void setId(Integer id) {
         this.id = id;

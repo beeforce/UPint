@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6dd634">
+    android:background="#98c428">
 
     <FrameLayout
         android:id="@+id/contentContainer2"
@@ -40,17 +40,6 @@
                     android:scrollbars="vertical" />
 
             </android.support.v4.widget.SwipeRefreshLayout>
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_gravity="center"
-                android:text="list"
-                android:textSize="16dp"
-                android:textStyle="italic"
-                android:textColor="#afaeae"/>
 
         </LinearLayout>
     </FrameLayout>

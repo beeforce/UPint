@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#98c428">
 
     <FrameLayout
-        android:id="@+id/contentContainer2"
+        android:id="@+id/contentContainer3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,42 +20,26 @@
                 android:id="@+id/tvProjectName2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Upcmoming"
-                android:textSize="16dp" />
+                android:layout_marginLeft="20dp"
+                android:text="Your listening"
+                android:textSize="26dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="#fff">
-            <TextView
-                android:id="@+id/tvName2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ivAvatar"
-                android:layout_centerHorizontal="true"
-                android:text="Hello World2"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/refresh2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
 
-            <TextView
-                android:id="@+id/tvTruckId2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="\@LSLS2" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffff"
+                    android:scrollbars="vertical" />
 
-            <TextView
-                android:id="@+id/tvAddress2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvTruckId"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="6dp"
-                android:gravity="center"
-                android:text="Chiang Mai2" />
-        </LinearLayout>
+            </android.support.v4.widget.SwipeRefreshLayout>
 
 
         </LinearLayout>

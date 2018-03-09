@@ -1,7 +1,9 @@
 package com.example.bee.upint2;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
@@ -20,15 +22,16 @@ import com.example.bee.upint2.adapter.SectionPageAdapter;
 import com.example.bee.upint2.fragment.Listenfragment;
 import com.example.bee.upint2.fragment.Schedulefragment;
 import com.example.bee.upint2.fragment.Settingfragment;
-import com.example.bee.upint2.fragment.Staticfragment;
+import com.example.bee.upint2.fragment.Statusfragment;
 import com.example.bee.upint2.fragment.Upcomingfragment;
-import com.example.bee.upint2.model.sendOject;
+import com.example.bee.upint2.tool.MySharedPreference;
+import com.example.bee.upint2.tool.UserInterfaceUtils;
+import com.example.bee.upint2.tool.Validator;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -39,8 +42,9 @@ public class Main2Activity extends AppCompatActivity {
     private Upcomingfragment upcomingfragmentFrag;
     private Listenfragment listenfragment;
     private Schedulefragment schedulefragment;
-    private Staticfragment staticfragment;
+    private Statusfragment statusfragment;
     private Settingfragment settingfragment;
+    private boolean doubleBackToExitPressedOnce = false;
 
 
     @Override
@@ -163,7 +167,7 @@ public class Main2Activity extends AppCompatActivity {
         upcomingfragmentFrag = new Upcomingfragment();
         listenfragment = new Listenfragment();
         schedulefragment = new Schedulefragment();
-        staticfragment = new Staticfragment();
+        statusfragment = new Statusfragment();
         settingfragment = new Settingfragment();
 
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
@@ -171,11 +175,64 @@ public class Main2Activity extends AppCompatActivity {
         adapter.addFragment(upcomingfragmentFrag);
         adapter.addFragment(listenfragment);
         adapter.addFragment(schedulefragment);
-        adapter.addFragment(staticfragment);
+        adapter.addFragment(statusfragment);
         adapter.addFragment(settingfragment);
 
 
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //Checking for fragment count on backstack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else if (!doubleBackToExitPressedOnce) {
+            this.doubleBackToExitPressedOnce = true;
+
+            UserInterfaceUtils.showToast(getApplicationContext(),
+                    getResources().getString(R.string.double_back_exit));
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        } else {
+            super.onBackPressed();
+            return;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+        String current = simpleDateFormat.format(new Date());
+
+        MySharedPreference.putPref(MySharedPreference.LAST_ACTIVE_TIME, current, getApplicationContext());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Boolean isActiveOverHalfHour = Validator.isActiveOverHalfHour(getApplicationContext());
+
+        if (isActiveOverHalfHour){
+            MySharedPreference.clearPref(getApplicationContext());
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
     }
 }
 class BottomNavigationViewHelper {

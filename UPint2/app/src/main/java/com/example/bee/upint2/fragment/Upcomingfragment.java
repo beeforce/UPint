@@ -1,31 +1,31 @@
 package com.example.bee.upint2.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.bee.upint2.LoginActivity;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.adapter.RecycleAdapterCourse;
 import com.example.bee.upint2.adapter.RecyclerViewClickListener;
 import com.example.bee.upint2.model.Course;
+import com.example.bee.upint2.model.Course_user;
 import com.example.bee.upint2.model.UserProfile;
+import com.example.bee.upint2.model.sendOject;
+import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -46,12 +46,12 @@ public class Upcomingfragment extends android.support.v4.app.Fragment implements
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<Course> course;
+    private List<Course_user> courseEnroll;
     private RecycleAdapterCourse adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ApiService mAPIService;
-    private UserProfile userProfile;
-    private TextView tvName, tvTruckId, tvAddress;
-
+    private Date d;
+    public static String scheduledate;
 
 
     @Override
@@ -66,12 +66,12 @@ public class Upcomingfragment extends android.support.v4.app.Fragment implements
 
     @Override
     public void onRefresh() {
+        recyclerView.removeAllViewsInLayout();
         getClassdetail();
         swipeRefreshLayout.setRefreshing(false);
     }
 
     private void initInstances(View rootView) {
-
 
 
         swipeRefreshLayout = rootView.findViewById(R.id.refresh);
@@ -83,25 +83,25 @@ public class Upcomingfragment extends android.support.v4.app.Fragment implements
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
 
+
         getClassdetail();
 
     }
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
-        adapter = new RecycleAdapterCourse(getActivity(),this);
+        adapter = new RecycleAdapterCourse(getActivity(), this);
 
     }
 
-    public void getClassdetail(){
+    public void getClassdetail() {
         mAPIService = ApiUtils.getAPIService();
         mAPIService.getCoursedetail().enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
-
-
                 course = response.body();
-                onSuccess(course);
+                searchClass();
+
 
                 Log.w(TAG, "onResponse: ");
             }
@@ -112,12 +112,15 @@ public class Upcomingfragment extends android.support.v4.app.Fragment implements
             }
         });
     }
-    private void onSuccess(List<Course> jobsList) {
+
+    private void onSuccess(List<Course> courseList) {
+        List<Course> filteredJob = new ArrayList<Course>();
+
         final Date[] d1 = new Date[1];
         final Date[] d2 = new Date[1];
 
         // sort by date
-        Collections.sort(jobsList, new Comparator<Course>() {
+        Collections.sort(courseList, new Comparator<Course>() {
 
             @Override
             public int compare(Course o1, Course o2) {
@@ -135,9 +138,41 @@ public class Upcomingfragment extends android.support.v4.app.Fragment implements
             }
 
         });
-        adapter = new RecycleAdapterCourse(jobsList,getActivity());
-        recyclerView.setAdapter(adapter);
 
+        // sort by id
+        for (Course each : courseList) {
+            for (Course_user each1 : courseEnroll) {
+                if (each.getId() == each1.getCourse_id()){
+                    filteredJob.add(each);
+                    Log.w(TAG, "find course id"+each.getId()+"  "+each1.getCourse_id());
+                }
+            }
+        }
+        courseList.removeAll(filteredJob);
+        adapter = new RecycleAdapterCourse(courseList, getActivity());
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void searchClass() {
+
+        sendOject o = new sendOject();
+        int user_id = Integer.parseInt(o.getUser_id());
+        mAPIService = ApiUtils.getAPIService();
+        mAPIService.searchclassEnroll(user_id).enqueue(new Callback<List<Course_user>>() {
+            @Override
+            public void onResponse(Call<List<Course_user>> call, Response<List<Course_user>> response) {
+                if (response.isSuccessful()) {
+                    courseEnroll = response.body();
+                    onSuccess(course);
+                } else
+                    Log.w(TAG, "Search class onResponse:fail");
+            }
+
+            @Override
+            public void onFailure(Call<List<Course_user>> call, Throwable t) {
+                Log.w(TAG, "onFailure: " + t.getMessage());
+            }
+        });
     }
 
 
