@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:state_pressed="true"-->
+        <!--android:drawable="@drawable/keyword_default">-->
+    <!--</item>-->
+    <!--<item android:state_selected="true" android:drawable="@drawable/keyword_select_border"/>-->
+    <!--<item android:drawable="@drawable/keyword_default" />-->
+
+    <item android:drawable="@drawable/keyword_select_border"
+        android:state_selected="true" />
+    <item android:drawable="@drawable/keyword_default"
+        android:state_enabled="false"/>
+
+</selector>
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
+
+    <!--<item android:state_focused="true">-->
+        <!--<shape xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--android:shape="rectangle">-->
+            <!--<gradient android:startColor="#333333"-->
+                <!--android:endColor="#333333"-->
+                <!--android:angle="270" />-->
+            <!--<corners android:radius="3dp" />-->
+            <!--<stroke android:width="3px" android:color="#333333" />-->
+            <!--<corners-->
+                <!--android:bottomLeftRadius="30dp"-->
+                <!--android:bottomRightRadius="30dp"-->
+                <!--android:radius="60dp"-->
+                <!--android:topLeftRadius="30dp"-->
+                <!--android:topRightRadius="30dp" />-->
+
+        <!--</shape>-->
+    <!--</item> &lt;!&ndash; focus &ndash;&gt;-->
+    <!--<item android:state_pressed="true">-->
+        <!--<shape xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--android:shape="rectangle">-->
+            <!--<gradient android:startColor="#333333"-->
+                <!--android:endColor="#333333"-->
+                <!--android:angle="270" />-->
+            <!--<corners android:radius="3dp" />-->
+            <!--<stroke android:width="3px" android:color="#333333" />-->
+            <!--<corners-->
+                <!--android:bottomLeftRadius="30dp"-->
+                <!--android:bottomRightRadius="30dp"-->
+                <!--android:radius="60dp"-->
+                <!--android:topLeftRadius="30dp"-->
+                <!--android:topRightRadius="30dp" />-->
+
+        <!--</shape>-->
+    <!--</item> &lt;!&ndash; on press &ndash;&gt;-->
+
+    <!--<item>-->
+        <!--<shape xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--android:shape="rectangle">-->
+            <!--<gradient android:startColor="#00000000"-->
+                <!--android:endColor="#00000000"-->
+                <!--android:angle="270" />-->
+            <!--<corners android:radius="3dp" />-->
+            <!--<stroke android:width="3px" android:color="#333333" />-->
+            <!--<corners-->
+                <!--android:bottomLeftRadius="30dp"-->
+                <!--android:bottomRightRadius="30dp"-->
+                <!--android:radius="60dp"-->
+                <!--android:topLeftRadius="30dp"-->
+                <!--android:topRightRadius="30dp" />-->
+
+        <!--</shape>-->
+    <!--</item> &lt;!&ndash; default &ndash;&gt;-->
+<!--</selector>-->
+

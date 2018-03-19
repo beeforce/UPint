@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.model.Course;
@@ -81,6 +82,7 @@ public class ListViewAdapter extends BaseAdapter{
         holder.textView.setText(courselist.get(position).getCourse_name());
         return convertView;
     }
+
 
     public class ViewHolder{
         TextView textView;

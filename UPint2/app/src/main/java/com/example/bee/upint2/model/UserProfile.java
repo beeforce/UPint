@@ -123,6 +123,18 @@ public class UserProfile implements Serializable {
     @Expose
     String image;
 
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
+    @SerializedName("count")
+    @Expose
+    String count;
+
 
 
 

@@ -7,35 +7,102 @@
     tools:context="com.example.bee.upint2.SeachclassActivity">
 
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:id="@+id/searchclasstv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search Class"
+            android:textSize="30dp"
+            android:layout_marginTop="30dp"
+            android:textColor="#000"/>
+
+
+        <TextView
+            android:id="@+id/targetunivsearchclass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchclasstv"
+            android:text="targetuniv"
+            android:textColor="#6dd634"
+            android:textSize="22dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="2dp"
+            android:drawableStart="@drawable/ic_account_balance_18pt"
+            android:textStyle="bold"
+            android:drawablePadding="3dp"/>
+
+        <TextView
+            android:id="@+id/targetyearsearchclass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/targetunivsearchclass"
+            android:text="target year"
+            android:textColor="#6dd634"
+            android:textSize="22dp"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:drawablePadding="3dp"
+            android:drawableStart="@drawable/ic_perm_identity_black_24dp"/>
+
+
+
+
     <EditText
         android:id="@+id/searchclasset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_below="@+id/targetyearsearchclass"
+        android:layout_marginBottom="@dimen/common_25_dp"
         android:singleLine="true"
-        android:hint="Search class"
+        android:hint="Subject"
+        android:textSize="30dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/ic_search_black"
         />
 
-    <TextView
-        android:id="@+id/textViewPasswordStrengthIndiactor"
-        android:layout_below="@+id/searchclasset"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Strange"
-        />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/center"
-        android:layout_width="@dimen/common_0_dp"
-        android:layout_height="@dimen/common_0_dp"
+        android:layout_width="20dp"
+        android:layout_height="0dp"
+        android:layout_centerVertical="true"/>
+
+
+    <TextView
+        android:id="@+id/suggestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:text="Suggestions"
+        android:textSize="17dp"
+        android:textColor="#000"
         />
     <ListView
         android:id="@+id/course_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/center"></ListView>
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@+id/suggestion"></ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/background_2dp_border"
+        android:layout_above="@+id/center"
+        android:layout_marginBottom="20dp"
+        >
+
+    </RelativeLayout>
 
 </RelativeLayout>

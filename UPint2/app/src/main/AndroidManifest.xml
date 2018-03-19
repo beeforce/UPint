@@ -48,12 +48,18 @@
         </activity>
         <activity android:name=".Main2Activity" />
         <activity android:name=".Register" />
-        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".MakeclassActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Classdetail" />
-        <activity android:name=".SeachclassActivity"></activity>
+        <activity
+            android:name=".SeachclassActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan|adjustNothing" />
+        <activity android:name=".Classdetail_searchclass" />
+        <activity android:name=".SearchclassActivity_Keyword"></activity>
     </application>
 
 </manifest>

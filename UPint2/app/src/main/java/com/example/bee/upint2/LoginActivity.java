@@ -11,10 +11,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.example.bee.upint2.fragment.Schedulefragment;
 import com.example.bee.upint2.fragment.Upcomingfragment;
@@ -48,6 +51,23 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+//        View view = this.getCurrentFocus();
+//        if (view == null) {
+//            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//        }
+        RelativeLayout activity_login_layout = (RelativeLayout) findViewById(R.id.activity_login_layout);
+
+        activity_login_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                return true;
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
         String user_type = bundle.getString("Usertype_login");

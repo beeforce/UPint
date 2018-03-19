@@ -17,16 +17,16 @@ import android.widget.TextView;
 import com.example.bee.upint2.MakeclassActivity;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.SeachclassActivity;
+import com.example.bee.upint2.SearchclassActivity_Keyword;
 
 /**
  * Created by Bee on 1/30/2018.
  */
 
-public class Settingfragment extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class Settingfragment extends android.support.v4.app.Fragment {
 
     private RecyclerView recyclerView;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private String truckDriverId;
+
     private Context mContext;
 
 
@@ -39,10 +39,6 @@ public class Settingfragment extends android.support.v4.app.Fragment implements 
         return rootView;
     }
 
-    @Override
-    public void onRefresh() {
-        swipeRefreshLayout.setRefreshing(false);
-    }
 
     private void initInstances(View rootView) {
 
@@ -53,6 +49,14 @@ public class Settingfragment extends android.support.v4.app.Fragment implements 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SeachclassActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button button2 = rootView.findViewById(R.id.searchclasskeywordbt);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchclassActivity_Keyword.class);
                 startActivity(intent);
             }
         });

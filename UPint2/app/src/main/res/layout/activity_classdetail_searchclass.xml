@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bee.upint2.Classdetail_searchclass">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/class_picture"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:src="@drawable/com_facebook_button_icon_blue"
+        android:scaleType="centerCrop"
+        />
+
+    <TextView
+        android:id="@+id/course_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="#fff"
+        android:textSize="27dp"
+        android:textStyle="bold"
+        />
+
+    <ImageView
+        android:id="@+id/moneyicon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_money"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="180dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/price_searchclass"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:layout_toRightOf="@+id/moneyicon"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="180dp"
+
+        />
+
+    <ImageView
+        android:id="@+id/peopleicon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_people"
+        android:layout_toRightOf="@+id/price_searchclass"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="180dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numberofstudent_searchclass"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_toRightOf="@+id/peopleicon"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="182dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numberofstudent_searchclass2"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_toRightOf="@+id/numberofstudent_searchclass"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="182dp"
+        />
+
+    <TextView
+        android:id="@+id/teacher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/class_picture"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="#000"
+        android:textSize="26dp"
+        />
+    <ImageView
+        android:id="@+id/place_searchclass_icon"
+        android:layout_width="20dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_place"
+        android:layout_below="@+id/teacher"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+       android:id="@+id/place_searchclass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/teacher"
+        android:textSize="20dp"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@+id/place_searchclass_icon"
+        android:layout_marginTop="3dp"
+        android:textColor="#000"/>
+
+    <Button
+        android:id="@+id/buttontags1_searchclass"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="7dp"
+        android:layout_below="@+id/place_searchclass"
+        android:text="#keyword"
+        android:textSize="9dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:layout_marginLeft="23dp"
+        android:background="@drawable/tags_button_black"
+        />
+
+    <Button
+        android:id="@+id/buttontags2_searchclass"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_toRightOf="@+id/buttontags1_searchclass"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="7dp"
+        android:layout_below="@+id/place_searchclass"
+        android:text="#keyword"
+        android:textSize="9dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:background="@drawable/tags_button_black"
+        />
+
+    <Button
+        android:id="@+id/buttontags3_searchclass"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_toRightOf="@+id/buttontags2_searchclass"
+        android:layout_marginTop="9dp"
+        android:layout_below="@+id/place_searchclass"
+        android:text="#keyword"
+        android:textSize="9dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:background="@drawable/tags_button_black"
+        />
+
+    <Button
+        android:id="@+id/buttontags4_searchclass"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/buttontags1_searchclass"
+        android:text="#keyword"
+        android:textSize="9dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:background="@drawable/tags_button_black"
+        />
+
+    <Button
+        android:id="@+id/buttontags5_searchclass"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_toRightOf="@+id/buttontags1_searchclass"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/buttontags1_searchclass"
+        android:text="#keyword"
+        android:textSize="9dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:background="@drawable/tags_button_black"/>
+
+    <RelativeLayout
+        android:id="@+id/centerrelay"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/background_2dp_border"
+        android:layout_below="@+id/buttontags5_searchclass"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="15dp"
+        />
+
+    <TextView
+        android:id="@+id/termet_searchclass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Term"
+        android:layout_marginLeft="20dp"
+        android:textColor="#000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/centerrelay"/>
+
+    <TextView
+        android:id="@+id/term_searchclass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23dp"
+        android:textColor="#000"
+        android:textSize="18dp"
+        android:layout_below="@+id/termet_searchclass"/>
+
+    <TextView
+        android:id="@+id/descriptionet_searchclass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:layout_marginLeft="20dp"
+        android:textColor="#000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/term_searchclass"/>
+
+    <TextView
+        android:id="@+id/description_searchclass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23dp"
+        android:textColor="#000"
+        android:textSize="18dp"
+        android:layout_below="@+id/descriptionet_searchclass"/>
+
+    <TextView
+        android:id="@+id/targetet_searchclass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Target"
+        android:layout_marginLeft="20dp"
+        android:textColor="#000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/description_searchclass"/>
+
+    <TextView
+        android:id="@+id/target_searchclass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23dp"
+        android:textColor="#000"
+        android:textSize="18dp"
+        android:layout_below="@+id/targetet_searchclass"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>

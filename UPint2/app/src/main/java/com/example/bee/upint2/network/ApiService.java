@@ -66,9 +66,12 @@ public interface ApiService {
     @GET("courseDetailsOfuser/{user_id}")
     Call<List<Course>> courseDetailsOfuser(@Path("user_id") int user_id);
 
-    //ยังไม่เสด
-    @GET("userDetails")
-    Call<UserProfile> userDetail(@Query("email") String email);
+
+    @GET("userDetailswithId/{id}")
+    Call<UserProfile> userDetailswithId(@Path("id") String id);
+
+    @GET("classCount/{course_id}")
+    Call<UserProfile> classCount(@Path("course_id") String course_id);
 
     @POST("refresh")
     @FormUrlEncoded

@@ -109,21 +109,23 @@ public class MainActivity extends AppCompatActivity {
         teacherBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                type = "Teacher";
+                Log.w(TAG, "User type: " + type);
                 teacherBt.setFocusable(true);
                 teacherBt.setFocusableInTouchMode(true);
                 teacherBt.requestFocus();
                 studentBt.clearFocus();
-                type = "Teacher";
             }
         });
         studentBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                type = "Student";
+                Log.w(TAG, "User type: " + type);
                 studentBt.setFocusable(true);
                 studentBt.setFocusableInTouchMode(true);
                 studentBt.requestFocus();
                 teacherBt.clearFocus();
-                type = "Student";
             }
         });
         agree.setClickable(true);
