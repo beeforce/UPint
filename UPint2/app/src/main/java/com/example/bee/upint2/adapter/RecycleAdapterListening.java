@@ -153,17 +153,39 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
             holder.targetuniv.setText(course.get(position).getTarget_university());
             holder.targetmajor.setText(course.get(position).getTarget_major()+" major");
             holder.targetyear.setText(course.get(position).getTarget_years()+" year student");
-            holder.tag.setText(course.get(position).getTags());
-            if (course.get(position).getTarget_years() == "1"){
-                holder.targetyear.setText("First year student");
+            ArrayList<String> taglist = new ArrayList<>();
+
+            String tag = course.get(position).getTags().toString();
+            String[] tagpart = tag.split(",");
+            for (int i=0; i < tagpart.length;i++){
+                taglist.add(tagpart[i]);
             }
-            if (course.get(position).getTarget_years() == "2"){
-                holder.targetyear.setText("Second year student");
+
+
+            if (tagpart.length == 1){
+                holder.tag2.setVisibility(View.GONE);
+                holder.tag1.setText(taglist.get(0));
             }
-//            if (target_year == "3") {
+            else if (tagpart.length == 2){
+                holder.tag3.setVisibility(View.GONE);
+                holder.tag1.setText(taglist.get(0));
+                holder.tag2.setText(taglist.get(1));
+            }else {
+                holder.tag1.setText(taglist.get(0));
+                holder.tag2.setText(taglist.get(1));
+                holder.tag3.setText(taglist.get(2));
+
+            }
+//            if (course.get(position).getTarget_years().toString() == "1"){
+//                holder.targetyear.setText("First year student");
+//            }
+//            if (course.get(position).getTarget_years().toString() == "2"){
+//                holder.targetyear.setText("Second year student");
+//            }
+//            if (course.get(position).getTarget_years().toString() == "3") {
 //                holder.targetyear.setText("Third year student");
 //            }
-//            if (target_year == "4"){
+//            if (course.get(position).getTarget_years().toString() == "4"){
 //                holder.targetyear.setText("Forth year student");
 //            }
 
@@ -180,7 +202,7 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
     public static class MyViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView img;
-        private TextView Name, price,numberofstudent, tag, targetuniv, targetmajor, targetyear;
+        private TextView Name, price,numberofstudent, tag1, tag2, tag3, targetuniv, targetmajor, targetyear;
         private RelativeLayout classinfolayout;
         private Context ctx;
         private List<Course> course = new ArrayList<Course>();
@@ -190,7 +212,9 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
             img = (ImageView) itemView.findViewById(R.id.img2);
             Name = (TextView) itemView.findViewById(R.id.name2);
             price = (TextView) itemView.findViewById(R.id.price2);
-            tag = (TextView) itemView.findViewById(R.id.buttontags1_listen);
+            tag1 = (TextView) itemView.findViewById(R.id.buttontags1_listen);
+            tag2 = (TextView) itemView.findViewById(R.id.buttontags2_listen);
+            tag3 = (TextView) itemView.findViewById(R.id.buttontags3_listen);
             numberofstudent = (TextView) itemView.findViewById(R.id.numberofstudent2);
             classinfolayout = (RelativeLayout) itemView.findViewById(R.id.classinfolayout2);
             targetuniv = (TextView) itemView.findViewById(R.id.targetuniv);

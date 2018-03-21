@@ -7,6 +7,86 @@
     tools:context="com.example.bee.upint2.SeachclassActivity">
 
 
+    <RelativeLayout
+        android:id="@+id/card_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+
+        <RelativeLayout
+            android:id="@+id/search_class_name_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#98c428">
+
+            <ImageView
+                android:id="@+id/arrow_left_img"
+                android:layout_marginTop="5dp"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_arrow_left_white"/>
+            <TextView
+                android:id="@+id/search_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/arrow_left_img"
+                android:layout_marginLeft="30dp"
+                android:text="English"
+                android:textSize="30dp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                />
+
+            <Button
+                android:id="@+id/buttontags1_keyword"
+                android:layout_width="57dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_below="@+id/search_text"
+                android:text="#keyword"
+                android:textSize="11dp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="35dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/tags_button"
+                />
+
+            <Button
+                android:id="@+id/buttontags2_keyword"
+                android:layout_width="57dp"
+                android:layout_height="22dp"
+                android:layout_toRightOf="@+id/buttontags1_keyword"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_below="@+id/search_text"
+                android:text="#keyword"
+                android:textSize="11dp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:background="@drawable/tags_button"
+                />
+
+        </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_keyword"
+        android:layout_below="@+id/search_class_name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffff"
+        android:scrollbars="vertical" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/searchclass_keyword_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <TextView
         android:id="@+id/searchclasskeywordtv"
         android:layout_width="wrap_content"
@@ -197,6 +277,8 @@
         android:textAllCaps="false"
         android:textSize="22dp"
         android:textStyle="bold" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

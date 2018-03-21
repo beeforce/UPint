@@ -134,8 +134,6 @@ public class SeachclassActivity extends AppCompatActivity {
                 i.putExtra("totalstudent", course.get(position).getTotal_student().toString());
                 i.putExtra("image_path", course.get(position).getCourse_image_path());
                 view.getContext().startActivity(i);
-                Toast.makeText(getApplicationContext(), course.get(position).getCourse_name()+" "+course.get(position).getId(),
-                        Toast.LENGTH_LONG).show();
             }
         });
 

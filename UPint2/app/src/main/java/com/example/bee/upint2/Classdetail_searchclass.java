@@ -2,6 +2,7 @@ package com.example.bee.upint2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.example.bee.upint2.model.UserProfile;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -26,7 +28,7 @@ public class Classdetail_searchclass extends AppCompatActivity {
     private String user_id, course_id, image_path;
     private TextView numberofstudent_searchclass, teacher, course_name, price_searchclass
             , numberofstudent_searchclass2, place_searchclass, term_searchclass, description_searchclass, target_searchclass;
-    private Button buttontags1_searchclass;
+    private Button buttontags1_searchclass, buttontags2_searchclass, buttontags3_searchclass, buttontags4_searchclass, buttontags5_searchclass;
     private ImageView class_picture;
 
     @Override
@@ -44,6 +46,10 @@ public class Classdetail_searchclass extends AppCompatActivity {
         numberofstudent_searchclass2 = (TextView) findViewById(R.id.numberofstudent_searchclass2);
         place_searchclass = (TextView) findViewById(R.id.place_searchclass);
         buttontags1_searchclass = (Button) findViewById(R.id.buttontags1_searchclass);
+        buttontags2_searchclass = findViewById(R.id.buttontags2_searchclass);
+        buttontags3_searchclass = findViewById(R.id.buttontags3_searchclass);
+        buttontags4_searchclass = findViewById(R.id.buttontags4_searchclass);
+        buttontags5_searchclass = findViewById(R.id.buttontags5_searchclass);
         term_searchclass = (TextView) findViewById(R.id.term_searchclass);
         description_searchclass = (TextView) findViewById(R.id.description_searchclass);
         target_searchclass = (TextView) findViewById(R.id.target_searchclass);
@@ -56,7 +62,35 @@ public class Classdetail_searchclass extends AppCompatActivity {
         price_searchclass.setText(getIntent().getStringExtra("cost"));
         numberofstudent_searchclass2.setText(getIntent().getStringExtra("totalstudent"));
         place_searchclass.setText(getIntent().getStringExtra("place"));
-        buttontags1_searchclass.setText(getIntent().getStringExtra("tags"));
+        ArrayList<String> taglist = new ArrayList<>();
+
+        String tag = getIntent().getStringExtra("tags");
+        String[] tagpart = tag.split(",");
+        for (int i=0; i < tagpart.length;i++){
+            taglist.add(tagpart[i]);
+        }
+
+
+        if (tagpart.length == 1){
+            buttontags2_searchclass.setVisibility(View.GONE);
+            buttontags3_searchclass.setVisibility(View.GONE);
+            buttontags4_searchclass.setVisibility(View.GONE);
+            buttontags5_searchclass.setVisibility(View.GONE);
+            buttontags1_searchclass.setText(taglist.get(0));
+        }
+        else if (tagpart.length == 2){
+            buttontags3_searchclass.setVisibility(View.GONE);
+            buttontags4_searchclass.setVisibility(View.GONE);
+            buttontags5_searchclass.setVisibility(View.GONE);
+            buttontags1_searchclass.setText(taglist.get(0));
+            buttontags2_searchclass.setText(taglist.get(1));
+        }else {
+            buttontags1_searchclass.setText(taglist.get(0));
+            buttontags2_searchclass.setText(taglist.get(1));
+            buttontags3_searchclass.setText(taglist.get(2));
+
+        }
+//        buttontags1_searchclass.setText(getIntent().getStringExtra("tags"));
         term_searchclass.setText(getIntent().getStringExtra("term"));
         description_searchclass.setText(getIntent().getStringExtra("description"));
         target_searchclass.setText(getIntent().getStringExtra("target_year"));

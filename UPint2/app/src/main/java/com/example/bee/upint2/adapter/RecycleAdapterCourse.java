@@ -129,7 +129,32 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
                 } else {
                     holder.dateremain.setText("Today");
                 }
-                holder.tag.setText(course.get(position).getTags());
+
+                ArrayList<String> taglist = new ArrayList<>();
+
+                String tag = course.get(position).getTags().toString();
+                String[] tagpart = tag.split(",");
+                for (int i=0; i < tagpart.length;i++){
+                    taglist.add(tagpart[i]);
+                }
+
+
+                if (tagpart.length == 1){
+                    holder.tag2.setVisibility(View.GONE);
+                    holder.tag1.setText(taglist.get(0));
+                }
+                else if (tagpart.length == 2){
+                    holder.tag3.setVisibility(View.GONE);
+                    holder.tag1.setText(taglist.get(0));
+                    holder.tag2.setText(taglist.get(1));
+                }else {
+                    holder.tag1.setText(taglist.get(0));
+                    holder.tag2.setText(taglist.get(1));
+                    holder.tag3.setText(taglist.get(2));
+
+                }
+
+
                 holder.course_place.setText(course.get(position).getPlace());
                 holder.course_numberstudent.setText("" + course.get(position).getTotal_student());
                 //string part url
@@ -178,7 +203,7 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
     public static class MyViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView img;
-        private TextView Name, price, time, numberofstudent, date, tag, dateremain, course_place, course_numberstudent;
+        private TextView Name, price, time, numberofstudent, date, tag1, tag2, tag3, dateremain, course_place, course_numberstudent;
         private RelativeLayout classinfolayout;
         private Context ctx;
         private List<Course> course = new ArrayList<Course>();
@@ -190,7 +215,9 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
             price = (TextView) itemView.findViewById(R.id.price);
             date = (TextView) itemView.findViewById(R.id.course_date);
             time = (TextView) itemView.findViewById(R.id.course_time);
-            tag = (TextView) itemView.findViewById(R.id.buttontags1);
+            tag1 = (TextView) itemView.findViewById(R.id.buttontags1);
+            tag2 = (TextView) itemView.findViewById(R.id.buttontags2);
+            tag3 = (TextView) itemView.findViewById(R.id.buttontags3);
             numberofstudent = (TextView) itemView.findViewById(R.id.numberofstudent);
             dateremain = (TextView) itemView.findViewById(R.id.dateremain);
             course_place = (TextView) itemView.findViewById(R.id.course_place);
