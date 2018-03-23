@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollviewApphome"
+    android:fillViewport="true">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/content_homeapp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_green_color"
+        >
+        <TextView
+            android:id="@+id/date"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Tomorrow 16:00"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="20dp"
+            />
+
+        <TextView
+            android:id="@+id/teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Pralin's Mathematics class"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/date"
+            />
+
+        <ImageView
+            android:id="@+id/place_icon"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_place_white"
+            android:layout_below="@+id/teacher"
+            android:layout_marginLeft="19dp"
+            />
+
+        <TextView
+            android:id="@+id/place"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Cafe Chalatte"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/place_icon"
+            android:layout_below="@+id/teacher"
+            android:layout_marginBottom="10dp"
+            />
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="#fff"
+                app:cardCornerRadius="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:id="@+id/upcoming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11dp"
+                android:textStyle="bold"
+                android:textColor="#2dd21b"
+                android:text="UPCOMING"/>
+
+            <TextView
+                android:id="@+id/dayremain"
+                android:layout_below="@+id/upcoming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#2dd21b"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-10dp"
+                android:layout_marginBottom="-8dp"
+                android:text="3"/>
+
+            <TextView
+                android:layout_below="@+id/dayremain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="11dp"
+                android:textStyle="bold"
+                android:textColor="#2dd21b"
+                android:layout_marginBottom="4dp"
+                android:text="CLASSES"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/sea_layout"
+        android:layout_below="@+id/content_homeapp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:src="@drawable/sea"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_20_dp"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:text="EVENT"
+            android:textColor="#fff"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_20_dp"
+            android:layout_marginTop="60dp"
+            android:textSize="25dp"
+            android:text="How to study yourself?"
+            android:textColor="#fff"
+            />
+
+
+    </RelativeLayout>
+
+            <TextView
+                android:id="@+id/search_recent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="18dp"
+                android:text="Recent Search"
+                android:textColor="#1d1c1c"
+                android:layout_below="@+id/sea_layout"
+                />
+
+    <HorizontalScrollView
+        android:id="@+id/horizonscroll_recent"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:scrollbars="none"
+        android:layout_below="@+id/search_recent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        
+
+                <RelativeLayout
+                    android:id="@+id/cardview_recent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/background_border_cardview"
+                    >
+                <TextView
+                    android:id="@+id/classname_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Classname"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:textStyle="bold"
+                    android:textColor="#494646"
+                    android:textSize="17dp"/>
+                <TextView
+                    android:id="@+id/keyword_home1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/classname_home"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="1dp"
+                    android:textStyle="italic"
+                    android:textColor="#494646"
+                    android:text="#keyword"/>
+
+                    <TextView
+                        android:id="@+id/keyword_home2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/classname_home"
+                        android:layout_toRightOf="@+id/keyword_home1"
+                        android:paddingLeft="1dp"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="1dp"
+                        android:textStyle="italic"
+                        android:textColor="#494646"
+                        android:text="#keyword"/>
+
+                    <TextView
+                        android:id="@+id/keyword_home3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/classname_home"
+                        android:layout_toRightOf="@+id/keyword_home2"
+                        android:paddingLeft="1dp"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="10dp"
+                        android:textStyle="italic"
+                        android:textColor="#494646"
+                        android:text="#keyword"/>
+
+                </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/cardview_recent2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/cardview_recent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/background_border_cardview">
+                <TextView
+                    android:id="@+id/classname_home2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Classname"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:textStyle="bold"
+                    android:textColor="#494646"
+                    android:textSize="17dp"/>
+                <TextView
+                    android:id="@+id/keyword_home4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/classname_home2"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="1dp"
+                    android:textStyle="italic"
+                    android:textColor="#494646"
+                    android:text="#keyword"/>
+
+                <TextView
+                    android:id="@+id/keyword_home5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/classname_home2"
+                    android:layout_toRightOf="@+id/keyword_home4"
+                    android:paddingLeft="1dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="1dp"
+                    android:textStyle="italic"
+                    android:textColor="#494646"
+                    android:text="#keyword"/>
+
+                <TextView
+                    android:id="@+id/keyword_home6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/classname_home2"
+                    android:layout_toRightOf="@+id/keyword_home5"
+                    android:paddingLeft="1dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="10dp"
+                    android:textStyle="italic"
+                    android:textColor="#494646"
+                    android:text="#keyword"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/cardview_recent3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/cardview_recent2"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/background_border_cardview">
+                <TextView
+                    android:id="@+id/classname_home3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Classname"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:textStyle="bold"
+                    android:textColor="#494646"
+                    android:textSize="17dp"/>
+                <TextView
+                    android:id="@+id/keyword_home7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/classname_home3"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="1dp"
+                    android:textStyle="italic"
+                    android:textColor="#494646"
+                    android:text="#keyword"/>
+
+                <TextView
+                    android:id="@+id/keyword_home8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/classname_home3"
+                    android:layout_toRightOf="@+id/keyword_home7"
+                    android:paddingLeft="1dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="1dp"
+                    android:textStyle="italic"
+                    android:textColor="#494646"
+                    android:text="#keyword"/>
+
+                <TextView
+                    android:id="@+id/keyword_home9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/classname_home3"
+                    android:layout_toRightOf="@+id/keyword_home8"
+                    android:paddingLeft="1dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="10dp"
+                    android:textStyle="italic"
+                    android:textColor="#494646"
+                    android:text="#keyword"/>
+
+            </RelativeLayout>
+
+
+
+    </RelativeLayout>
+    </HorizontalScrollView>
+
+    <RelativeLayout
+        android:id="@+id/layout_line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/background_2dp_border"
+        android:layout_below="@+id/horizonscroll_recent">
+    </RelativeLayout>
+    
+    
+    <TextView
+        android:id="@+id/startutor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_line"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="#1d1c1c"
+        android:textSize="18dp"
+        android:text="Star tutors in Chiangmai"
+        />
+    <HorizontalScrollView
+        android:id="@+id/startutor_horizonview"
+        android:layout_width="match_parent"
+        android:layout_height="165dp"
+        android:scrollbars="none"
+        android:layout_below="@+id/startutor"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_star_tutor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            />
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+        <RelativeLayout
+            android:id="@+id/layout_line2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/background_2dp_border"
+            android:layout_below="@+id/startutor_horizonview">
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Best Cafe to study in Chaingmai"
+            android:textColor="#1d1c1c"
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/layout_line2"/>
+
+
+    </RelativeLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/stop_podcast_button"
+            app:backgroundTint="#98c428"
+            android:src="@drawable/ic_search_white"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="end|bottom"
+            />
+    </android.support.design.widget.CoordinatorLayout>
+
+</ScrollView>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UPint2</string>
+    <string name="app_name">UPint</string>
     <string name="facebook_app_id">381162788998709</string>
     <string name="fb_login_protocol_scheme">94cb5fa4cb2b690c6e88f3ede0456b2c</string>
 
@@ -21,6 +21,9 @@
     <string name="action_bar_setting">Setting</string>
     <string name="double_back_exit">Press once again to exit!</string>
     <string name="description_hint">Description\nabout your class</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+
     <string-array name="years">
         <item>Year</item>
         <item>1</item>

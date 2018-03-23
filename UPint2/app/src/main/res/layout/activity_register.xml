@@ -381,7 +381,7 @@ your education"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:visibility="gone">
+        >
 
         <TextView
             android:id="@+id/pleaseupload"

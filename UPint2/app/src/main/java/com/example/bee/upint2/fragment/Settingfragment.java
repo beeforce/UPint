@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.bee.upint2.AppfeedActivity;
 import com.example.bee.upint2.MakeclassActivity;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.SeachclassActivity;
@@ -57,6 +58,14 @@ public class Settingfragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SearchclassActivity_Keyword.class);
+                startActivity(intent);
+            }
+        });
+        Button button3 = rootView.findViewById(R.id.Appffeedbt);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AppfeedActivity.class);
                 startActivity(intent);
             }
         });

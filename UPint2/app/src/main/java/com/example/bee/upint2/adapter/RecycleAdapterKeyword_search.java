@@ -1,6 +1,7 @@
 package com.example.bee.upint2.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,14 +16,19 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.example.bee.upint2.Classdetail_searchclass;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.model.Course;
 import com.example.bee.upint2.model.UserProfile;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -180,6 +186,7 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
         private ImageView img;
         private TextView name, price, numberofstudent, totalofstudent, teacher_name;
         private Button buttontags1_keyword, buttontags2_keyword, buttontags3_keyword;
+        private Date d;
 
         public MyViewholder(View itemView, Context ctx, List<Course> course) {
             super(itemView);
@@ -201,7 +208,59 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(ctx,"position"+course.get(getAdapterPosition()).getId(),Toast.LENGTH_SHORT).show();
+
+            String timestartst = course.get(getAdapterPosition()).getStart_time();
+            String[] timestartpart = timestartst.split(":");
+            String timestart1 = timestartpart[0];
+            String timestart2 = timestartpart[1];
+            String timestart3 = timestartpart[2];
+            String timestart = timestart1 + "." + timestart2;
+            //string part timefinish
+            String timefinishst = course.get(getAdapterPosition()).getFinish_time();
+            String[] timefinishpart = timefinishst.split(":");
+            String timefinish1 = timefinishpart[0];
+            String timefinish2 = timefinishpart[1];
+            String timefinish3 = timefinishpart[2];
+            String timefinish = timefinish1 + "." + timefinish2;
+
+            int hour = Integer.parseInt(timestart1) % 12;
+            int hourfinish = (Integer.parseInt(timefinish1)) % 12;
+            int finishhour = Integer.parseInt(timefinish1);
+            int finishminute = Integer.parseInt(timefinish2);
+            int starthour = Integer.parseInt(timestart1);
+            int startminute = Integer.parseInt(timestart2);
+            String finishtime = String.format("%02d.%02d %s", hourfinish == 0 ? 12 : hourfinish,
+                    finishminute, finishhour < 12 ? "am" : "pm");
+            String starttime = String.format("%02d.%02d %s", hour == 0 ? 12 : hour,
+                    startminute, starthour < 12 ? "am" : "pm");
+            String scheduletime = starttime + " - " + finishtime;
+
+            SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
+            Date today = Calendar.getInstance().getTime();
+            try {
+                d = input.parse(course.get(getAdapterPosition()).getDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            String scheduledate = output.format(d);
+
+            Intent i = new Intent(v.getContext(), Classdetail_searchclass.class);
+            i.putExtra("course_id", course.get(getAdapterPosition()).getId().toString());
+            i.putExtra("user_id", course.get(getAdapterPosition()).getUser_id());
+            i.putExtra("tags", course.get(getAdapterPosition()).getTags());
+            i.putExtra("target_year", course.get(getAdapterPosition()).getTarget_years());
+            i.putExtra("scheduletime", scheduletime.toString());
+            i.putExtra("course_name", course.get(getAdapterPosition()).getCourse_name().toString());
+            i.putExtra("level", course.get(getAdapterPosition()).getLevel_of_difficult());
+            i.putExtra("description", course.get(getAdapterPosition()).getDescription());
+            i.putExtra("cost", course.get(getAdapterPosition()).getPrice_per_student());
+            i.putExtra("scheduledate", scheduledate.toString());
+            i.putExtra("place", course.get(getAdapterPosition()).getPlace());
+            i.putExtra("term", course.get(getAdapterPosition()).getTerms());
+            i.putExtra("totalstudent", course.get(getAdapterPosition()).getTotal_student().toString());
+            i.putExtra("image_path", course.get(getAdapterPosition()).getCourse_image_path());
+            v.getContext().startActivity(i);
         }
 
     }

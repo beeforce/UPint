@@ -39,21 +39,21 @@ public class Classdetail_searchclass extends AppCompatActivity {
         mAPIService = ApiUtils.getAPIService();
 
         //set textview
-        numberofstudent_searchclass = (TextView) findViewById(R.id.numberofstudent_searchclass);
-        teacher = (TextView) findViewById(R.id.teacher);
-        course_name = (TextView) findViewById(R.id.course_name);
-        price_searchclass = (TextView) findViewById(R.id.price_searchclass);
-        numberofstudent_searchclass2 = (TextView) findViewById(R.id.numberofstudent_searchclass2);
-        place_searchclass = (TextView) findViewById(R.id.place_searchclass);
-        buttontags1_searchclass = (Button) findViewById(R.id.buttontags1_searchclass);
+        numberofstudent_searchclass = findViewById(R.id.numberofstudent_searchclass);
+        teacher = findViewById(R.id.teacher);
+        course_name = findViewById(R.id.course_name);
+        price_searchclass = findViewById(R.id.price_searchclass);
+        numberofstudent_searchclass2 = findViewById(R.id.numberofstudent_searchclass2);
+        place_searchclass = findViewById(R.id.place_searchclass);
+        buttontags1_searchclass = findViewById(R.id.buttontags1_searchclass);
         buttontags2_searchclass = findViewById(R.id.buttontags2_searchclass);
         buttontags3_searchclass = findViewById(R.id.buttontags3_searchclass);
         buttontags4_searchclass = findViewById(R.id.buttontags4_searchclass);
         buttontags5_searchclass = findViewById(R.id.buttontags5_searchclass);
-        term_searchclass = (TextView) findViewById(R.id.term_searchclass);
-        description_searchclass = (TextView) findViewById(R.id.description_searchclass);
-        target_searchclass = (TextView) findViewById(R.id.target_searchclass);
-        class_picture = (ImageView) findViewById(R.id.class_picture);
+        term_searchclass = findViewById(R.id.term_searchclass);
+        description_searchclass = findViewById(R.id.description_searchclass);
+        target_searchclass = findViewById(R.id.target_searchclass);
+        class_picture = findViewById(R.id.class_picture);
 
         //get extra string
         user_id = getIntent().getStringExtra("user_id");
@@ -93,7 +93,7 @@ public class Classdetail_searchclass extends AppCompatActivity {
 //        buttontags1_searchclass.setText(getIntent().getStringExtra("tags"));
         term_searchclass.setText(getIntent().getStringExtra("term"));
         description_searchclass.setText(getIntent().getStringExtra("description"));
-        target_searchclass.setText(getIntent().getStringExtra("target_year"));
+        target_searchclass.setText(getIntent().getStringExtra("target_year")+" year student0");
         image_path = getIntent().getStringExtra("image_path");
 
         String[] parts = image_path.split("/");

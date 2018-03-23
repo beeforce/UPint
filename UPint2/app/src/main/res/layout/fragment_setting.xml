@@ -64,6 +64,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="search keyword"/>
+
+                <Button
+                    android:id="@+id/Appffeedbt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="search keyword"/>
             </LinearLayout>
 
 

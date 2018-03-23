@@ -1,29 +1,20 @@
 package com.example.bee.upint2.fragment;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.example.bee.upint2.LoginActivity;
-import com.example.bee.upint2.Main2Activity;
 import com.example.bee.upint2.R;
-import com.example.bee.upint2.adapter.RecycleAdapterCourse;
 import com.example.bee.upint2.adapter.RecycleAdapterListening;
 import com.example.bee.upint2.adapter.RecyclerViewClickListener;
 import com.example.bee.upint2.model.Course;
 import com.example.bee.upint2.model.sendOject;
-import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
 
