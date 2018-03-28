@@ -2,7 +2,6 @@ package com.example.bee.upint2.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,22 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.bee.upint2.Classdetail;
-import com.example.bee.upint2.MainActivity;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.model.Course;
-import com.example.bee.upint2.model.sendOject;
-import com.example.bee.upint2.network.AccessToken;
-import com.example.bee.upint2.network.ApiService;
-import com.example.bee.upint2.network.ApiUtils;
 
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,10 +26,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by Bee on 2/21/2018.
