@@ -38,6 +38,18 @@ public class AccessToken {
     @Expose
     boolean success;
 
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    @SerializedName("error")
+    @Expose
+    String error;
+
     public void setSuccess(boolean success) {
         this.success = success;
     }

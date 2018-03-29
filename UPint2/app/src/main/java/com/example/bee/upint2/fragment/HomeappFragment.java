@@ -74,19 +74,6 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
 //        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 //        recyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<Integer> viewColoers = new ArrayList<>();
-        viewColoers.add(Color.BLUE);
-        viewColoers.add(Color.YELLOW);
-        viewColoers.add(Color.MAGENTA);
-        viewColoers.add(Color.RED);
-        viewColoers.add(Color.BLACK);
-
-        ArrayList<String> animalNames = new ArrayList<>();
-        animalNames.add("Horse");
-        animalNames.add("Cow");
-        animalNames.add("Camel");
-        animalNames.add("Sheep");
-        animalNames.add("Goat");
 
         //fab
         searchfab = rootView.findViewById(R.id.search_class_fab);
@@ -169,7 +156,7 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
             }
         }
         courseList.removeAll(filteredJob);
-        Sortdate(courseList);
+//        Sortdate(courseList);
         adapter = new MyRecyclerViewAdapter(courseList, getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView2.setAdapter(adapter);
@@ -202,32 +189,5 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
     public void recyclerViewListClicked(View v, int position) {
         adapter = new MyRecyclerViewAdapter(getActivity(), this);
 
-    }
-
-    private void Sortdate(List<Course> courseList) {
-
-        for (Course each : courseList) {
-            SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
-            Date today = Calendar.getInstance().getTime();
-            try {
-                d = input.parse(each.getDate());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            scheduledate = output.format(d);
-            //get remain date
-            long date_remain = d.getTime() - today.getTime();
-            long seconds = date_remain / 1000;
-            long minutes = seconds / 60;
-            long hours = minutes / 60;
-            long days = hours / 24;
-            Log.w(TAG, "date" + days);
-            if (days == 0 | !d.before(today)) {
-
-            } else {
-                courseList.remove(each);
-            }
-        }
     }
 }

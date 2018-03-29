@@ -24,7 +24,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -72,6 +71,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             e.printStackTrace();
         }
         scheduledate = output.format(d);
+
         //get remain date
         long date_remain = d.getTime() - today.getTime();
         long seconds = date_remain / 1000;

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:id="@+id/activity_register_layout"
     tools:context="com.example.bee.upint2.Register">
 
     <RelativeLayout

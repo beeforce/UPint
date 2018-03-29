@@ -87,4 +87,7 @@ public interface ApiService {
     @GET("courseDetails/{course_id}")
     Call<Course> courseDetailswithId(@Path("course_id") int course_id);
 
+    @GET("CheckEmailRegister/{email}")
+    Call<AccessToken> checkUserEmailforRegister(@Path("email") String email);
+
 }

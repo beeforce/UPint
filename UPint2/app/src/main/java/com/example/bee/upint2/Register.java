@@ -3,6 +3,7 @@ package com.example.bee.upint2;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -21,9 +22,11 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -91,6 +94,7 @@ public class Register extends AppCompatActivity {
     private SweetAlertDialog pDialog;
     private ApiService mAPIService;
     private Call<AccessToken> call;
+    private AccessToken accessToken;
     private static final String TAG = "RegisterActivity";
 
 
@@ -108,8 +112,17 @@ public class Register extends AppCompatActivity {
         this.setContentView(R.layout.activity_register);
 
 
-//        service = RetrofitBuilder.createService(ApiService.class);
-//        tokenManager = TokenManager.getInstance(getSharedPreferences("prefs", MODE_PRIVATE));
+        //disable keyboard onclick layout
+        RelativeLayout activity_login_layout = findViewById(R.id.activity_register_layout);
+        activity_login_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                return true;
+            }
+        });
 
 
         //datepicker
@@ -231,8 +244,30 @@ public class Register extends AppCompatActivity {
                     vibrator.vibrate(120);
                     return;
                 } else {
-                    relay3.setVisibility(View.VISIBLE);
-                    relay2.setVisibility(View.GONE);
+                    showProgressDialog();
+                    mAPIService = ApiUtils.getAPIService();
+                    mAPIService.checkUserEmailforRegister(email.getText().toString()).enqueue(new Callback<AccessToken>() {
+                        @Override
+                        public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                            if (response.isSuccessful()) {
+                                dismissProgressDialog();
+                                showProgressDialogSuccessEmailduplicate();
+                                relay3.setVisibility(View.VISIBLE);
+                                relay2.setVisibility(View.GONE);
+                            }else {
+                                dismissProgressDialog();
+                                showProgressDialogRegisterEmailDuplicate();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<AccessToken> call, Throwable t) {
+                            showProgressDialog();
+                            showProgressDialogWarningConnection();
+
+
+                        }
+                    });
                 }
             }
         });
@@ -312,10 +347,12 @@ public class Register extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             Log.w(TAG, "onResponse: " + response.body());
                             dismissProgressDialog();
-                            startActivity(new Intent(Register.this, LoginActivity.class));
-                            finish();
+                            accessToken = response.body();
+                            Log.w(TAG, "onResponse: " + response.body().getError());
+                            showProgressDialogSuccessRegister();
                         } else {
                             dismissProgressDialog();
+                            showProgressDialogRegisterEmailDuplicate();
                             Log.w(TAG, "onResponse Fail: " + response.body());
                         }
                     }
@@ -324,6 +361,7 @@ public class Register extends AppCompatActivity {
                     public void onFailure(Call<AccessToken> call, Throwable t) {
                         Log.w(TAG, "onFailure: " + t.getMessage());
                         dismissProgressDialog();
+                        showProgressDialogWarningConnection();
                     }
                 });
             }
@@ -543,6 +581,7 @@ public class Register extends AppCompatActivity {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 
+
     private boolean checkphonenumber() {
         if (phonenumber.getText().toString().trim().isEmpty()) {
             phonenumberTextlayout.setErrorEnabled(true);
@@ -626,30 +665,65 @@ public class Register extends AppCompatActivity {
         }
     }
 
+    private void showProgressDialogRegisterEmailDuplicate() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        pDialog.setTitleText("ERROR!");
+        pDialog.setContentText("Your Email has already registered");
+        pDialog.setConfirmText("Ok");
+        pDialog.show();
+    }
+
     private void showProgressDialogWarning() {
-        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("ERROR!")
-                .setContentText("Your certification code is not correct")
-                .setConfirmText("Ok!")
-                .show();
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        pDialog.setTitleText("ERROR!");
+        pDialog.setContentText("Your certification code is not correct");
+        pDialog.setConfirmText("Ok");
+        pDialog.show();
     }
 
     private void showWarningReceiveSMS() {
-        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("ERROR!")
-                .setContentText("Your phone number can not receive certification code yet. Please try again")
-                .setConfirmText("Ok!")
-                .show();
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        pDialog.setTitleText("ERROR!");
+        pDialog.setContentText("Your phone number can not receive certification code yet. Please try again");
+        pDialog.setConfirmText("Ok");
+        pDialog.show();
         cerificationBt.setVisibility(View.VISIBLE);
         cetificationcodeTextlayout.setVisibility(View.GONE);
         next3.setVisibility(View.GONE);
     }
 
+    private void showProgressDialogWarningConnection(){
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        pDialog.setTitleText("ERROR!");
+        pDialog.setContentText("Connection Failed");
+        pDialog.setConfirmText("Ok");
+        pDialog.show();
+    }
+    private void showProgressDialogSuccessEmailduplicate() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
+        pDialog.setTitleText("SUCCESS!");
+        pDialog.setContentText("You email can use for Registration");
+        pDialog.show();
+    }
+
     private void showProgressDialogSuccess() {
-        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText("SUCCESS!")
-                .setContentText("You certification code is correct!")
-                .show();
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
+        pDialog.setTitleText("SUCCESS!");
+        pDialog.setContentText("You certification code is correct!");
+        pDialog.show();
+    }
+    private void showProgressDialogSuccessRegister() {
+        pDialog =  new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
+        pDialog.setTitleText("SUCCESS!");
+        pDialog.setContentText("Registration Successful");
+        pDialog.show();
+        pDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                startActivity(new Intent(Register.this, LoginActivity.class));
+                finish();
+            }
+        });
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {

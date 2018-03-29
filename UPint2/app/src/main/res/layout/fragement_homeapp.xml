@@ -391,7 +391,7 @@
         />
     <HorizontalScrollView
         android:id="@+id/startutor_horizonview"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="165dp"
         android:scrollbars="none"
         android:layout_below="@+id/startutor"
