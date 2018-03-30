@@ -27,6 +27,7 @@
             >
 
         <ImageView
+            android:id="@+id/profile_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -46,7 +47,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/user_years"
+        android:id="@+id/user_university"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Chaingmai university"

@@ -12,8 +12,13 @@ import android.text.Html;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.bee.upint2.adapter.SectionPageAdapter;
 import com.example.bee.upint2.fragment.HomeappFragment;
 import com.example.bee.upint2.fragment.Listenfragment;
@@ -21,6 +26,16 @@ import com.example.bee.upint2.fragment.Schedulefragment;
 import com.example.bee.upint2.fragment.Settingfragment;
 import com.example.bee.upint2.fragment.Statusfragment;
 import com.example.bee.upint2.model.CustomViewPager;
+import com.example.bee.upint2.model.UserProfile;
+import com.example.bee.upint2.model.sendOject;
+import com.example.bee.upint2.network.ApiService;
+import com.example.bee.upint2.network.ApiUtils;
+
+import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AppfeedActivity extends AppCompatActivity {
 
@@ -34,6 +49,7 @@ public class AppfeedActivity extends AppCompatActivity {
     private Settingfragment settingfragment;
     private NavigationView navigationView;
     private Toolbar toolbar;
+    private ApiService mAPIService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +77,45 @@ public class AppfeedActivity extends AppCompatActivity {
 
 
         navigationView = findViewById(R.id.nav_view);
+        final View hView =  navigationView.getHeaderView(0);
+        final TextView username = hView.findViewById(R.id.user_name);
+        final TextView user_university = hView.findViewById(R.id.user_university);
+        final ImageView profile_image = hView.findViewById(R.id.profile_image);
+        sendOject o = new sendOject();
+        String user_id = o.getUser_id();
+        mAPIService = ApiUtils.getAPIService();
+        mAPIService.userDetailswithId(user_id).enqueue(new Callback<UserProfile>() {
+            @Override
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                username.setText(response.body().getFirst_name()+" "+response.body().getLast_name());
+                user_university.setText(response.body().getSchool()+" University");
+
+                String string = response.body().getImage();
+                String[] parts = string.split("/");
+                String part1 = parts[0];
+                String part4 = parts[3];
+                String part5 = parts[4];
+                String part6 = parts[5];
+                String part7 = parts[6];
+                String part8 = parts[7];
+                String part9 = parts[8];
+                String url_image = part1 + "//192.168.1.13/" + part4 + "/" + part5 + "/" + part6 + "/" + part7 + "/" + part8 + "/" + part9;
+                Glide.with(hView.getContext())
+                        .load(url_image)
+                        .override(600, 600)
+                        .centerCrop()
+                        .into(profile_image);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<UserProfile> call, Throwable t) {
+
+            }
+        });
+
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override

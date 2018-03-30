@@ -229,7 +229,7 @@ public class Main2Activity extends AppCompatActivity {
 
         if (isActiveOverHalfHour){
             MySharedPreference.clearPref(getApplicationContext());
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }

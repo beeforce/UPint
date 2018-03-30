@@ -10,6 +10,7 @@ import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,7 +40,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 
     CallbackManager mCallbackManager;
-    private static final String TAG = "FACELOG";
+    private static final String TAG = "MainActivity";
     private FirebaseAuth mAuth;
     Button facebookBt;
     String type;
@@ -106,26 +107,33 @@ public class MainActivity extends AppCompatActivity {
         TextView agree = (TextView) findViewById(R.id.agree);
         teacherBt = (Button) findViewById(R.id.teacherBt);
         studentBt = (Button) findViewById(R.id.studentBt);
-        teacherBt.setOnClickListener(new View.OnClickListener() {
+        teacherBt.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                type = "Teacher";
-                Log.w(TAG, "User type: " + type);
+            public boolean onTouch(View v, MotionEvent event) {
                 teacherBt.setFocusable(true);
                 teacherBt.setFocusableInTouchMode(true);
                 teacherBt.requestFocus();
+                if (teacherBt.isFocused()){
+                    type = "Teacher";
+                }
                 studentBt.clearFocus();
+                Log.w(TAG, "User type: " + type);
+                return false;
             }
         });
-        studentBt.setOnClickListener(new View.OnClickListener() {
+
+        studentBt.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                type = "Student";
-                Log.w(TAG, "User type: " + type);
+            public boolean onTouch(View v, MotionEvent event) {
                 studentBt.setFocusable(true);
                 studentBt.setFocusableInTouchMode(true);
                 studentBt.requestFocus();
+                if (studentBt.isFocused()){
+                    type = "Student";
+                }
                 teacherBt.clearFocus();
+                Log.w(TAG, "User type: " + type);
+                return false;
             }
         });
         agree.setClickable(true);

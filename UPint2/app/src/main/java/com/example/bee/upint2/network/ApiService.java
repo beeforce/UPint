@@ -58,7 +58,7 @@ public interface ApiService {
 
     @POST("login")
     @Multipart
-    Call<AccessToken> login(@Part("email") RequestBody email, @Part("password") RequestBody password);
+    Call<AccessToken> login(@Part("email") RequestBody email, @Part("password") RequestBody password, @Part("state") RequestBody usertype);
 
     @GET("Allcoursedetail")
     Call<List<Course>> getCoursedetail();

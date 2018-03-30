@@ -64,8 +64,6 @@ public class Classdetail extends AppCompatActivity {
         sendOject o = new sendOject();
         user_id = o.getUser_id();
 
-        Toast.makeText(getApplicationContext(), "show id "+course_id+" : "+user_id,
-                Toast.LENGTH_SHORT).show();
 
         book = (Button) findViewById(R.id.book);
         back = (ImageView) findViewById(R.id.backclassdetail);

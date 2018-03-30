@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout tillemail, tillpassword;
     private Vibrator vibrator;
     private Animation anim;
+    private String user_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         Bundle bundle = getIntent().getExtras();
-        String user_type = bundle.getString("Usertype_login");
+        user_type = bundle.getString("Usertype_login");
+        Log.w(TAG, "User_type: " + user_type);
         login = (Button) findViewById(R.id.btn_login);
         tillemail = (TextInputLayout) findViewById(R.id.til_email2);
         tillpassword = (TextInputLayout) findViewById(R.id.til_password2);
@@ -96,13 +98,14 @@ public class LoginActivity extends AppCompatActivity {
 
                     RequestBody emailR = RequestBody.create(MultipartBody.FORM, email);
                     RequestBody passwordR = RequestBody.create(MultipartBody.FORM, password);
+                    RequestBody user_typeR = RequestBody.create(MultipartBody.FORM, user_type);
 
-                    mAPIService.login(emailR, passwordR).enqueue(new Callback<AccessToken>() {
+                    mAPIService.login(emailR, passwordR,user_typeR).enqueue(new Callback<AccessToken>() {
                         @Override
                         public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                             Log.w(TAG, "onResponse: " + response);
                             dismissProgressDialog();
-                            if (response.isSuccessful()) {
+                            if (response.code() == 200) {
                                 Log.w(TAG, "onResponse: " + response.body().getAccessToken());
                                 Log.w(TAG, "user id: " + response.body().getUser_id());
                                 sendOject se = new sendOject();
@@ -111,9 +114,16 @@ public class LoginActivity extends AppCompatActivity {
                                 se2.setUser_id(response.body().getUser_id());
                                 dismissProgressDialog();
                                 showProgressDialogSuccess();
-                            } else {
+                            } else if (response.code() == 400){   // wrong password
                                 dismissProgressDialog();
                                 showProgressDialogWarning();
+                            }else if (response.code() == 401){    // wrong user type
+                                dismissProgressDialog();
+                                showProgressDialogWarningUsertype();
+                            }
+                            else{
+                                dismissProgressDialog();
+                                showProgressDialogWarningConnection();
                             }
                         }
 
@@ -173,6 +183,21 @@ public class LoginActivity extends AppCompatActivity {
                 .setContentText("Can not login to the system. Please enter the correct email and password")
                 .setConfirmText("Ok!")
                 .show();
+    }
+
+    private void showProgressDialogWarningUsertype(){
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        pDialog.setTitleText("Wrong user type!");
+        pDialog.setContentText("Please select a correct who you are");
+        pDialog.setConfirmText("Ok!");
+        pDialog.show();
+        pDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+            }
+        });
     }
 
     private void showProgressDialogWarningConnection(){
