@@ -18,7 +18,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="?android:attr/actionBarSize"
         android:background="#fff"
         app:layout_scrollFlags="scroll|enterAlways"
         >
@@ -47,12 +47,15 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/navigation_bottom"
-        android:foregroundTint="#269900"
-        app:itemIconTint="#269900"
-        app:itemTextColor="#2e2e2e"
+        app:menu="@menu/drawer_view"
+        android:fontFamily="sans-serif-thin"
         app:headerLayout="@layout/nav_header"
+        app:itemIconTint="@color/menu_text_color"
+        app:itemTextColor="#2e2e2e"
+        app:itemBackground="@drawable/menu_background_color"
         />
+
+
 
 
 

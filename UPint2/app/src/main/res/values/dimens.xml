@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <dimen name="design_navigation_icon_size" tools:override="true">40dp</dimen>
+    <dimen name="design_navigation_icon_size" tools:override="true">34dp</dimen>
     <dimen name="design_fab_image_size" tools:override="true">38dp</dimen>
+    <dimen name="design_navigation_separator_vertical_padding">0dp</dimen>
 </resources>

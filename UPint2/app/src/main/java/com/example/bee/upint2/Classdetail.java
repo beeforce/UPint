@@ -58,7 +58,7 @@ public class Classdetail extends AppCompatActivity {
         classdetailscheduletime.setText(getIntent().getStringExtra("scheduletime"));
         classdetailplace.setText(getIntent().getStringExtra("place"));
         termclassdetail.setText(getIntent().getStringExtra("term"));
-        numberclassdetail.setText(getIntent().getStringExtra("totalstudent"));
+        numberclassdetail.setText(getIntent().getStringExtra(  "totalstudent"));
 
         course_id = getIntent().getStringExtra("course_id");
         sendOject o = new sendOject();

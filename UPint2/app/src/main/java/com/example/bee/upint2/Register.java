@@ -262,7 +262,7 @@ public class Register extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<AccessToken> call, Throwable t) {
-                            showProgressDialog();
+                            dismissProgressDialog();
                             showProgressDialogWarningConnection();
 
 
@@ -702,7 +702,7 @@ public class Register extends AppCompatActivity {
     private void showProgressDialogSuccessEmailduplicate() {
         pDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
         pDialog.setTitleText("SUCCESS!");
-        pDialog.setContentText("You email can use for Registration");
+        pDialog.setContentText("Your email can use for Registration");
         pDialog.show();
     }
 

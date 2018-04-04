@@ -1,7 +1,6 @@
 package com.example.bee.upint2.fragment;
 
 import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,27 +10,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.adapter.RecycleAdapterCourse;
 import com.example.bee.upint2.adapter.RecyclerViewClickListener;
 import com.example.bee.upint2.model.Course;
 import com.example.bee.upint2.model.Course_user;
-import com.example.bee.upint2.model.UserProfile;
 import com.example.bee.upint2.model.sendOject;
-import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
 import com.willowtreeapps.spruce.Spruce;
 import com.willowtreeapps.spruce.animation.DefaultAnimations;
-import com.willowtreeapps.spruce.sort.DefaultSort;
 import com.willowtreeapps.spruce.sort.LinearSort;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -41,11 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by Bee on 1/30/2018.
- */
-
-public class Upcomingfragment extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewClickListener {
+public class UpcomingStudentFragment extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewClickListener {
 
 
     private static final String TAG = "Upcomingfragment";
@@ -62,7 +52,7 @@ public class Upcomingfragment extends android.support.v4.app.Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragement_upcoming, container, false);
+        View rootView = inflater.inflate(R.layout.fragement_upcoming_student, container, false);
 
         initInstances(rootView);
 //        Userdetail();
@@ -77,6 +67,7 @@ public class Upcomingfragment extends android.support.v4.app.Fragment implements
         swipeRefreshLayout.setRefreshing(false);
         spruceAnimator.start();
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -104,7 +95,6 @@ public class Upcomingfragment extends android.support.v4.app.Fragment implements
         recyclerView.setHasFixedSize(true);
 
 
-
         getClassdetail();
 
     }
@@ -121,9 +111,7 @@ public class Upcomingfragment extends android.support.v4.app.Fragment implements
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 course = response.body();
-                searchClass();
-
-
+                onSuccess(course);
                 Log.w(TAG, "onResponse: ");
             }
 
@@ -160,70 +148,20 @@ public class Upcomingfragment extends android.support.v4.app.Fragment implements
 
         });
 
+        sendOject o = new sendOject();
+        int user_id = Integer.parseInt(o.getUser_id());
+        String userId = String.valueOf(user_id);
         // sort by id
         for (Course each : courseList) {
-            for (Course_user each1 : courseEnroll) {
-                if (each.getId().equals(each1.getCourse_id())){
-                    filteredJob.add(each);
-                    Log.w(TAG, "find course id"+each.getId()+"  "+each1.getCourse_id());
-                }
+            if (!each.getUser_id().equals(userId)){
+                filteredJob.add(each);
             }
         }
-        adapter = new RecycleAdapterCourse(filteredJob, getActivity());
+        courseList.removeAll(filteredJob);
+        adapter = new RecycleAdapterCourse(courseList, getActivity());
         recyclerView.setAdapter(adapter);
     }
 
-    public void searchClass() {
 
-        sendOject o = new sendOject();
-        int user_id = Integer.parseInt(o.getUser_id());
-        mAPIService = ApiUtils.getAPIService();
-        mAPIService.searchclassEnroll(user_id).enqueue(new Callback<List<Course_user>>() {
-            @Override
-            public void onResponse(Call<List<Course_user>> call, Response<List<Course_user>> response) {
-                if (response.isSuccessful()) {
-                    courseEnroll = response.body();
-                    onSuccess(course);
-                } else
-                    Log.w(TAG, "Search class onResponse:fail");
-            }
-
-            @Override
-            public void onFailure(Call<List<Course_user>> call, Throwable t) {
-                Log.w(TAG, "onFailure: " + t.getMessage());
-            }
-        });
-    }
-
-
-    //ยังไม่เสด
-//    private void Userdetail() {
-//
-//        mAPIService = ApiUtils.getAPIService();
-//        mAPIService.userDetail("Bee@hotmail.com").enqueue(new Callback<UserProfile>() {
-//            @Override
-//            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
-//                if (response.isSuccessful()) {
-//                    Log.w(TAG, "onResponse: " + response.body() );
-//                    onSuccess(response.body());
-//                } else {
-//                    Log.w(TAG, "onResponsefail ");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserProfile> call, Throwable t) {
-//                Log.w(TAG, "onfailure"+t.getMessage());
-//            }
-//        });
-//    }
-//
-//    private void onSuccess(UserProfile userProfile){
-//
-//        tvName.setText(userProfile.getFirst_name()+" | "+userProfile.getLast_name());
-//        tvTruckId.setText(userProfile.getSchool()+" | "+userProfile.getMajor()+" | "+userProfile.getDate_graduated());
-//        tvAddress.setText(userProfile.getImage());
-//
-//    }
 
 }

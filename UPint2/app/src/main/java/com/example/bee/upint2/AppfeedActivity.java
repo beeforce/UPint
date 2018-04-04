@@ -1,7 +1,7 @@
 package com.example.bee.upint2;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -10,21 +10,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.example.bee.upint2.adapter.SectionPageAdapter;
 import com.example.bee.upint2.fragment.HomeappFragment;
 import com.example.bee.upint2.fragment.Listenfragment;
 import com.example.bee.upint2.fragment.Schedulefragment;
 import com.example.bee.upint2.fragment.Settingfragment;
 import com.example.bee.upint2.fragment.Statusfragment;
+import com.example.bee.upint2.fragment.UpcomingStudentFragment;
+import com.example.bee.upint2.fragment.Upcomingfragment;
 import com.example.bee.upint2.model.CustomViewPager;
 import com.example.bee.upint2.model.UserProfile;
 import com.example.bee.upint2.model.sendOject;
@@ -43,7 +41,7 @@ public class AppfeedActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private CustomViewPager viewPager;
     private HomeappFragment homeappFragment;
-    private Listenfragment listenfragment;
+    private Upcomingfragment upcomingfragment;
     private Schedulefragment schedulefragment;
     private Statusfragment statusfragment;
     private Settingfragment settingfragment;
@@ -54,6 +52,14 @@ public class AppfeedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //set language
+        String languageToLoad = "en_US"; // your language
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale.ENGLISH; //set locale language to english
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
         setContentView(R.layout.activity_appfeed);
 
 
@@ -77,6 +83,7 @@ public class AppfeedActivity extends AppCompatActivity {
 
 
         navigationView = findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(0).setChecked(true);
         final View hView =  navigationView.getHeaderView(0);
         final TextView username = hView.findViewById(R.id.user_name);
         final TextView user_university = hView.findViewById(R.id.user_university);
@@ -122,25 +129,25 @@ public class AppfeedActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         mDrawerLayout.closeDrawers();
                         switch (menuItem.getItemId()) {
-                            case R.id.action_upcoming:
+                            case R.id.nav_home:
                                 viewPager.setCurrentItem(0);
 //                                toolbar.setTitle(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
                                 return true;
 
-                            case R.id.action_listening:
+                            case R.id.nav_upcoming:
                                 viewPager.setCurrentItem(1);
 //                                toolbar.setTitle(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
                                 return true;
 
-                            case R.id.action_schedule:
+                            case R.id.nav_explore:
                                 viewPager.setCurrentItem(2);
 //                                toolbar.setTitle(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
                                 return true;
-                            case R.id.action_static:
+                            case R.id.nav_feedback:
                                 viewPager.setCurrentItem(3);
 //                                toolbar.setTitle(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
                                 return true;
-                            case R.id.action_setting:
+                            case R.id.nav_logout:
                                 viewPager.setCurrentItem(4);
 //                                toolbar.setTitle(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
                                 return true;
@@ -171,7 +178,7 @@ public class AppfeedActivity extends AppCompatActivity {
            }
     private void setupViewPager() {
         homeappFragment = new HomeappFragment();
-        listenfragment = new Listenfragment();
+        upcomingfragment = new Upcomingfragment();
         schedulefragment = new Schedulefragment();
         statusfragment = new Statusfragment();
         settingfragment = new Settingfragment();
@@ -179,7 +186,7 @@ public class AppfeedActivity extends AppCompatActivity {
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
 
         adapter.addFragment(homeappFragment);
-        adapter.addFragment(listenfragment);
+        adapter.addFragment(upcomingfragment);
         adapter.addFragment(schedulefragment);
         adapter.addFragment(statusfragment);
         adapter.addFragment(settingfragment);

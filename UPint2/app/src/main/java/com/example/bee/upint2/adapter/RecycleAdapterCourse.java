@@ -2,6 +2,8 @@ package com.example.bee.upint2.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -121,7 +123,7 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
                 holder.dateremain.setText("D-" + (a + b));
             } else if (days == 0 & hour > 0 && day != to_day) {
                 holder.dateremain.setText("D-1");
-            } else if (day == to_day) {
+            } else if (day.equals(to_day)) {
                 holder.dateremain.setText("Today");
             }
 
@@ -182,6 +184,8 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
                     .override(600, 600)
                     .centerCrop()
                     .into(holder.img);
+            final int semiTransparentGrey = Color.argb(60, 10, 10, 10);
+            holder.img.setColorFilter(semiTransparentGrey, PorterDuff.Mode.SRC_ATOP);
 
         } else {
             holder.classinfolayout.setVisibility(View.GONE);

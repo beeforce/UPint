@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                     checkpassword();
                     vibrator.vibrate(120);
                     return;
-                }else {
+                } else {
                     showProgressDialog();
                     mAPIService = ApiUtils.getAPIService();
                     final String email = tillemail.getEditText().getText().toString();
@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                     RequestBody passwordR = RequestBody.create(MultipartBody.FORM, password);
                     RequestBody user_typeR = RequestBody.create(MultipartBody.FORM, user_type);
 
-                    mAPIService.login(emailR, passwordR,user_typeR).enqueue(new Callback<AccessToken>() {
+                    mAPIService.login(emailR, passwordR, user_typeR).enqueue(new Callback<AccessToken>() {
                         @Override
                         public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                             Log.w(TAG, "onResponse: " + response);
@@ -114,14 +114,13 @@ public class LoginActivity extends AppCompatActivity {
                                 se2.setUser_id(response.body().getUser_id());
                                 dismissProgressDialog();
                                 showProgressDialogSuccess();
-                            } else if (response.code() == 400){   // wrong password
+                            } else if (response.code() == 400) {   // wrong password
                                 dismissProgressDialog();
                                 showProgressDialogWarning();
-                            }else if (response.code() == 401){    // wrong user type
+                            } else if (response.code() == 401) {    // wrong user type
                                 dismissProgressDialog();
                                 showProgressDialogWarningUsertype();
-                            }
-                            else{
+                            } else {
                                 dismissProgressDialog();
                                 showProgressDialogWarningConnection();
                             }
@@ -140,15 +139,16 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(call != null) {
+        if (call != null) {
             call.cancel();
             call = null;
         }
     }
+
     private void showProgressDialog() {
         pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -163,21 +163,26 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void showProgressDialogSuccess(){
-        pDialog =new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
+    private void showProgressDialogSuccess() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
         pDialog.setTitleText("SUCCESS!");
         pDialog.setContentText("You're logged in!");
         pDialog.show();
         pDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        startActivity(new Intent(LoginActivity.this, Main2Activity.class));
-                        finish();
-                    }
-                });
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (user_type.equals("Teacher")) {
+                    startActivity(new Intent(LoginActivity.this, Main2Activity.class));
+                    finish();
+                } else {
+                    startActivity(new Intent(LoginActivity.this, AppfeedActivity.class));
+                    finish();
+                }
+            }
+        });
     }
 
-    private void showProgressDialogWarning(){
+    private void showProgressDialogWarning() {
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("ERROR!")
                 .setContentText("Can not login to the system. Please enter the correct email and password")
@@ -185,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void showProgressDialogWarningUsertype(){
+    private void showProgressDialogWarningUsertype() {
         pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
         pDialog.setTitleText("Wrong user type!");
         pDialog.setContentText("Please select a correct who you are");
@@ -200,7 +205,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void showProgressDialogWarningConnection(){
+    private void showProgressDialogWarningConnection() {
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("ERROR!")
                 .setContentText("Connection Failed")
@@ -210,10 +215,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void sendData() {
         Bundle bundle = new Bundle();
-        bundle.putString("userEmail","555555");
+        bundle.putString("userEmail", "555555");
         Upcomingfragment fragment = new Upcomingfragment();
         fragment.setArguments(bundle);
     }
+
     private boolean checkEmail() {
         if (tillemail.getEditText().getText().toString().trim().isEmpty()) {
             tillemail.setErrorEnabled(true);
@@ -240,8 +246,7 @@ public class LoginActivity extends AppCompatActivity {
             tillpassword.setErrorEnabled(true);
             tillpassword.setError("Please enter a Password");
             return false;
-        }
-        else if (tillpassword.getEditText().getText().toString().length() < 6) {
+        } else if (tillpassword.getEditText().getText().toString().length() < 6) {
             tillpassword.setErrorEnabled(true);
             tillpassword.setError("Password must more than 5 Characters");
             return false;

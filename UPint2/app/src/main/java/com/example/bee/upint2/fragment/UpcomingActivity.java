@@ -1,30 +1,16 @@
 package com.example.bee.upint2.fragment;
 
 import android.animation.Animator;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.example.bee.upint2.R;
-import com.example.bee.upint2.SeachclassActivity;
-import com.example.bee.upint2.adapter.MyRecyclerViewAdapter;
 import com.example.bee.upint2.adapter.RecycleAdapterCourse;
 import com.example.bee.upint2.adapter.RecyclerViewClickListener;
 import com.example.bee.upint2.model.Course;
@@ -39,85 +25,72 @@ import com.willowtreeapps.spruce.sort.LinearSort;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by Bee on 3/22/2018.
- */
 
-public class HomeappFragment extends android.support.v4.app.Fragment implements RecyclerViewClickListener {
+public class UpcomingActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewClickListener {
 
-    private RecyclerView recyclerView, recyclerView2;
+    private static final String TAG = "Upcomingfragment";
+    private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<Course> course;
     private List<Course_user> courseEnroll;
-//    private RecycleAdapterCourse adapter;
-    private static final String TAG = "HomeappFragment";
+    private RecycleAdapterCourse adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private ApiService mAPIService;
-    private MyRecyclerViewAdapter adapter;
-    private FloatingActionButton searchfab;
+    private Animator spruceAnimator;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragement_homeapp, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_upcoming);
 
-        initInstances(rootView);
-        return rootView;
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
-    private void initInstances(View rootView) {
-//        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-//        recyclerView.setLayoutManager(layoutManager);
 
-        RelativeLayout upcomingLayout = rootView.findViewById(R.id.content_homeapp);
-        upcomingLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Intent intent = new Intent(getActivity(), UpcomingActivity.class);
-                startActivity(intent);
-                return true;
-            }
-        });
+        swipeRefreshLayout = findViewById(R.id.refresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
-        //fab
-        searchfab = rootView.findViewById(R.id.search_class_fab);
-        searchfab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SeachclassActivity.class);
-                startActivity(intent);
-            }
-        });
+        recyclerView = findViewById(R.id.recyclerView);
 
-        //first recycle -> star tutor
-        recyclerView = rootView.findViewById(R.id.recyclerView_star_tutor);
+
+        spruceAnimator = new Spruce.SpruceBuilder(swipeRefreshLayout)
+                .sortWith(new LinearSort(/*interObjectDelay=*/100L, /*reversed=*/false, LinearSort.Direction.TOP_TO_BOTTOM))
+                .animateWith(DefaultAnimations.growAnimator(swipeRefreshLayout, /*duration=*/800))
+                .start();
+        layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        //second recycle -> star tutor
-        recyclerView2 = rootView.findViewById(R.id.recyclerView_star_tutor2);
-        recyclerView2.setHasFixedSize(true);
-        recyclerView2.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
 
 
         getClassdetail();
 
+
     }
 
+    @Override
+    public void onRefresh() {
+        recyclerView.removeAllViewsInLayout();
+        course.clear();
+        getClassdetail();
+        swipeRefreshLayout.setRefreshing(false);
+        spruceAnimator.start();
+
+    }
+
+    @Override
+    public void recyclerViewListClicked(View v, int position) {
+        adapter = new RecycleAdapterCourse(getApplicationContext(), this);
+
+    }
 
     public void getClassdetail() {
         mAPIService = ApiUtils.getAPIService();
@@ -167,19 +140,15 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
         // sort by id
         for (Course each : courseList) {
             for (Course_user each1 : courseEnroll) {
-                if (each.getId() == each1.getCourse_id()){
+                if (each.getId().equals(each1.getCourse_id())){
                     filteredJob.add(each);
                     Log.w(TAG, "find course id"+each.getId()+"  "+each1.getCourse_id());
                 }
             }
         }
-        courseList.removeAll(filteredJob);
-//        Sortdate(courseList);
-        adapter = new MyRecyclerViewAdapter(courseList, getActivity());
+        adapter = new RecycleAdapterCourse(filteredJob, getApplicationContext());
         recyclerView.setAdapter(adapter);
-        recyclerView2.setAdapter(adapter);
     }
-
 
     public void searchClass() {
 
@@ -201,11 +170,5 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
                 Log.w(TAG, "onFailure: " + t.getMessage());
             }
         });
-    }
-
-    @Override
-    public void recyclerViewListClicked(View v, int position) {
-        adapter = new MyRecyclerViewAdapter(getActivity(), this);
-
     }
 }

@@ -14,21 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Created by Bee on 3/9/2018.
- */
-
-public class ListViewAdapter extends BaseAdapter{
+public class ListViewAdapterProvince extends BaseAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private List<Course> courselist;
-    private ArrayList<Course> courseArrayList = new ArrayList<Course>();
+    private List<String> provincelist;
+    private ArrayList<String> provinceArrayList = new ArrayList<>();
 
-    public ListViewAdapter(Context context, List<Course> courselist){
+    public ListViewAdapterProvince(Context context, List<String> provincelist){
         this.context = context;
-        this.courselist = courselist;
-        this.courseArrayList.addAll(courselist);
+        this.provincelist = provincelist;
+        this.provinceArrayList.addAll(provincelist);
         layoutInflater = LayoutInflater.from(context);
 
     }
@@ -36,13 +32,13 @@ public class ListViewAdapter extends BaseAdapter{
     public void myFilter(String name){
 
         name = name.toLowerCase(Locale.getDefault());
-        courselist.clear();
+        provincelist.clear();
         if (name.length() == 0){
-            courselist.addAll(courseArrayList);
+            provincelist.addAll(provinceArrayList);
         }else{
-            for (Course each : courseArrayList){
-                if (each.getCourse_name().toLowerCase(Locale.getDefault()).contains(name)){
-                    courselist.add(each);
+            for (String each : provinceArrayList){
+                if (each.toString().toLowerCase(Locale.getDefault()).contains(name)){
+                    provincelist.add(each);
                 }
             }
         }
@@ -51,12 +47,12 @@ public class ListViewAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return courselist.size();
+        return provincelist.size();
     }
 
     @Override
-    public Course getItem(int position) {
-        return courselist.get(position);
+    public String getItem(int position) {
+        return provincelist.get(position);
     }
 
     @Override
@@ -66,16 +62,16 @@ public class ListViewAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewHolder holder;
+        final ListViewAdapterProvince.ViewHolder holder;
         if (convertView == null){
-            holder = new ViewHolder();
+            holder = new ListViewAdapterProvince.ViewHolder();
             convertView = layoutInflater.inflate(R.layout.model_item,null);
             holder.textView = (TextView) convertView.findViewById(R.id.nameList);
             convertView.setTag(holder);
         }else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (ListViewAdapterProvince.ViewHolder) convertView.getTag();
         }
-        holder.textView.setText(courselist.get(position).getCourse_name());
+        holder.textView.setText(provincelist.get(position).toString());
         return convertView;
     }
 

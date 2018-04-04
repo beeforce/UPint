@@ -60,7 +60,9 @@
             android:windowSoftInputMode="stateHidden|adjustPan|adjustNothing" />
         <activity android:name=".Classdetail_searchclass" />
         <activity android:name=".SearchclassActivity_Keyword" />
-        <activity android:name=".AppfeedActivity"></activity>
+        <activity android:name=".AppfeedActivity" />
+        <activity android:name=".AddResumeActivity" />
+        <activity android:name=".fragment.UpcomingActivity"></activity>
     </application>
 
 </manifest>

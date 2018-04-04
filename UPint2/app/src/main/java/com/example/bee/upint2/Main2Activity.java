@@ -23,6 +23,7 @@ import com.example.bee.upint2.fragment.Listenfragment;
 import com.example.bee.upint2.fragment.Schedulefragment;
 import com.example.bee.upint2.fragment.Settingfragment;
 import com.example.bee.upint2.fragment.Statusfragment;
+import com.example.bee.upint2.fragment.UpcomingStudentFragment;
 import com.example.bee.upint2.fragment.Upcomingfragment;
 import com.example.bee.upint2.tool.MySharedPreference;
 import com.example.bee.upint2.tool.UserInterfaceUtils;
@@ -39,7 +40,7 @@ public class Main2Activity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
     private MenuItem prevMenuItem;
-    private Upcomingfragment upcomingfragmentFrag;
+    private UpcomingStudentFragment upcomingStudentFragment;
     private Listenfragment listenfragment;
     private Schedulefragment schedulefragment;
     private Statusfragment statusfragment;
@@ -164,7 +165,7 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
     private void setupViewPager() {
-        upcomingfragmentFrag = new Upcomingfragment();
+        upcomingStudentFragment = new UpcomingStudentFragment();
         listenfragment = new Listenfragment();
         schedulefragment = new Schedulefragment();
         statusfragment = new Statusfragment();
@@ -172,7 +173,7 @@ public class Main2Activity extends AppCompatActivity {
 
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(upcomingfragmentFrag);
+        adapter.addFragment(upcomingStudentFragment);
         adapter.addFragment(listenfragment);
         adapter.addFragment(schedulefragment);
         adapter.addFragment(statusfragment);
