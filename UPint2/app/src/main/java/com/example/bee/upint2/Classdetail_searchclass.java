@@ -1,10 +1,15 @@
 package com.example.bee.upint2;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -12,6 +17,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.bee.upint2.model.UserProfile;
+import com.example.bee.upint2.model.sendOject;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
 
@@ -26,10 +32,13 @@ public class Classdetail_searchclass extends AppCompatActivity {
 
     private ApiService mAPIService;
     private String user_id, course_id, image_path;
-    private TextView numberofstudent_searchclass, teacher, course_name, price_searchclass
-            , numberofstudent_searchclass2, place_searchclass, term_searchclass, description_searchclass, target_searchclass;
-    private Button buttontags1_searchclass, buttontags2_searchclass, buttontags3_searchclass, buttontags4_searchclass, buttontags5_searchclass;
+    private TextView numberofstudent_searchclass, teacher, course_name, price_searchclass, numberofstudent_searchclass2, place_searchclass, description_searchclass, target_searchclass, classdetailcourse_name,
+            levelofdifficult, costclassdetail, classdetailschedule, classdetailscheduletime, classdetailplace, termclassdetail, numberclassdetail;
+    private Button buttontags1_searchclass, buttontags2_searchclass, buttontags3_searchclass, book;
     private ImageView class_picture;
+    private ImageView back, back2;
+    private RelativeLayout layout1;
+    private LinearLayout layout2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +57,53 @@ public class Classdetail_searchclass extends AppCompatActivity {
         buttontags1_searchclass = findViewById(R.id.buttontags1_searchclass);
         buttontags2_searchclass = findViewById(R.id.buttontags2_searchclass);
         buttontags3_searchclass = findViewById(R.id.buttontags3_searchclass);
-        buttontags4_searchclass = findViewById(R.id.buttontags4_searchclass);
-        buttontags5_searchclass = findViewById(R.id.buttontags5_searchclass);
-        term_searchclass = findViewById(R.id.term_searchclass);
         description_searchclass = findViewById(R.id.description_searchclass);
         target_searchclass = findViewById(R.id.target_searchclass);
         class_picture = findViewById(R.id.class_picture);
+
+        classdetailcourse_name = (TextView) findViewById(R.id.classdetailcourse_name);
+        levelofdifficult = (TextView) findViewById(R.id.levelofdifficult);
+        costclassdetail = (TextView) findViewById(R.id.costclassdetail);
+        classdetailschedule = (TextView) findViewById(R.id.classdetailschedule);
+        classdetailscheduletime = (TextView) findViewById(R.id.classdetailscheduletime);
+        classdetailplace = (TextView) findViewById(R.id.classdetailplace);
+        termclassdetail = (TextView) findViewById(R.id.termclassdetail);
+        numberclassdetail = (TextView) findViewById(R.id.numberclassdetail);
+
+        classdetailcourse_name.setText(getIntent().getStringExtra("course_name"));
+        levelofdifficult.setText(getIntent().getStringExtra("level"));
+        costclassdetail.setText(getIntent().getStringExtra("cost") + "B");
+        classdetailschedule.setText(getIntent().getStringExtra("scheduledate"));
+        classdetailscheduletime.setText(getIntent().getStringExtra("scheduletime"));
+        classdetailplace.setText(getIntent().getStringExtra("place"));
+        termclassdetail.setText(getIntent().getStringExtra("term"));
+        numberclassdetail.setText(getIntent().getStringExtra("totalstudent"));
+        layout1 = (RelativeLayout) findViewById(R.id.layout1);
+        layout2 = (LinearLayout) findViewById(R.id.layout2);
+
+        back = (ImageView) findViewById(R.id.backclassdetail);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        back2 = (ImageView) findViewById(R.id.backclassdetail2);
+        back2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layout2.setVisibility(View.GONE);
+                layout1.setVisibility(View.VISIBLE);
+            }
+        });
+        book = (Button) findViewById(R.id.book);
+        book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layout2.setVisibility(View.VISIBLE);
+                layout1.setVisibility(View.GONE);
+            }
+        });
 
         //get extra string
         user_id = getIntent().getStringExtra("user_id");
@@ -66,34 +116,37 @@ public class Classdetail_searchclass extends AppCompatActivity {
 
         String tag = getIntent().getStringExtra("tags");
         String[] tagpart = tag.split(",");
-        for (int i=0; i < tagpart.length;i++){
+        for (int i = 0; i < tagpart.length; i++) {
             taglist.add(tagpart[i]);
         }
 
 
-        if (tagpart.length == 1){
+        if (tagpart.length == 1) {
             buttontags2_searchclass.setVisibility(View.GONE);
             buttontags3_searchclass.setVisibility(View.GONE);
-            buttontags4_searchclass.setVisibility(View.GONE);
-            buttontags5_searchclass.setVisibility(View.GONE);
             buttontags1_searchclass.setText(taglist.get(0));
-        }
-        else if (tagpart.length == 2){
+        } else if (tagpart.length == 2) {
             buttontags3_searchclass.setVisibility(View.GONE);
-            buttontags4_searchclass.setVisibility(View.GONE);
-            buttontags5_searchclass.setVisibility(View.GONE);
             buttontags1_searchclass.setText(taglist.get(0));
             buttontags2_searchclass.setText(taglist.get(1));
-        }else {
+        } else {
             buttontags1_searchclass.setText(taglist.get(0));
             buttontags2_searchclass.setText(taglist.get(1));
             buttontags3_searchclass.setText(taglist.get(2));
 
         }
 //        buttontags1_searchclass.setText(getIntent().getStringExtra("tags"));
-        term_searchclass.setText(getIntent().getStringExtra("term"));
         description_searchclass.setText(getIntent().getStringExtra("description"));
-        target_searchclass.setText(getIntent().getStringExtra("target_year")+" year student");
+        String years = getIntent().getStringExtra("target_year");
+        if (years.equals("1")) {
+            target_searchclass.setText("First year student");
+        } else if (years.equals("2")) {
+            target_searchclass.setText("Second year student");
+        } else if (years.equals("3")) {
+            target_searchclass.setText("Third year student");
+        } else if (years.equals("4")) {
+            target_searchclass.setText("Fourth year student");
+        }
         image_path = getIntent().getStringExtra("image_path");
 
         String[] parts = image_path.split("/");
@@ -124,15 +177,23 @@ public class Classdetail_searchclass extends AppCompatActivity {
                 })
                 .centerCrop()
                 .into(class_picture);
+        final int semiTransparentGrey = Color.argb(60, 10, 10, 10);
+        class_picture.setColorFilter(semiTransparentGrey, PorterDuff.Mode.SRC_ATOP);
 
         getClasscount();
         getTeachername();
     }
-    public void getClasscount(){
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    public void getClasscount() {
         mAPIService.classCount(course_id).enqueue(new Callback<UserProfile>() {
             @Override
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
-                numberofstudent_searchclass.setText(response.body().getCount()+" /");
+                numberofstudent_searchclass.setText(response.body().getCount() + " /");
 
             }
 
@@ -143,7 +204,7 @@ public class Classdetail_searchclass extends AppCompatActivity {
         });
     }
 
-    public void getTeachername(){
+    public void getTeachername() {
         mAPIService.userDetailswithId(user_id).enqueue(new Callback<UserProfile>() {
             @Override
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {

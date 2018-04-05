@@ -6,294 +6,808 @@
     android:layout_height="match_parent"
     tools:context="com.example.bee.upint2.Classdetail_searchclass">
 
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
+            android:id="@+id/classdetailrelay1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp">
 
+            <ImageView
+                android:id="@+id/backclassdetail"
+                android:layout_width="35dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_arrow_left" />
 
-    <ImageView
-        android:id="@+id/class_picture"
-        android:layout_width="match_parent"
-        android:layout_height="225dp"
-        android:src="@drawable/com_facebook_button_icon_blue"
-        android:scaleType="centerCrop"
-        />
-
-    <TextView
-        android:id="@+id/course_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:layout_marginLeft="20dp"
-        android:textColor="#fff"
-        android:textSize="27dp"
-        android:textStyle="bold"
-        />
-
-    <ImageView
-        android:id="@+id/moneyicon"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/ic_money"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="180dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/price_searchclass"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:textSize="17dp"
-        android:layout_toRightOf="@+id/moneyicon"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="180dp"
-
-        />
-
-    <ImageView
-        android:id="@+id/peopleicon"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/ic_people"
-        android:layout_toRightOf="@+id/price_searchclass"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="180dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/numberofstudent_searchclass"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:textSize="15dp"
-        android:layout_toRightOf="@+id/peopleicon"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="182dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/numberofstudent_searchclass2"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:textSize="15dp"
-        android:layout_toRightOf="@+id/numberofstudent_searchclass"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="182dp"
-        />
-
-    <TextView
-        android:id="@+id/teacher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/class_picture"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:textColor="#000"
-        android:textSize="26dp"
-        />
-    <ImageView
-        android:id="@+id/place_searchclass_icon"
-        android:layout_width="20dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_place"
-        android:layout_below="@+id/teacher"
-        android:layout_marginLeft="20dp"/>
-
-    <TextView
-       android:id="@+id/place_searchclass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/teacher"
-        android:textSize="20dp"
-        android:layout_marginLeft="3dp"
-        android:layout_toRightOf="@+id/place_searchclass_icon"
-        android:layout_marginTop="3dp"
-        android:textColor="#000"/>
-
-    <Button
-        android:id="@+id/buttontags1_searchclass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginRight="7dp"
-        android:layout_below="@+id/place_searchclass"
-        android:text="#keyword"
-        android:textSize="12dp"
-        android:textStyle="bold"
-        android:textColor="#000"
-        android:layout_marginLeft="23dp"
-        android:background="@drawable/tags_button_black"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:minHeight="0dp" android:minWidth="0dp"
-        android:textAllCaps="false"
-        />
-
-    <Button
-        android:id="@+id/buttontags2_searchclass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/buttontags1_searchclass"
-        android:layout_marginTop="9dp"
-        android:layout_marginRight="7dp"
-        android:layout_below="@+id/place_searchclass"
-        android:text="#keyword"
-        android:textSize="12dp"
-        android:textStyle="bold"
-        android:textColor="#000"
-        android:background="@drawable/tags_button_black"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:minHeight="0dp" android:minWidth="0dp"
-        android:textAllCaps="false"
-        />
-
-    <Button
-        android:id="@+id/buttontags3_searchclass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/buttontags2_searchclass"
-        android:layout_marginTop="9dp"
-        android:layout_below="@+id/place_searchclass"
-        android:text="#keyword"
-        android:textSize="12dp"
-        android:textStyle="bold"
-        android:textColor="#000"
-        android:background="@drawable/tags_button_black"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:minHeight="0dp" android:minWidth="0dp"
-        android:textAllCaps="false"
-        />
-
-    <Button
-        android:id="@+id/buttontags4_searchclass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/buttontags1_searchclass"
-        android:text="#keyword"
-        android:textSize="12dp"
-        android:textStyle="bold"
-        android:textColor="#000"
-        android:background="@drawable/tags_button_black"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:minHeight="0dp" android:minWidth="0dp"
-        android:textAllCaps="false"
-        />
-
-    <Button
-        android:id="@+id/buttontags5_searchclass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/buttontags1_searchclass"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/buttontags1_searchclass"
-        android:text="#keyword"
-        android:textSize="12dp"
-        android:textStyle="bold"
-        android:textColor="#000"
-        android:background="@drawable/tags_button_black"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:minHeight="0dp" android:minWidth="0dp"
-        android:textAllCaps="false"
-        />
-
-    <RelativeLayout
-        android:id="@+id/centerrelay"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/background_2dp_border"
-        android:layout_below="@+id/buttontags5_searchclass"
-        android:layout_marginBottom="12dp"
-        android:layout_marginTop="15dp"
-        />
-
-    <TextView
-        android:id="@+id/termet_searchclass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Term"
-        android:layout_marginLeft="20dp"
-        android:textColor="#000"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:layout_below="@+id/centerrelay"/>
-
-    <TextView
-        android:id="@+id/term_searchclass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="23dp"
-        android:textColor="#000"
-        android:textSize="18dp"
-        android:layout_below="@+id/termet_searchclass"/>
-
-    <TextView
-        android:id="@+id/descriptionet_searchclass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:layout_marginLeft="20dp"
-        android:textColor="#000"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:layout_below="@+id/term_searchclass"/>
-
-    <TextView
-        android:id="@+id/description_searchclass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="23dp"
-        android:textColor="#000"
-        android:textSize="18dp"
-        android:layout_below="@+id/descriptionet_searchclass"/>
-
-    <TextView
-        android:id="@+id/targetet_searchclass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Target"
-        android:layout_marginLeft="20dp"
-        android:textColor="#000"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:layout_below="@+id/description_searchclass"/>
-
-    <TextView
-        android:id="@+id/target_searchclass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="23dp"
-        android:textColor="#000"
-        android:textSize="18dp"
-        android:layout_below="@+id/targetet_searchclass"/>
+            <TextView
+                android:id="@+id/classdetailcourse_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Course name"
+                android:textColor="#98c428"
+                android:textSize="22dp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
-    </ScrollView>
 
+        <RelativeLayout
+            android:id="@+id/classdetailrelay2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/classdetailrelay1"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/background_2dp_border" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/classdetailrelay2">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/class_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="225dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/com_facebook_button_icon_blue" />
+
+                <TextView
+                    android:id="@+id/course_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="130dp"
+                    android:shadowColor="#000000"
+                    android:shadowDx="-1"
+                    android:shadowDy="-1"
+                    android:shadowRadius="1"
+                    android:textColor="#fff"
+                    android:textSize="27dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/moneyicon"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="180dp"
+                    android:shadowColor="#000000"
+                    android:shadowDx="-1"
+                    android:shadowDy="-1"
+                    android:shadowRadius="1"
+                    android:src="@drawable/ic_money" />
+
+                <TextView
+                    android:id="@+id/price_searchclass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="180dp"
+                    android:layout_toRightOf="@+id/moneyicon"
+                    android:shadowColor="#000000"
+                    android:shadowDx="-1"
+                    android:shadowDy="-1"
+                    android:shadowRadius="1"
+                    android:textColor="#ffffff"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/peopleicon"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="180dp"
+                    android:layout_toRightOf="@+id/price_searchclass"
+                    android:shadowColor="#000000"
+                    android:shadowDx="-1"
+                    android:shadowDy="-1"
+                    android:shadowRadius="1"
+                    android:src="@drawable/ic_people" />
+
+                <TextView
+                    android:id="@+id/numberofstudent_searchclass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="182dp"
+                    android:layout_toRightOf="@+id/peopleicon"
+                    android:shadowColor="#000000"
+                    android:shadowDx="-1"
+                    android:shadowDy="-1"
+                    android:shadowRadius="1"
+                    android:textColor="#ffffff"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/numberofstudent_searchclass2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="182dp"
+                    android:layout_toRightOf="@+id/numberofstudent_searchclass"
+                    android:shadowColor="#000000"
+                    android:shadowDx="-1"
+                    android:shadowDy="-1"
+                    android:shadowRadius="1"
+                    android:textColor="#ffffff"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/teacher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/class_picture"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#000"
+                    android:textSize="26dp" />
+
+                <ImageView
+                    android:id="@+id/place_searchclass_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/teacher"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_place" />
+
+                <TextView
+                    android:id="@+id/place_searchclass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/teacher"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_toRightOf="@+id/place_searchclass_icon"
+                    android:textColor="#000"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/buttontags1_searchclass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/place_searchclass"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginTop="9dp"
+                    android:background="@drawable/tags_button_black"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="#keyword"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/buttontags2_searchclass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/place_searchclass"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_toRightOf="@+id/buttontags1_searchclass"
+                    android:background="@drawable/tags_button_black"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="#keyword"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/buttontags3_searchclass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/place_searchclass"
+                    android:layout_marginTop="9dp"
+                    android:layout_toRightOf="@+id/buttontags2_searchclass"
+                    android:background="@drawable/tags_button_black"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="#keyword"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+
+                <RelativeLayout
+                    android:id="@+id/centerrelay"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/buttontags1_searchclass"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_2dp_border" />
+
+
+                <TextView
+                    android:id="@+id/descriptionet_searchclass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/centerrelay"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Description"
+                    android:textColor="#000"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/description_searchclass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/descriptionet_searchclass"
+                    android:layout_marginLeft="17dp"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/targetet_searchclass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/description_searchclass"
+                    android:layout_marginLeft="15dp"
+                    android:text="Target"
+                    android:textColor="#000"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/target_searchclass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/targetet_searchclass"
+                    android:layout_marginLeft="18dp"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+
+                <RelativeLayout
+                    android:id="@+id/classdetailine"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/target_searchclass"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_2dp_border" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/classdetailine">
+
+                    <RelativeLayout
+                        android:id="@+id/classdetailrelay3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/levelofdifTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Level of difficulty"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/levelofdifficult"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/levelofdifTV"
+                            android:text="expert"
+                            android:textColor="#000"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:id="@+id/termclassdetailTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/levelofdifficult"
+                            android:text="Term"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/termclassdetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/termclassdetailTV"
+                            android:text="Long term"
+                            android:textColor="#000"
+                            android:textSize="18dp" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/classdetailrelay4"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/classdetailrelay3"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/background_2dp_border" />
+
+                    <RelativeLayout
+                        android:id="@+id/classdetailrelay5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/classdetailrelay4"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/numberclassdetailTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:text="Total of students"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/numberclassdetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/numberclassdetailTV"
+                            android:layout_toLeftOf="@+id/personTV"
+                            android:text="15"
+                            android:textColor="#98c428"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/personTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/numberclassdetailTV"
+                            android:text=" Persons"
+                            android:textColor="#000"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:id="@+id/costTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cost"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/costclassdetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/costTV"
+                            android:text="300B"
+                            android:textColor="#98c428"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/costclassdetailperstudent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/costTV"
+                            android:layout_toRightOf="@+id/costclassdetail"
+                            android:text=" / 1 student"
+                            android:textColor="#000"
+                            android:textSize="18dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/classdetailrelay6"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/classdetailrelay5"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/background_2dp_border" />
+
+                    <RelativeLayout
+                        android:id="@+id/classdetailrelay7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/classdetailrelay6"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/classdetailscheduleTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Schedule"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/classdetailschedule"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/classdetailscheduleTV"
+                            android:layout_alignParentRight="true"
+                            android:text="10 October 2018"
+                            android:textColor="#98c428"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/classdetailscheduletime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/classdetailschedule"
+                            android:text="3 pm - 5 pm"
+                            android:textColor="#98c428"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/classdetailrelay8"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/classdetailrelay7"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/background_2dp_border" />
+
+                    <RelativeLayout
+                        android:id="@+id/classdetailrelay9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/classdetailrelay8"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp">
+
+
+                        <TextView
+                            android:id="@+id/classdetailplaceTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Place"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/classdetailplace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/classdetailplaceTV"
+                            android:layout_alignParentRight="true"
+                            android:text="Cafe Chalette"
+                            android:textColor="#98c428"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/classdetailrelay10"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/classdetailrelay9"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/background_2dp_border" />
+
+                    <Button
+                        android:id="@+id/book"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/classdetailrelay10"
+                        android:background="@drawable/mydefault_button_login"
+                        android:text="Book"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fillViewport="true"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#98c428"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/backclassdetail2"
+                android:layout_width="35dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_arrow_left_white" />
+
+            <TextView
+                android:id="@+id/classdetailcourse_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="7dp"
+                android:text="Course name"
+                android:textColor="#fff"
+                android:textSize="25dp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subject"
+                android:textColor="#000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="subject"
+                android:textColor="#98c428"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/background_2dp_border" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Schedule"
+                android:textColor="#000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/schedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="10 October 2016"
+                android:textColor="#98c428"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/schedule"
+                android:text="3 pm - 5 pm"
+                android:textColor="#98c428"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/background_2dp_border" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Number of students"
+                android:textColor="#000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/numberofstudent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="2"
+                android:textColor="#98c428"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/background_2dp_border" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Place"
+                android:textColor="#000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/place_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Cafe Chalate"
+                android:textColor="#98c428"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/background_2dp_border" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Message to Tutor"
+                android:textColor="#000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:gravity="top|left"
+                android:lines="3"
+                android:maxLines="3"
+                android:textColor="#000"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/background_2dp_border" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/totalpayment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="600 B"
+            android:textColor="#98c428"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/pay"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:background="@drawable/mydefault_button_login"
+            android:text="Payment"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:layout_alignParentBottom="true"
+            />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>
