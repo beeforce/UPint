@@ -1,6 +1,7 @@
 package com.example.bee.upint2.fragment;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.example.bee.upint2.AppfeedActivity;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.adapter.RecycleAdapterCourse;
 import com.example.bee.upint2.adapter.RecyclerViewClickListener;
@@ -53,7 +56,6 @@ public class UpcomingActivity extends AppCompatActivity implements SwipeRefreshL
         setContentView(R.layout.activity_upcoming);
 
 
-
         swipeRefreshLayout = findViewById(R.id.refresh);
         swipeRefreshLayout.setOnRefreshListener(this);
 
@@ -69,10 +71,23 @@ public class UpcomingActivity extends AppCompatActivity implements SwipeRefreshL
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
 
+        ImageView back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(UpcomingActivity.this,AppfeedActivity.class);
+                startActivity(i);
+            }
+        });
 
 
         getClassdetail();
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
 
@@ -140,9 +155,9 @@ public class UpcomingActivity extends AppCompatActivity implements SwipeRefreshL
         // sort by id
         for (Course each : courseList) {
             for (Course_user each1 : courseEnroll) {
-                if (each.getId().equals(each1.getCourse_id())){
+                if (each.getId().equals(each1.getCourse_id())) {
                     filteredJob.add(each);
-                    Log.w(TAG, "find course id"+each.getId()+"  "+each1.getCourse_id());
+                    Log.w(TAG, "find course id" + each.getId() + "  " + each1.getCourse_id());
                 }
             }
         }

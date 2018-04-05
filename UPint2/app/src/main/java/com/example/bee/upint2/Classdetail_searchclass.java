@@ -93,7 +93,7 @@ public class Classdetail_searchclass extends AppCompatActivity {
 //        buttontags1_searchclass.setText(getIntent().getStringExtra("tags"));
         term_searchclass.setText(getIntent().getStringExtra("term"));
         description_searchclass.setText(getIntent().getStringExtra("description"));
-        target_searchclass.setText(getIntent().getStringExtra("target_year")+" year student0");
+        target_searchclass.setText(getIntent().getStringExtra("target_year")+" year student");
         image_path = getIntent().getStringExtra("image_path");
 
         String[] parts = image_path.split("/");

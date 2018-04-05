@@ -38,7 +38,7 @@ import retrofit2.Response;
 public class UpcomingStudentFragment extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewClickListener {
 
 
-    private static final String TAG = "Upcomingfragment";
+    private static final String TAG = "UpcomingStudentFragment";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<Course> course;

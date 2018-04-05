@@ -1,5 +1,6 @@
 package com.example.bee.upint2;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,12 +18,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.bee.upint2.adapter.SectionPageAdapter;
 import com.example.bee.upint2.fragment.HomeappFragment;
-import com.example.bee.upint2.fragment.Listenfragment;
 import com.example.bee.upint2.fragment.Schedulefragment;
 import com.example.bee.upint2.fragment.Settingfragment;
 import com.example.bee.upint2.fragment.Statusfragment;
-import com.example.bee.upint2.fragment.UpcomingStudentFragment;
-import com.example.bee.upint2.fragment.Upcomingfragment;
+import com.example.bee.upint2.fragment.UpcomingActivity;
 import com.example.bee.upint2.model.CustomViewPager;
 import com.example.bee.upint2.model.UserProfile;
 import com.example.bee.upint2.model.sendOject;
@@ -41,7 +40,6 @@ public class AppfeedActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private CustomViewPager viewPager;
     private HomeappFragment homeappFragment;
-    private Upcomingfragment upcomingfragment;
     private Schedulefragment schedulefragment;
     private Statusfragment statusfragment;
     private Settingfragment settingfragment;
@@ -134,21 +132,16 @@ public class AppfeedActivity extends AppCompatActivity {
 //                                toolbar.setTitle(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
                                 return true;
 
-                            case R.id.nav_upcoming:
+                            case R.id.nav_explore:
                                 viewPager.setCurrentItem(1);
 //                                toolbar.setTitle(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
                                 return true;
-
-                            case R.id.nav_explore:
+                            case R.id.nav_feedback:
                                 viewPager.setCurrentItem(2);
 //                                toolbar.setTitle(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
                                 return true;
-                            case R.id.nav_feedback:
-                                viewPager.setCurrentItem(3);
-//                                toolbar.setTitle(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
-                                return true;
                             case R.id.nav_logout:
-                                viewPager.setCurrentItem(4);
+                                viewPager.setCurrentItem(3);
 //                                toolbar.setTitle(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
                                 return true;
 
@@ -160,6 +153,11 @@ public class AppfeedActivity extends AppCompatActivity {
 
         initViewPager();
         setupViewPager();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 
     @Override
@@ -178,7 +176,6 @@ public class AppfeedActivity extends AppCompatActivity {
            }
     private void setupViewPager() {
         homeappFragment = new HomeappFragment();
-        upcomingfragment = new Upcomingfragment();
         schedulefragment = new Schedulefragment();
         statusfragment = new Statusfragment();
         settingfragment = new Settingfragment();
@@ -186,7 +183,6 @@ public class AppfeedActivity extends AppCompatActivity {
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
 
         adapter.addFragment(homeappFragment);
-        adapter.addFragment(upcomingfragment);
         adapter.addFragment(schedulefragment);
         adapter.addFragment(statusfragment);
         adapter.addFragment(settingfragment);

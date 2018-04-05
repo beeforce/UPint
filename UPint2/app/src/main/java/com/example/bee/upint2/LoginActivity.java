@@ -19,8 +19,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.example.bee.upint2.fragment.Schedulefragment;
-import com.example.bee.upint2.fragment.Upcomingfragment;
 import com.example.bee.upint2.model.sendOject;
 import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
@@ -211,13 +209,6 @@ public class LoginActivity extends AppCompatActivity {
                 .setContentText("Connection Failed")
                 .setConfirmText("Ok!")
                 .show();
-    }
-
-    private void sendData() {
-        Bundle bundle = new Bundle();
-        bundle.putString("userEmail", "555555");
-        Upcomingfragment fragment = new Upcomingfragment();
-        fragment.setArguments(bundle);
     }
 
     private boolean checkEmail() {

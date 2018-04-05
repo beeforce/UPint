@@ -24,7 +24,6 @@ import com.example.bee.upint2.fragment.Schedulefragment;
 import com.example.bee.upint2.fragment.Settingfragment;
 import com.example.bee.upint2.fragment.Statusfragment;
 import com.example.bee.upint2.fragment.UpcomingStudentFragment;
-import com.example.bee.upint2.fragment.Upcomingfragment;
 import com.example.bee.upint2.tool.MySharedPreference;
 import com.example.bee.upint2.tool.UserInterfaceUtils;
 import com.example.bee.upint2.tool.Validator;
