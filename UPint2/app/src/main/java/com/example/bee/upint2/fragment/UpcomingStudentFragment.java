@@ -123,8 +123,6 @@ public class UpcomingStudentFragment extends android.support.v4.app.Fragment imp
     }
 
     private void onSuccess(List<Course> courseList) {
-        List<Course> filteredJob = new ArrayList<Course>();
-
         final Date[] d1 = new Date[1];
         final Date[] d2 = new Date[1];
 
@@ -136,10 +134,10 @@ public class UpcomingStudentFragment extends android.support.v4.app.Fragment imp
                 if (o1.getDate() == null || o2.getDate() == null)
                     return 0;
 
-                SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
-                    d1[0] = input.parse(o1.getDate());
-                    d2[0] = input.parse(o2.getDate());
+                    d1[0] = input.parse(o1.getDate() + " " + o1.getStart_time());
+                    d2[0] = input.parse(o2.getDate() + " " + o2.getStart_time());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -147,21 +145,23 @@ public class UpcomingStudentFragment extends android.support.v4.app.Fragment imp
             }
 
         });
-
-        sendOject o = new sendOject();
-        int user_id = Integer.parseInt(o.getUser_id());
-        String userId = String.valueOf(user_id);
-        // sort by id
-        for (Course each : courseList) {
-            if (!each.getUser_id().equals(userId)){
-                filteredJob.add(each);
-            }
-        }
-        courseList.removeAll(filteredJob);
-        adapter = new RecycleAdapterCourse(courseList, getActivity());
-        recyclerView.setAdapter(adapter);
+        initAdapterview(courseList);
     }
 
-
+        public void initAdapterview (List<Course> courseList) {
+            List<Course> filteredJob = new ArrayList<Course>();
+            sendOject o = new sendOject();
+            int user_id = Integer.parseInt(o.getUser_id());
+            String userId = String.valueOf(user_id);
+            // sort by id
+            for (Course each : courseList) {
+                if (!each.getUser_id().equals(userId)) {
+                    filteredJob.add(each);
+                }
+            }
+            courseList.removeAll(filteredJob);
+            adapter = new RecycleAdapterCourse(courseList, getActivity());
+            recyclerView.setAdapter(adapter);
+        }
 
 }

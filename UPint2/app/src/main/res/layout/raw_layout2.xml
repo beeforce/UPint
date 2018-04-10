@@ -26,7 +26,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test"
             android:gravity="center_vertical"
             android:layout_gravity="center_vertical"
             android:textSize="20dp"
@@ -35,12 +34,15 @@
             android:layout_marginLeft="13dp"
             android:id="@+id/name2"
             android:layout_marginTop="7dp"
+            android:shadowColor="#000000"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test"
             android:gravity="center_vertical"
             android:layout_gravity="center_vertical"
             android:layout_below="@+id/name2"
@@ -49,11 +51,14 @@
             android:layout_marginLeft="13dp"
             android:id="@+id/targetuniv"
             android:layout_marginTop="5dp"
+            android:shadowColor="#000000"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test"
             android:gravity="center_vertical"
             android:layout_gravity="center_vertical"
             android:layout_below="@+id/targetuniv"
@@ -62,11 +67,14 @@
             android:layout_marginLeft="13dp"
             android:id="@+id/targetmajor"
             android:layout_marginTop="2dp"
+            android:shadowColor="#000000"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test"
             android:gravity="center_vertical"
             android:layout_gravity="center_vertical"
             android:layout_below="@+id/targetmajor"
@@ -75,6 +83,10 @@
             android:layout_marginLeft="13dp"
             android:id="@+id/targetyear"
             android:layout_marginTop="2dp"
+            android:shadowColor="#000000"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
             />
 
 
@@ -86,6 +98,10 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="130dp"
+            android:shadowColor="#000000"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
             />
         <Button
             android:id="@+id/buttontags1_listen"
@@ -106,6 +122,10 @@
             android:paddingBottom="2dp"
             android:minHeight="0dp" android:minWidth="0dp"
             android:textAllCaps="false"
+            android:shadowColor="#000000"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
             />
 
         <Button
@@ -127,6 +147,10 @@
             android:paddingBottom="2dp"
             android:minHeight="0dp" android:minWidth="0dp"
             android:textAllCaps="false"
+            android:shadowColor="#000000"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
             />
 
         <Button
@@ -147,18 +171,25 @@
             android:paddingBottom="2dp"
             android:minHeight="0dp" android:minWidth="0dp"
             android:textAllCaps="false"
+            android:shadowColor="#000000"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/price2"
-            android:text="price"
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:textSize="13dp"
             android:layout_toRightOf="@+id/moneyicon"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="130dp"
+            android:shadowColor="#000000"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
 
             />
 
@@ -170,19 +201,41 @@
             android:layout_toRightOf="@+id/price2"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="130dp"
+            android:shadowColor="#000000"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/numberofstudent2"
-            android:text="15"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:textSize="13dp"
+            android:layout_toRightOf="@+id/numberofstudent_total"
+            android:layout_marginTop="130dp"
+            android:shadowColor="#000000"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
+
+            />
+
+        <TextView
+            android:id="@+id/numberofstudent_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:textSize="13dp"
             android:layout_toRightOf="@+id/peopleicon"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="130dp"
-
+            android:shadowColor="#000000"
+            android:shadowDx="-1"
+            android:shadowDy="-1"
+            android:shadowRadius="1"
             />
 
     </RelativeLayout>

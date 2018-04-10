@@ -1,13 +1,16 @@
 package com.example.bee.upint2.adapter;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -62,6 +65,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(MyViewholder holder, int position) {
+        holder.getView().setAnimation(AnimationUtils.loadAnimation(holder.getcontext(),R.anim.zoom_in));
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
         Date today = Calendar.getInstance().getTime();
@@ -120,7 +124,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             String part7 = parts[6];
             String part8 = parts[7];
             String part9 = parts[8];
-            String url_image = part1 + "//192.168.1.13/" + part4 + "/" + part5 + "/" + part6 + "/" + part7 + "/" + part8 + "/" + part9;
+            String url_image = part1 + "//192.168.31.164/" + part4 + "/" + part5 + "/" + part6 + "/" + part7 + "/" + part8 + "/" + part9;
             Glide.with(context)
                     .load(url_image)
                     .listener(new RequestListener<String, GlideDrawable>() {
@@ -159,6 +163,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public static class MyViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView img;
+        private View view;
         private TextView Name, price, numberofstudent, tag1, tag2, tag3, course_numberstudent;
         private RelativeLayout classinfolayout;
         private Context ctx;
@@ -177,17 +182,25 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             classinfolayout = itemView.findViewById(R.id.classinfolayout3);
             this.course = course;
             this.ctx = ctx;
+            this.view = itemView;
             itemView.setOnClickListener(this);
 
+        }
+        public View getView() {
+            return this.view;
+        }
+        public Context getcontext(){
+            return this.ctx;
         }
 
         @Override
         public void onClick(View v) {
+            v.setAnimation(AnimationUtils.loadAnimation(getcontext(),R.anim.zoom_in));
             int position = getAdapterPosition();
             Course course = this.course.get(position);
             Intent i = new Intent(v.getContext(), Classdetail.class);
             i.putExtra("course_id", course.getId().toString());
-            i.putExtra("scheduletime", scheduletime.toString());
+//            i.putExtra("scheduletime", scheduletime.toString());
             i.putExtra("course_name", course.getCourse_name().toString());
             i.putExtra("level", course.getLevel_of_difficult());
             i.putExtra("description", course.getDescription());

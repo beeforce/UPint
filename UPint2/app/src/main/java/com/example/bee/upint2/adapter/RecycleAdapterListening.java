@@ -2,6 +2,8 @@ package com.example.bee.upint2.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,6 +21,9 @@ import com.bumptech.glide.request.target.Target;
 import com.example.bee.upint2.Classdetail;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.model.Course;
+import com.example.bee.upint2.model.UserProfile;
+import com.example.bee.upint2.network.ApiService;
+import com.example.bee.upint2.network.ApiUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +32,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Bee on 2/28/2018.
@@ -40,6 +49,9 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
     private Date d;
     private static final String TAG = "RecycleAdapterListening";
     public static String scheduletime, scheduledate;
+    private ApiService mAPIService;
+    private String count;
+
 
     public RecycleAdapterListening(Context context, RecyclerViewClickListener itemListener){
         this.context = context;
@@ -58,7 +70,7 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
     }
 
     @Override
-    public void onBindViewHolder(MyViewholder holder, int position) {
+    public void onBindViewHolder(final MyViewholder holder, int position) {
 
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
@@ -80,7 +92,7 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
         if (days >= 0 | !d.before(today)) {
             holder.Name.setText(course.get(position).getCourse_name());
             holder.price.setText(course.get(position).getPrice_per_student() + "B");
-            holder.numberofstudent.setText("0/" + course.get(position).getTotal_student());
+            holder.numberofstudent.setText("" + course.get(position).getTotal_student());
             //string part timestart
             String timestartst = course.get(position).getStart_time();
             String[] timestartpart = timestartst.split(":");
@@ -129,7 +141,7 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
             String part7 = parts[6];
             String part8 = parts[7];
             String part9 = parts[8];
-            String url_image = part1 + "//192.168.1.13/" + part4 + "/" + part5 + "/" + part6 + "/" + part7 + "/" + part8 + "/" + part9;
+            String url_image = part1 + "//192.168.31.164/" + part4 + "/" + part5 + "/" + part6 + "/" + part7 + "/" + part8 + "/" + part9;
             Glide.with(context)
                     .load(url_image)
                     .listener(new RequestListener<String, GlideDrawable>() {
@@ -150,9 +162,21 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
                     .override(600, 600)
                     .centerCrop()
                     .into(holder.img);
+            final int semiTransparentGrey = Color.argb(150, 10, 10, 10);
+            holder.img.setColorFilter(semiTransparentGrey, PorterDuff.Mode.SRC_ATOP);
+
             holder.targetuniv.setText(course.get(position).getTarget_university());
             holder.targetmajor.setText(course.get(position).getTarget_major()+" major");
-            holder.targetyear.setText(course.get(position).getTarget_years()+" year student");
+            String years = course.get(position).getTarget_years();
+            if (years.equals("1")) {
+                holder.targetyear.setText("First year student");
+            } else if (years.equals("2")) {
+                holder.targetyear.setText("Second year student");
+            } else if (years.equals("3")) {
+                holder.targetyear.setText("Third year student");
+            } else if (years.equals("4")) {
+                holder.targetyear.setText("Fourth year student");
+            }
             ArrayList<String> taglist = new ArrayList<>();
 
             String tag = course.get(position).getTags().toString();
@@ -174,25 +198,13 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
                 holder.tag1.setText(taglist.get(0));
                 holder.tag2.setText(taglist.get(1));
                 holder.tag3.setText(taglist.get(2));
-
             }
-//            if (course.get(position).getTarget_years().toString() == "1"){
-//                holder.targetyear.setText("First year student");
-//            }
-//            if (course.get(position).getTarget_years().toString() == "2"){
-//                holder.targetyear.setText("Second year student");
-//            }
-//            if (course.get(position).getTarget_years().toString() == "3") {
-//                holder.targetyear.setText("Third year student");
-//            }
-//            if (course.get(position).getTarget_years().toString() == "4"){
-//                holder.targetyear.setText("Forth year student");
-//            }
 
         } else {
             holder.classinfolayout.setVisibility(View.GONE);
         }
     }
+
 
     @Override
     public int getItemCount() {
@@ -202,7 +214,7 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
     public static class MyViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView img;
-        private TextView Name, price,numberofstudent, tag1, tag2, tag3, targetuniv, targetmajor, targetyear;
+        private TextView Name, price,numberofstudent, tag1, tag2, tag3, targetuniv, targetmajor, targetyear, numberofstudent_count;
         private RelativeLayout classinfolayout;
         private Context ctx;
         private List<Course> course = new ArrayList<Course>();
@@ -220,6 +232,7 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
             targetuniv = (TextView) itemView.findViewById(R.id.targetuniv);
             targetmajor = (TextView) itemView.findViewById(R.id.targetmajor);
             targetyear = (TextView) itemView.findViewById(R.id.targetyear);
+            numberofstudent_count = (TextView) itemView.findViewById(R.id.numberofstudent_total);
             this.course = course;
             this.ctx = ctx;
             itemView.setOnClickListener(this);

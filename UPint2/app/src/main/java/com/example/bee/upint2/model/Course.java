@@ -56,7 +56,7 @@ public class Course implements Serializable {
     String level_of_difficult;
     @SerializedName("total_student")
     @Expose
-    Integer total_student;
+    int total_student;
     @SerializedName("tags")
     @Expose
     String tags;

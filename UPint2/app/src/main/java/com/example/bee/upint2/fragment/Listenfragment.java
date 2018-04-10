@@ -1,5 +1,6 @@
 package com.example.bee.upint2.fragment;
 
+import android.animation.Animator;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,9 +15,13 @@ import com.example.bee.upint2.R;
 import com.example.bee.upint2.adapter.RecycleAdapterListening;
 import com.example.bee.upint2.adapter.RecyclerViewClickListener;
 import com.example.bee.upint2.model.Course;
+import com.example.bee.upint2.model.UserProfile;
 import com.example.bee.upint2.model.sendOject;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
+import com.willowtreeapps.spruce.Spruce;
+import com.willowtreeapps.spruce.animation.DefaultAnimations;
+import com.willowtreeapps.spruce.sort.LinearSort;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,7 +51,8 @@ public class Listenfragment extends android.support.v4.app.Fragment implements S
     private RecycleAdapterListening adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ApiService mAPIService;
-    private ApiService mAPIService2;
+    private Animator spruceAnimator;
+    private String class_count;
 
 
     @Override
@@ -70,6 +76,12 @@ public class Listenfragment extends android.support.v4.app.Fragment implements S
         swipeRefreshLayout.setOnRefreshListener(this);
 
         recyclerView = rootView.findViewById(R.id.recyclerView2);
+
+        spruceAnimator = new Spruce.SpruceBuilder(swipeRefreshLayout)
+                .sortWith(new LinearSort(/*interObjectDelay=*/100L, /*reversed=*/false, LinearSort.Direction.TOP_TO_BOTTOM))
+                .animateWith(DefaultAnimations.growAnimator(swipeRefreshLayout, /*duration=*/800))
+                .start();
+
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -80,11 +92,20 @@ public class Listenfragment extends android.support.v4.app.Fragment implements S
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (spruceAnimator != null) {
+            spruceAnimator.start();
+        }
+    }
+
+    @Override
     public void onRefresh() {
         course.clear();
         courselistenList.clear();
         getClassdetailwithId();
         swipeRefreshLayout.setRefreshing(false);
+        spruceAnimator.start();
 
     }
 
@@ -96,14 +117,12 @@ public class Listenfragment extends android.support.v4.app.Fragment implements S
     public void getClassdetailwithId() {
         sendOject o = new sendOject();
         int user_id = Integer.parseInt(o.getUser_id());
-        mAPIService.courseDetailsOfuser(user_id).enqueue(new Callback<List<Course>>() {
+        mAPIService.courseListening(user_id).enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 if (response.isSuccessful()) {
                     course = response.body();
-                    for (int i = 0; i < course.size(); i++) {
-                        onSuccess(course.get(i).getCourse_id());
-                    }
+                    onSuccess(course);
                     Log.w(TAG, "onResponse: " + course.size());
                 } else {
 
@@ -119,51 +138,53 @@ public class Listenfragment extends android.support.v4.app.Fragment implements S
 
     }
 
-    private void onSuccess(int course_id) {
-        mAPIService2 = ApiUtils.getAPIService();
-        mAPIService2.courseDetailswithId(course_id).enqueue(new Callback<Course>() {
+    private void onSuccess(List<Course> courseList) {
+
+        final Date[] d1 = new Date[1];
+        final Date[] d2 = new Date[1];
+
+        // sort by date
+        Collections.sort(courseList, new Comparator<Course>() {
+
             @Override
-            public void onResponse(Call<Course> call, Response<Course> response) {
-                if (response.isSuccessful()) {
-                    courselisten = response.body();
-                    if (courselistenList.size() <= course.size()) {
-                        courselistenList.add(courselisten);
+            public int compare(Course o1, Course o2) {
+                if (o1.getDate() == null || o2.getDate() == null)
+                    return 0;
 
-                        final Date[] d1 = new Date[1];
-                        final Date[] d2 = new Date[1];
-
-                        // sort by date
-                        Collections.sort(courselistenList, new Comparator<Course>() {
-
-                            @Override
-                            public int compare(Course o1, Course o2) {
-                                if (o1.getDate() == null || o2.getDate() == null)
-                                    return 0;
-
-                                SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
-                                try {
-                                    d1[0] = input.parse(o1.getDate());
-                                    d2[0] = input.parse(o2.getDate());
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                                return d1[0].compareTo(d2[0]);
-                            }
-
-                        });
-
-                        adapter = new RecycleAdapterListening(courselistenList, getActivity());
-                        recyclerView.setAdapter(adapter);
-                    }
-                    Log.w(TAG, "onResponse: " + courselisten.getCourse_name().toString());
+                SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    d1[0] = input.parse(o1.getDate()+" "+o1.getStart_time());
+                    d2[0] = input.parse(o2.getDate()+" "+o2.getStart_time());
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
+                return d1[0].compareTo(d2[0]);
+            }
+
+        });
+
+        for (Course each : courseList) {
+            Log.w(TAG, "class id" + each.getId());
+        }
+
+        adapter = new RecycleAdapterListening(courseList, getActivity());
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    public void Classcount(String course_id) {
+        mAPIService = ApiUtils.getAPIService();
+        mAPIService.classCount(course_id).enqueue(new Callback<UserProfile>() {
+            @Override
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                Log.w(TAG, "class count" + response.body().getCount().toString());
+
             }
 
             @Override
-            public void onFailure(Call<Course> call, Throwable t) {
+            public void onFailure(Call<UserProfile> call, Throwable t) {
 
             }
         });
-
     }
 }

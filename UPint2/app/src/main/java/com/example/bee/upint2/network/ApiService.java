@@ -63,15 +63,14 @@ public interface ApiService {
     @GET("Allcoursedetail")
     Call<List<Course>> getCoursedetail();
 
-    @GET("courseDetailsOfuser/{user_id}")
-    Call<List<Course>> courseDetailsOfuser(@Path("user_id") int user_id);
-
 
     @GET("userDetailswithId/{id}")
     Call<UserProfile> userDetailswithId(@Path("id") String id);
 
     @GET("classCount/{course_id}")
     Call<UserProfile> classCount(@Path("course_id") String course_id);
+
+
 
     @POST("refresh")
     @FormUrlEncoded
@@ -83,6 +82,9 @@ public interface ApiService {
 
     @GET("courseEnroll/{user_id}")
     Call<List<Course_user>> searchclassEnroll(@Path("user_id") int user_id);
+
+    @GET("courseListening/{user_id}")
+    Call<List<Course>> courseListening(@Path("user_id") int user_id);
 
     @GET("courseDetails/{course_id}")
     Call<Course> courseDetailswithId(@Path("course_id") int course_id);

@@ -1,5 +1,6 @@
 package com.example.bee.upint2;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -18,12 +19,16 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.bee.upint2.model.UserProfile;
 import com.example.bee.upint2.model.sendOject;
+import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,11 +39,12 @@ public class Classdetail_searchclass extends AppCompatActivity {
     private String user_id, course_id, image_path;
     private TextView numberofstudent_searchclass, teacher, course_name, price_searchclass, numberofstudent_searchclass2, place_searchclass, description_searchclass, target_searchclass, classdetailcourse_name,
             levelofdifficult, costclassdetail, classdetailschedule, classdetailscheduletime, classdetailplace, termclassdetail, numberclassdetail;
-    private Button buttontags1_searchclass, buttontags2_searchclass, buttontags3_searchclass, book;
+    private Button buttontags1_searchclass, buttontags2_searchclass, buttontags3_searchclass, book, payment;
     private ImageView class_picture;
     private ImageView back, back2;
     private RelativeLayout layout1;
     private LinearLayout layout2;
+    private SweetAlertDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,14 @@ public class Classdetail_searchclass extends AppCompatActivity {
         classdetailplace = (TextView) findViewById(R.id.classdetailplace);
         termclassdetail = (TextView) findViewById(R.id.termclassdetail);
         numberclassdetail = (TextView) findViewById(R.id.numberclassdetail);
+
+        //get extra string
+        user_id = getIntent().getStringExtra("user_id");
+        course_id = getIntent().getStringExtra("course_id");
+        course_name.setText(getIntent().getStringExtra("course_name"));
+        price_searchclass.setText(getIntent().getStringExtra("cost"));
+        numberofstudent_searchclass2.setText(getIntent().getStringExtra("totalstudent"));
+        place_searchclass.setText(getIntent().getStringExtra("place"));
 
         classdetailcourse_name.setText(getIntent().getStringExtra("course_name"));
         levelofdifficult.setText(getIntent().getStringExtra("level"));
@@ -105,13 +119,40 @@ public class Classdetail_searchclass extends AppCompatActivity {
             }
         });
 
-        //get extra string
-        user_id = getIntent().getStringExtra("user_id");
-        course_id = getIntent().getStringExtra("course_id");
-        course_name.setText(getIntent().getStringExtra("course_name"));
-        price_searchclass.setText(getIntent().getStringExtra("cost"));
-        numberofstudent_searchclass2.setText(getIntent().getStringExtra("totalstudent"));
-        place_searchclass.setText(getIntent().getStringExtra("place"));
+        payment = findViewById(R.id.pay);
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProgressDialog();
+                mAPIService = ApiUtils.getAPIService();
+                RequestBody user_idR = RequestBody.create(MultipartBody.FORM, user_id);
+                RequestBody course_idR = RequestBody.create(MultipartBody.FORM, course_id);
+
+                mAPIService.bookClass(user_idR, course_idR).enqueue(new Callback<AccessToken>() {
+                    @Override
+                    public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                        dismissProgressDialog();
+                        if (response.isSuccessful()) {
+                            if (response.body().isSuccess()) {
+                                showProgressDialogSuccess();
+                            } else {
+                                showProgressDialogWarning();
+                            }
+
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AccessToken> call, Throwable t) {
+                        showProgressDialogerrorconnection();
+
+                    }
+                });
+            }
+        });
+
         ArrayList<String> taglist = new ArrayList<>();
 
         String tag = getIntent().getStringExtra("tags");
@@ -157,7 +198,7 @@ public class Classdetail_searchclass extends AppCompatActivity {
         String part7 = parts[6];
         String part8 = parts[7];
         String part9 = parts[8];
-        String url_image = part1 + "//192.168.1.13/" + part4 + "/" + part5 + "/" + part6 + "/" + part7 + "/" + part8 + "/" + part9;
+        String url_image = part1 + "//192.168.31.164/" + part4 + "/" + part5 + "/" + part6 + "/" + part7 + "/" + part8 + "/" + part9;
         Glide.with(getApplicationContext())
                 .load(url_image)
                 .listener(new RequestListener<String, GlideDrawable>() {
@@ -218,5 +259,48 @@ public class Classdetail_searchclass extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void showProgressDialog() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+
+    private void dismissProgressDialog() {
+        if (pDialog != null && pDialog.isShowing()) {
+            pDialog.dismiss();
+        }
+    }
+
+    private void showProgressDialogSuccess() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
+        pDialog.setTitleText("SUCCESS!");
+        pDialog.setContentText("You're request are successful!");
+        pDialog.show();
+        pDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                finish();
+            }
+        });
+    }
+
+    private void showProgressDialogWarning() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        pDialog.setTitleText("ERROR!");
+        pDialog.setContentText("Can not book a class");
+        pDialog.setConfirmText("Ok!");
+        pDialog.show();
+    }
+
+    private void showProgressDialogerrorconnection() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        pDialog.setTitleText("Connection Error!");
+        pDialog.setContentText("Please check your connection");
+        pDialog.setConfirmText("Ok!");
+        pDialog.show();
     }
 }

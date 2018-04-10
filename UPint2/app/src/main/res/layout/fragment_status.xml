@@ -38,7 +38,7 @@
                     android:id="@+id/relaymonth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#98c428">
+                    android:background="@color/UPgreen">
 
                     <TextView
                         android:id="@+id/month"
@@ -53,7 +53,6 @@
                         android:text="Month" />
                 </RelativeLayout>
 
-
                 <com.github.tibolte.agendacalendarview.AgendaCalendarView
                     android:layout_below="@+id/relaymonth"
                     android:id="@+id/agenda_calendar_view"
@@ -65,9 +64,10 @@
                     agendaCalendar:calendarDayTextColor="#6aa615"
                     agendaCalendar:calendarHeaderColor="#6aa615"
                     agendaCalendar:calendarPastDayTextColor="@android:color/darker_gray"
-                    agendaCalendar:fabColor="#6aa615" />
+                    agendaCalendar:fabColor="@color/UPgreen" />
 
             </LinearLayout>
+
 
 
         </LinearLayout>

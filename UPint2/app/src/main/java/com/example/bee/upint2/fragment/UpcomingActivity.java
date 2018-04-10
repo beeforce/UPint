@@ -40,7 +40,7 @@ import retrofit2.Response;
 
 public class UpcomingActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewClickListener {
 
-    private static final String TAG = "Upcomingfragment";
+    private static final String TAG = "UpcomingActivity";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<Course> course;
@@ -140,10 +140,10 @@ public class UpcomingActivity extends AppCompatActivity implements SwipeRefreshL
                 if (o1.getDate() == null || o2.getDate() == null)
                     return 0;
 
-                SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
-                    d1[0] = input.parse(o1.getDate());
-                    d2[0] = input.parse(o2.getDate());
+                    d1[0] = input.parse(o1.getDate()+" "+o1.getStart_time());
+                    d2[0] = input.parse(o2.getDate()+" "+o2.getStart_time());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

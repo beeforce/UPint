@@ -163,7 +163,7 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
             String part7 = parts[6];
             String part8 = parts[7];
             String part9 = parts[8];
-            String url_image = part1 + "//192.168.1.13/" + part4 + "/" + part5 + "/" + part6 + "/" + part7 + "/" + part8 + "/" + part9;
+            String url_image = part1 + "//192.168.31.164/" + part4 + "/" + part5 + "/" + part6 + "/" + part7 + "/" + part8 + "/" + part9;
             Glide.with(context)
                     .load(url_image)
                     .listener(new RequestListener<String, GlideDrawable>() {

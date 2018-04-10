@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
@@ -205,6 +206,7 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
+        v.setAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.zoom_in));
         adapter = new MyRecyclerViewAdapter(getActivity(), this);
 
     }

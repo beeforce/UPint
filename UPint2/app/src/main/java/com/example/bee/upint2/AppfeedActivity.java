@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.bee.upint2.adapter.SectionPageAdapter;
+import com.example.bee.upint2.fragment.Explorefragment;
 import com.example.bee.upint2.fragment.HomeappFragment;
 import com.example.bee.upint2.fragment.Schedulefragment;
 import com.example.bee.upint2.fragment.Settingfragment;
@@ -41,7 +42,7 @@ public class AppfeedActivity extends AppCompatActivity {
     private CustomViewPager viewPager;
     private HomeappFragment homeappFragment;
     private Schedulefragment schedulefragment;
-    private Statusfragment statusfragment;
+    private Explorefragment explorefragment;
     private Settingfragment settingfragment;
     private NavigationView navigationView;
     private Toolbar toolbar;
@@ -104,7 +105,7 @@ public class AppfeedActivity extends AppCompatActivity {
                 String part7 = parts[6];
                 String part8 = parts[7];
                 String part9 = parts[8];
-                String url_image = part1 + "//192.168.1.13/" + part4 + "/" + part5 + "/" + part6 + "/" + part7 + "/" + part8 + "/" + part9;
+                String url_image = part1 + "//192.168.31.164/" + part4 + "/" + part5 + "/" + part6 + "/" + part7 + "/" + part8 + "/" + part9;
                 Glide.with(hView.getContext())
                         .load(url_image)
                         .override(600, 600)
@@ -175,17 +176,17 @@ public class AppfeedActivity extends AppCompatActivity {
 
            }
     private void setupViewPager() {
-        homeappFragment = new HomeappFragment();
-        schedulefragment = new Schedulefragment();
-        statusfragment = new Statusfragment();
-        settingfragment = new Settingfragment();
+        homeappFragment = new HomeappFragment();    //first fragment
+        explorefragment = new Explorefragment();    //second fragment
+        schedulefragment = new Schedulefragment();  //third fragment
+        settingfragment = new Settingfragment();    //fourth fragment
 
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(homeappFragment);
-        adapter.addFragment(schedulefragment);
-        adapter.addFragment(statusfragment);
-        adapter.addFragment(settingfragment);
+        adapter.addFragment(homeappFragment);   //add fragment 1
+        adapter.addFragment(explorefragment);   //2
+        adapter.addFragment(schedulefragment);  //3
+        adapter.addFragment(settingfragment);   //4
 
 
         viewPager.setAdapter(adapter);
