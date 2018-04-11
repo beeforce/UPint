@@ -113,6 +113,9 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView2.setNestedScrollingEnabled(false);
+
 
 
         getClassdetail();
