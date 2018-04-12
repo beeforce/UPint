@@ -1,166 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#fff">
 
-
-
-    <EditText
-        android:id="@+id/searchkeyword"
+    <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relay1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relaycenter"
-        android:layout_marginBottom="@dimen/common_15_dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="5dp"
-        android:background="@android:color/transparent"
-        android:drawablePadding="3dp"
-        android:drawableStart="@drawable/ic_search_black"
-        android:hint="Keywords"
-        android:singleLine="true"
-        android:textColor="#95ae53"
-        android:textColorHint="#95ae53"
-        android:textSize="30dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp">
 
-    <Button
-        android:id="@+id/buttontagsAll_searchclasskeyword"
+        <Button
+            android:id="@+id/buttonDate1_searchclasskeyword"
+            android:layout_width="40dp"
+            android:layout_height="35dip"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="9dp"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="13"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonDate2_searchclasskeyword"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/searchkeyword"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="9dp"
+            android:layout_toRightOf="@+id/buttonDate1_searchclasskeyword"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="13"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonDate3_searchclasskeyword"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/searchkeyword"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="9dp"
+            android:layout_toRightOf="@+id/buttonDate2_searchclasskeyword"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="14"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonDate4_searchclasskeyword"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/searchkeyword"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="9dp"
+            android:layout_toRightOf="@+id/buttonDate3_searchclasskeyword"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="15"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonDate5_searchclasskeyword"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/searchkeyword"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="9dp"
+            android:layout_toRightOf="@+id/buttonDate4_searchclasskeyword"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="13"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonDate6_searchclasskeyword"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/searchkeyword"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="9dp"
+            android:layout_toRightOf="@+id/buttonDate5_searchclasskeyword"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="13"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/buttonDate7_searchclasskeyword"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/searchkeyword"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="9dp"
+            android:layout_toRightOf="@+id/buttonDate6_searchclasskeyword"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="13"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/relay1"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/background_2dp_border"/>
+
+
+
+    <RelativeLayout
+        android:id="@+id/relay2"
         android:layout_width="wrap_content"
-        android:layout_height="35dip"
-        android:layout_weight="1"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_below="@+id/searchkeyword"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginTop="9dp"
-        android:background="@drawable/tags_button_black_keyword"
-        android:text="#All"
-        android:textAllCaps="false"
-        android:textColor="@color/button_text_color_keyword"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true">
 
 
-    <Button
-        android:id="@+id/buttontags1_searchclasskeyword"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_weight="1"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_below="@+id/buttontags2_searchclasskeyword"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/tags_button_black_keyword"
-        android:text="#Writing"
-        android:textAllCaps="false"
-        android:textColor="@color/button_text_color_keyword"
-        android:textSize="18dp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/buttontags2_searchclasskeyword"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_weight="1"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_below="@+id/searchkeyword"
-        android:layout_marginRight="7dp"
-        android:layout_marginTop="9dp"
-        android:layout_toRightOf="@+id/buttontags1_searchclasskeyword"
-        android:background="@drawable/tags_button_black_keyword"
-        android:text="#Communication"
-        android:textAllCaps="false"
-        android:textColor="@color/button_text_color_keyword"
-        android:textSize="18dp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/buttontags3_searchclasskeyword"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_weight="1"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_below="@+id/buttontags2_searchclasskeyword"
-        android:layout_marginRight="7dp"
-        android:layout_marginTop="12dp"
-        android:layout_toRightOf="@+id/buttontags1_searchclasskeyword"
-        android:background="@drawable/tags_button_black_keyword"
-        android:text="#Interpretive Pratices"
-        android:textAllCaps="false"
-        android:textColor="@color/button_text_color_keyword"
-        android:textSize="18dp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/buttontags4_searchclasskeyword"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_weight="1"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_below="@+id/buttontags3_searchclasskeyword"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/tags_button_black_keyword"
-        android:text="#Professional Seminar"
-        android:textAllCaps="false"
-        android:textColor="@color/button_text_color_keyword"
-        android:textSize="18dp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/buttontags5_searchclasskeyword"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_weight="1"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_below="@+id/buttontags4_searchclasskeyword"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/tags_button_black_keyword"
-        android:text="#Tutoring"
-        android:textAllCaps="false"
-        android:textColor="@color/button_text_color_keyword"
-        android:textSize="18dp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/buttontags6_searchclasskeyword"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_weight="1"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_below="@+id/buttontags4_searchclasskeyword"
-        android:layout_marginRight="7dp"
-        android:layout_marginTop="12dp"
-        android:layout_toRightOf="@+id/buttontags5_searchclasskeyword"
-        android:background="@drawable/tags_button_black_keyword"
-        android:text="#Argument"
-        android:textAllCaps="false"
-        android:textColor="@color/button_text_color_keyword"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+        <Button
+            android:id="@+id/buttontagsAll_searchclasskeyword"
+            android:layout_width="50dp"
+            android:layout_height="35dip"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="7dp"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="#All"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView2"
+        <Button
+            android:id="@+id/buttontags1_searchclasskeyword"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@+id/buttontagsAll_searchclasskeyword"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="#Writing"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttontags2_searchclasskeyword"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginRight="7dp"
+            android:layout_toRightOf="@+id/buttontagsAll_searchclasskeyword"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="#Communication"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttontags3_searchclasskeyword"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@+id/buttontags2_searchclasskeyword"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@+id/buttontags1_searchclasskeyword"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="#Interpretive Pratices"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttontags4_searchclasskeyword"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@+id/buttontags3_searchclasskeyword"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="#Professional Seminar"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttontags5_searchclasskeyword"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@+id/buttontags4_searchclasskeyword"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="#Tutoring"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttontags6_searchclasskeyword"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@+id/buttontags4_searchclasskeyword"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@+id/buttontags5_searchclasskeyword"
+            android:layout_weight="1"
+            android:background="@drawable/tags_button_black_keyword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="#Argument"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color_keyword"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/line2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/buttontags5_searchclasskeyword"
+            android:layout_height="2dp"
+            android:layout_below="@+id/relay2"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="#ffff"
-            android:scrollbars="vertical" />
+            android:background="@drawable/background_2dp_border"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView2"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/line2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:background="#ffff"
+        android:scrollbars="vertical"
+        android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
 
 
-</RelativeLayout>
+</ScrollView>

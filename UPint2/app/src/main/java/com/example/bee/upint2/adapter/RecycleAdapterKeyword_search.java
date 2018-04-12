@@ -2,11 +2,14 @@ package com.example.bee.upint2.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,6 +75,7 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
 
     @Override
     public void onBindViewHolder(final MyViewholder holder, int position) {
+        holder.getView().setAnimation(AnimationUtils.loadAnimation(holder.getcontext(),R.anim.zoom_in));
 
         mAPIService = ApiUtils.getAPIService();
 
@@ -91,7 +95,9 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
         mAPIService.classCount(courselist.get(position).getId().toString()).enqueue(new Callback<UserProfile>() {
             @Override
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
-                holder.numberofstudent.setText(response.body().getCount()+" /");
+                if (response.isSuccessful()) {
+                    holder.numberofstudent.setText(response.body().getCount() + " /");
+                }
 
             }
 
@@ -170,6 +176,8 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
                 .override(600, 600)
                 .centerCrop()
                 .into(holder.img);
+        final int semiTransparentGrey = Color.argb(60, 10, 10, 10);
+        holder.img.setColorFilter(semiTransparentGrey, PorterDuff.Mode.SRC_ATOP);
 
     }
 
@@ -187,11 +195,13 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
         private TextView name, price, numberofstudent, totalofstudent, teacher_name;
         private Button buttontags1_keyword, buttontags2_keyword, buttontags3_keyword;
         private Date d;
+        private View view;
 
         public MyViewholder(View itemView, Context ctx, List<Course> course) {
             super(itemView);
             this.course = course;
             this.ctx = ctx;
+            this.view = itemView;
 
             img = itemView.findViewById(R.id.course_photo);
             name = itemView.findViewById(R.id.course_name);
@@ -204,6 +214,13 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
             buttontags3_keyword = itemView.findViewById(R.id.buttontags3_keyword);
 
             itemView.setOnClickListener(this);
+        }
+
+        public View getView() {
+            return this.view;
+        }
+        public Context getcontext(){
+            return this.ctx;
         }
 
         @Override
