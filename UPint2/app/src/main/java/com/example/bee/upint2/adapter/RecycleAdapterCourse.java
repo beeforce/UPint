@@ -21,6 +21,9 @@ import com.bumptech.glide.request.target.Target;
 import com.example.bee.upint2.Classdetail;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.model.Course;
+import com.example.bee.upint2.model.UserProfile;
+import com.example.bee.upint2.network.ApiService;
+import com.example.bee.upint2.network.ApiUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,6 +32,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Bee on 2/21/2018.
@@ -42,6 +49,7 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
     private Date d;
     private static final String TAG = "RecycleAdapterCourse";
     public static String scheduletime, scheduledate;
+    private ApiService mAPIService;
 
     public RecycleAdapterCourse(Context context, RecyclerViewClickListener itemListener) {
 
@@ -62,7 +70,7 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
     }
 
     @Override
-    public void onBindViewHolder(MyViewholder holder, int position) {
+    public void onBindViewHolder(final MyViewholder holder, int position) {
 
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
@@ -88,7 +96,7 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
         if (days == 0 | !d.before(today)) {
             holder.Name.setText(course.get(position).getCourse_name());
             holder.price.setText(course.get(position).getPrice_per_student() + "B");
-            holder.numberofstudent.setText("0/" + course.get(position).getTotal_student());
+            holder.numberofstudent.setText("/" + course.get(position).getTotal_student());
             //string part timestart
             String timestartst = course.get(position).getStart_time();
             String[] timestartpart = timestartst.split(":");
@@ -150,6 +158,22 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
 
             }
 
+            mAPIService = ApiUtils.getAPIService();
+            mAPIService.classCount(course.get(position).getId().toString()).enqueue(new Callback<UserProfile>() {
+                @Override
+                public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                    if (response.isSuccessful()) {
+                        holder.numberofstudent_total.setText(response.body().getCount());
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<UserProfile> call, Throwable t) {
+
+                }
+            });
+
 
             holder.course_place.setText(course.get(position).getPlace());
             holder.course_numberstudent.setText("" + course.get(position).getTotal_student());
@@ -201,7 +225,7 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
     public static class MyViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView img;
-        private TextView Name, price, time, numberofstudent, date, tag1, tag2, tag3, dateremain, course_place, course_numberstudent;
+        private TextView Name, price, time, numberofstudent, date, tag1, tag2, tag3, dateremain, course_place, course_numberstudent,numberofstudent_total;
         private RelativeLayout classinfolayout;
         private Context ctx;
         private List<Course> course = new ArrayList<Course>();
@@ -217,6 +241,7 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
             tag2 = itemView.findViewById(R.id.buttontags2);
             tag3 = itemView.findViewById(R.id.buttontags3);
             numberofstudent = itemView.findViewById(R.id.numberofstudent);
+            numberofstudent_total = itemView.findViewById(R.id.numberofstudent_total);
             dateremain = itemView.findViewById(R.id.dateremain);
             course_place = itemView.findViewById(R.id.course_place);
             course_numberstudent = itemView.findViewById(R.id.course_numberstudent);

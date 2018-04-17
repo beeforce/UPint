@@ -82,7 +82,11 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
         mAPIService.userDetailswithId(courselist.get(position).getUser_id().toString()).enqueue(new Callback<UserProfile>() {
             @Override
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
-                holder.teacher_name.setText(response.body().getFirst_name());
+                if (response.isSuccessful()) {
+                    holder.teacher_name.setText(response.body().getFirst_name());
+                }else{
+                    ////-----do nothing
+                }
 
             }
 
