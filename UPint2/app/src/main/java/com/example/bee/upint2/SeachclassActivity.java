@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import com.example.bee.upint2.adapter.ListViewAdapter;
 import com.example.bee.upint2.model.Course;
+import com.example.bee.upint2.model.sendOject;
+import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
 
@@ -28,6 +31,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,7 +47,7 @@ public class SeachclassActivity extends AppCompatActivity {
     private ListView listView;
     private ApiService mAPIService;
     private Date d;
-    private TextView targetunivsearchclass, targetyearsearchclass;
+    private String course_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +57,20 @@ public class SeachclassActivity extends AppCompatActivity {
 
         getClassdetail();
 
-        targetunivsearchclass = (TextView) findViewById(R.id.targetunivsearchclass);
-
-        targetyearsearchclass = (TextView) findViewById(R.id.targetyearsearchclass);
-
         listView = (ListView) findViewById(R.id.course_list_view);
 
 
         editText = (EditText) findViewById(R.id.searchclasset);
 
         editText.addTextChangedListener(mTextEditorWatcher);
+
+        ImageView back = (ImageView) findViewById(R.id.backclassdetail);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 //        editText.addTextChangedListener(new TextWatcher() {
 //            @Override
@@ -82,6 +91,8 @@ public class SeachclassActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                getSearchRecentdata(position);
                 String timestartst = course.get(position).getStart_time();
                 String[] timestartpart = timestartst.split(":");
                 String timestart1 = timestartpart[0];
@@ -138,6 +149,85 @@ public class SeachclassActivity extends AppCompatActivity {
         });
 
     }
+
+    private void getSearchRecentdata(final int position){
+        mAPIService = ApiUtils.getAPIService();
+        sendOject o = new sendOject();
+        mAPIService.getSearchRecent(o.getUser_id()).enqueue(new Callback<AccessToken>() {
+            @Override
+            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                if (response.code() == 200){
+                    if (response.body().getSearch_recent() == ""){
+                        course_id = course.get(position).getId().toString();
+                    }else{
+                        String[] parts = response.body().getSearch_recent().split(",");
+                        String part1 = parts[0];
+                        if (parts.length == 1){
+                            if (course.get(position).getId().toString().equals(response.body().getSearch_recent())){
+                                course_id = course.get(position).getId().toString();
+                            }else{
+                                course_id = course.get(position).getId().toString()+","+response.body().getSearch_recent();
+                            }
+                        }else if (parts.length == 2){
+                            String part2 = parts[1];
+                            if (part1.equals(course.get(position).getId().toString())){
+                                course_id = response.body().getSearch_recent();
+                            } else if (part2.equals(course.get(position).getId().toString())){
+                                course_id = part2+","+part1;
+                            }else{
+                                course_id = course.get(position).getId().toString()+","+response.body().getSearch_recent();
+                            }
+                        }
+                        else if (parts.length == 3){
+                            String part2 = parts[1];
+                            String part3 = parts[2];
+                            if (part1.equals(course.get(position).getId().toString())){
+                                course_id = response.body().getSearch_recent();
+                            } else if (part2.equals(course.get(position).getId().toString())){
+                                course_id = part2+","+part1+","+part3;
+                            }else if (part3.equals(course.get(position).getId().toString())){
+                                course_id = part3+","+part1+","+part2;
+                            }else{
+                                course_id = course.get(position).getId().toString()+","+part1+","+part2;
+                            }
+                        }
+                    }
+                    updateSearchRecentdata();
+                } else {
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AccessToken> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void updateSearchRecentdata(){
+
+        sendOject o = new sendOject();
+        RequestBody user_id = RequestBody.create(MultipartBody.FORM, o.getUser_id());
+        RequestBody search_data = RequestBody.create(MultipartBody.FORM, course_id);
+        mAPIService.updateSearchRecent(user_id, search_data).enqueue(new Callback<AccessToken>() {
+            @Override
+            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+//                    if (response.code() == 200) {
+//                        Log.w("SearchRecent", "onResponse 200");
+//                    }else if (response.code() == 201) {
+//                        Log.w("SearchRecent", "onResponse 201");
+//                    }
+            }
+
+            @Override
+            public void onFailure(Call<AccessToken> call, Throwable t) {
+                Log.w("SearchRecent", "onResponsefail");
+
+            }
+        });
+
+    }
+
     private final TextWatcher  mTextEditorWatcher = new TextWatcher() {
 
         public void beforeTextChanged(CharSequence s, int start, int count, int after)

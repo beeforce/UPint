@@ -107,7 +107,7 @@ public class UpcomingStudentFragment extends android.support.v4.app.Fragment imp
 
     public void getClassdetail() {
         mAPIService = ApiUtils.getAPIService();
-        mAPIService.getCoursedetail().enqueue(new Callback<List<Course>>() {
+        mAPIService.getAllCoursedetail().enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 course = response.body();

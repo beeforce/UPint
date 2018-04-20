@@ -37,6 +37,24 @@ public class AccessToken {
     @SerializedName("success")
     @Expose
     boolean success;
+    @SerializedName("search_recent")
+    @Expose
+    String search_recent;
+    @SerializedName("error")
+    @Expose
+    String error;
+    @SerializedName("comment")
+    @Expose
+    String comment;
+
+    public String getSearch_recent() {
+        return search_recent;
+    }
+
+    public void setSearch_recent(String search_recent) {
+        this.search_recent = search_recent;
+    }
+
 
     public String getError() {
         return error;
@@ -46,9 +64,14 @@ public class AccessToken {
         this.error = error;
     }
 
-    @SerializedName("error")
-    @Expose
-    String error;
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
 
     public void setSuccess(boolean success) {
         this.success = success;

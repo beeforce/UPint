@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,11 @@ import com.example.bee.upint2.Classdetail_searchclass;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.model.Course;
 import com.example.bee.upint2.model.UserProfile;
+import com.example.bee.upint2.model.sendOject;
+import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,6 +41,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -200,6 +206,9 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
         private Button buttontags1_keyword, buttontags2_keyword, buttontags3_keyword;
         private Date d;
         private View view;
+        private ApiService mAPIService;
+        private SweetAlertDialog pDialog;
+        private String search_recent, course_id;
 
         public MyViewholder(View itemView, Context ctx, List<Course> course) {
             super(itemView);
@@ -229,6 +238,9 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
 
         @Override
         public void onClick(View v) {
+            getSearchRecentdata();
+            //add recent search
+
 
             String timestartst = course.get(getAdapterPosition()).getStart_time();
             String[] timestartpart = timestartst.split(":");
@@ -268,7 +280,7 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
 
             Intent i = new Intent(v.getContext(), Classdetail_searchclass.class);
             i.putExtra("course_id", course.get(getAdapterPosition()).getId().toString());
-            i.putExtra("user_id", course.get(getAdapterPosition()).getUser_id());
+            i.putExtra("teacher_id", course.get(getAdapterPosition()).getUser_id());
             i.putExtra("tags", course.get(getAdapterPosition()).getTags());
             i.putExtra("target_year", course.get(getAdapterPosition()).getTarget_years());
             i.putExtra("scheduletime", scheduletime.toString());
@@ -283,6 +295,86 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
             i.putExtra("image_path", course.get(getAdapterPosition()).getCourse_image_path());
             v.getContext().startActivity(i);
         }
+
+        private void getSearchRecentdata(){
+            mAPIService = ApiUtils.getAPIService();
+            sendOject o = new sendOject();
+            mAPIService.getSearchRecent(o.getUser_id()).enqueue(new Callback<AccessToken>() {
+                @Override
+                public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                    if (response.code() == 200){
+                        if (response.body().getSearch_recent() == ""){
+                            course_id = course.get(getAdapterPosition()).getId().toString();
+                        }else{
+                            String[] parts = response.body().getSearch_recent().split(",");
+                            String part1 = parts[0];
+                            if (parts.length == 1){
+                                if (course.get(getAdapterPosition()).getId().toString().equals(response.body().getSearch_recent())){
+                                    course_id = course.get(getAdapterPosition()).getId().toString();
+                                }else{
+                                    course_id = course.get(getAdapterPosition()).getId().toString()+","+response.body().getSearch_recent();
+                                }
+                            }else if (parts.length == 2){
+                                String part2 = parts[1];
+                                if (part1.equals(course.get(getAdapterPosition()).getId().toString())){
+                                    course_id = response.body().getSearch_recent();
+                                } else if (part2.equals(course.get(getAdapterPosition()).getId().toString())){
+                                    course_id = part2+","+part1;
+                                }else{
+                                    course_id = course.get(getAdapterPosition()).getId().toString()+","+response.body().getSearch_recent();
+                                }
+                            }
+                            else if (parts.length == 3){
+                                String part2 = parts[1];
+                                String part3 = parts[2];
+                                if (part1.equals(course.get(getAdapterPosition()).getId().toString())){
+                                    course_id = response.body().getSearch_recent();
+                                } else if (part2.equals(course.get(getAdapterPosition()).getId().toString())){
+                                    course_id = part2+","+part1+","+part3;
+                                }else if (part3.equals(course.get(getAdapterPosition()).getId().toString())){
+                                    course_id = part3+","+part1+","+part2;
+                                }else{
+                                    course_id = course.get(getAdapterPosition()).getId().toString()+","+part1+","+part2;
+                                }
+                            }
+                        }
+                        updateSearchRecentdata();
+                        Log.w("SearchRecent", "onResponse: "+search_recent);
+                    } else {
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AccessToken> call, Throwable t) {
+
+                }
+            });
+        }
+
+        private void updateSearchRecentdata(){
+
+            sendOject o = new sendOject();
+            RequestBody user_id = RequestBody.create(MultipartBody.FORM, o.getUser_id());
+            RequestBody search_data = RequestBody.create(MultipartBody.FORM, course_id);
+            mAPIService.updateSearchRecent(user_id, search_data).enqueue(new Callback<AccessToken>() {
+                @Override
+                public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+//                    if (response.code() == 200) {
+//                        Log.w("SearchRecent", "onResponse 200");
+//                    }else if (response.code() == 201) {
+//                        Log.w("SearchRecent", "onResponse 201");
+//                    }
+                }
+
+                @Override
+                public void onFailure(Call<AccessToken> call, Throwable t) {
+                    Log.w("SearchRecent", "onResponsefail");
+
+                }
+            });
+
+        }
+
 
     }
 }

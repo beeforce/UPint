@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.bee.upint2.adapter.SectionPageAdapter;
 import com.example.bee.upint2.fragment.Explorefragment;
+import com.example.bee.upint2.fragment.Feedbackfragment;
 import com.example.bee.upint2.fragment.HomeappFragment;
 import com.example.bee.upint2.fragment.Schedulefragment;
 import com.example.bee.upint2.fragment.Settingfragment;
@@ -26,6 +27,7 @@ import com.example.bee.upint2.fragment.UpcomingActivity;
 import com.example.bee.upint2.model.CustomViewPager;
 import com.example.bee.upint2.model.UserProfile;
 import com.example.bee.upint2.model.sendOject;
+import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
 
@@ -41,9 +43,8 @@ public class AppfeedActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private CustomViewPager viewPager;
     private HomeappFragment homeappFragment;
-    private Schedulefragment schedulefragment;
+    private Feedbackfragment feedbackfragment;
     private Explorefragment explorefragment;
-    private Settingfragment settingfragment;
     private NavigationView navigationView;
     private Toolbar toolbar;
     private ApiService mAPIService;
@@ -142,8 +143,9 @@ public class AppfeedActivity extends AppCompatActivity {
 //                                toolbar.setTitle(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
                                 return true;
                             case R.id.nav_logout:
-                                viewPager.setCurrentItem(3);
+//                                viewPager.setCurrentItem(3);
 //                                toolbar.setTitle(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
+                                logout();
                                 return true;
 
                         }
@@ -158,6 +160,27 @@ public class AppfeedActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
+    }
+    private void logout(){
+        sendOject o = new sendOject();
+        mAPIService.Logout(o.getAccesstoken()).enqueue(new Callback<AccessToken>() {
+            @Override
+            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                if (response.code() == 200){
+                    Intent i = new Intent(AppfeedActivity.this,MainActivity.class);
+                    startActivity(i);
+                }else if (response.code() == 401){
+                }else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AccessToken> call, Throwable t) {
+
+            }
+        });
 
     }
 
@@ -178,15 +201,13 @@ public class AppfeedActivity extends AppCompatActivity {
     private void setupViewPager() {
         homeappFragment = new HomeappFragment();    //first fragment
         explorefragment = new Explorefragment();    //second fragment
-        schedulefragment = new Schedulefragment();  //third fragment
-        settingfragment = new Settingfragment();    //fourth fragment
+        feedbackfragment = new Feedbackfragment();  //third fragment
 
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
 
         adapter.addFragment(homeappFragment);   //add fragment 1
         adapter.addFragment(explorefragment);   //2
-        adapter.addFragment(schedulefragment);  //3
-        adapter.addFragment(settingfragment);   //4
+        adapter.addFragment(feedbackfragment);  //3
 
 
         viewPager.setAdapter(adapter);

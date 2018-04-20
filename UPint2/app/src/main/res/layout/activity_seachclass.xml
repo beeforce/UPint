@@ -7,102 +7,81 @@
     tools:context="com.example.bee.upint2.SeachclassActivity">
 
 
+    <ImageView
+        android:id="@+id/backclassdetail"
+        android:layout_width="35dp"
+        android:layout_height="32dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_arrow_left" />
+
 
     <RelativeLayout
+        android:id="@+id/layoutsearchclass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/backclassdetail"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp">
+
 
         <TextView
             android:id="@+id/searchclasstv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif"
             android:text="Search Class"
+            android:textColor="#6dd634"
             android:textSize="30dp"
-            android:layout_marginTop="30dp"
-            android:textColor="#000"/>
+            android:textStyle="bold" />
 
 
-        <TextView
-            android:id="@+id/targetunivsearchclass"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/searchclasset"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/searchclasstv"
-            android:text="targetuniv"
-            android:textColor="#6dd634"
-            android:textSize="22dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="2dp"
-            android:drawableStart="@drawable/ic_account_balance_18pt"
-            android:textStyle="bold"
-            android:drawablePadding="3dp"/>
-
-        <TextView
-            android:id="@+id/targetyearsearchclass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/targetunivsearchclass"
-            android:text="target year"
-            android:textColor="#6dd634"
-            android:textSize="22dp"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"
-            android:drawablePadding="3dp"
-            android:drawableStart="@drawable/ic_perm_identity_black_24dp"/>
-
-
-
-
-    <EditText
-        android:id="@+id/searchclasset"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/targetyearsearchclass"
-        android:layout_marginBottom="@dimen/common_25_dp"
-        android:singleLine="true"
-        android:hint="Subject"
-        android:textSize="30dp"
-        android:layout_marginTop="10dp"
-        android:drawableStart="@drawable/ic_search_black"
-        />
+            android:layout_marginBottom="@dimen/common_25_dp"
+            android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/ic_search_black"
+            android:fontFamily="sans-serif"
+            android:hint="Subject"
+            android:singleLine="true"
+            android:textSize="30dp"
+            android:imeOptions="actionDone"/>
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/center"
-        android:layout_width="20dp"
-        android:layout_height="0dp"
-        android:layout_centerVertical="true"/>
+    <RelativeLayout
+        android:id="@+id/linesearchclass"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/layoutsearchclass"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/background_2dp_border" />
 
 
     <TextView
         android:id="@+id/suggestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linesearchclass"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
+        android:fontFamily="sans-serif"
         android:text="Suggestions"
-        android:textSize="17dp"
         android:textColor="#000"
-        />
+        android:textSize="17dp" />
+
     <ListView
         android:id="@+id/course_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/suggestion"
         android:layout_marginLeft="30dp"
-        android:layout_below="@+id/suggestion"></ListView>
+        android:layout_marginTop="10dp"></ListView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/background_2dp_border"
-        android:layout_above="@+id/center"
-        android:layout_marginBottom="20dp"
-        >
-
-    </RelativeLayout>
 
 </RelativeLayout>

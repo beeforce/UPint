@@ -14,6 +14,7 @@
                 android:layout_height="match_parent"
                 android:fillViewport="true">
                 <RelativeLayout
+                    android:id="@+id/content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -30,7 +31,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dp"
-            android:text="Tomorrow 16:00"
             android:textColor="#ffffff"
             android:layout_marginLeft="20dp"
             />
@@ -40,7 +40,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:text="Pralin's Mathematics class"
             android:textColor="#ffffff"
             android:layout_marginLeft="20dp"
             android:layout_below="@+id/date"
@@ -61,7 +60,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dp"
-            android:text="Cafe Chalatte"
             android:textColor="#ffffff"
             android:layout_marginLeft="2dp"
             android:layout_toRightOf="@+id/place_icon"
@@ -179,7 +177,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        
+
 
                 <RelativeLayout
                     android:id="@+id/cardview_recent"
@@ -194,7 +192,6 @@
                     android:id="@+id/classname_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Classname"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
                     android:paddingRight="10dp"
@@ -206,38 +203,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/classname_home"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="7dp"
                     android:paddingBottom="5dp"
-                    android:paddingRight="1dp"
+                    android:paddingRight="7dp"
                     android:textStyle="italic"
-                    android:textColor="#494646"
-                    android:text="#keyword"/>
+                    android:textColor="#494646" />
 
-                    <TextView
-                        android:id="@+id/keyword_home2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/classname_home"
-                        android:layout_toRightOf="@+id/keyword_home1"
-                        android:paddingLeft="1dp"
-                        android:paddingBottom="5dp"
-                        android:paddingRight="1dp"
-                        android:textStyle="italic"
-                        android:textColor="#494646"
-                        android:text="#keyword"/>
-
-                    <TextView
-                        android:id="@+id/keyword_home3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/classname_home"
-                        android:layout_toRightOf="@+id/keyword_home2"
-                        android:paddingLeft="1dp"
-                        android:paddingBottom="5dp"
-                        android:paddingRight="10dp"
-                        android:textStyle="italic"
-                        android:textColor="#494646"
-                        android:text="#keyword"/>
 
                 </RelativeLayout>
 
@@ -255,7 +226,6 @@
                     android:id="@+id/classname_home2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Classname"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
                     android:paddingRight="10dp"
@@ -263,42 +233,15 @@
                     android:textColor="#494646"
                     android:textSize="17dp"/>
                 <TextView
-                    android:id="@+id/keyword_home4"
+                    android:id="@+id/keyword_home2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/classname_home2"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="7dp"
                     android:paddingBottom="5dp"
-                    android:paddingRight="1dp"
+                    android:paddingRight="7dp"
                     android:textStyle="italic"
-                    android:textColor="#494646"
-                    android:text="#keyword"/>
-
-                <TextView
-                    android:id="@+id/keyword_home5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/classname_home2"
-                    android:layout_toRightOf="@+id/keyword_home4"
-                    android:paddingLeft="1dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="1dp"
-                    android:textStyle="italic"
-                    android:textColor="#494646"
-                    android:text="#keyword"/>
-
-                <TextView
-                    android:id="@+id/keyword_home6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/classname_home2"
-                    android:layout_toRightOf="@+id/keyword_home5"
-                    android:paddingLeft="1dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="10dp"
-                    android:textStyle="italic"
-                    android:textColor="#494646"
-                    android:text="#keyword"/>
+                    android:textColor="#494646" />
 
             </RelativeLayout>
 
@@ -311,12 +254,12 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/background_border_cardview">
                 <TextView
                     android:id="@+id/classname_home3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Classname"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
                     android:paddingRight="10dp"
@@ -324,42 +267,16 @@
                     android:textColor="#494646"
                     android:textSize="17dp"/>
                 <TextView
-                    android:id="@+id/keyword_home7"
+                    android:id="@+id/keyword_home3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/classname_home3"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="7dp"
                     android:paddingBottom="5dp"
-                    android:paddingRight="1dp"
+                    android:paddingRight="7dp"
                     android:textStyle="italic"
-                    android:textColor="#494646"
-                    android:text="#keyword"/>
+                    android:textColor="#494646" />
 
-                <TextView
-                    android:id="@+id/keyword_home8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/classname_home3"
-                    android:layout_toRightOf="@+id/keyword_home7"
-                    android:paddingLeft="1dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="1dp"
-                    android:textStyle="italic"
-                    android:textColor="#494646"
-                    android:text="#keyword"/>
-
-                <TextView
-                    android:id="@+id/keyword_home9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/classname_home3"
-                    android:layout_toRightOf="@+id/keyword_home8"
-                    android:paddingLeft="1dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="10dp"
-                    android:textStyle="italic"
-                    android:textColor="#494646"
-                    android:text="#keyword"/>
 
             </RelativeLayout>
 
@@ -375,8 +292,8 @@
         android:background="@drawable/background_2dp_border"
         android:layout_below="@+id/horizonscroll_recent">
     </RelativeLayout>
-    
-    
+
+
     <TextView
         android:id="@+id/startutor"
         android:layout_width="wrap_content"

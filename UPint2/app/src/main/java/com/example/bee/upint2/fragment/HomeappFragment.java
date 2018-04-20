@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ import com.example.bee.upint2.adapter.RecyclerViewClickListener;
 import com.example.bee.upint2.model.Course;
 import com.example.bee.upint2.model.Course_user;
 import com.example.bee.upint2.model.sendOject;
+import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
 
@@ -54,8 +57,10 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
     private ApiService mAPIService;
     private MyRecyclerViewAdapter adapter;
     private FloatingActionButton searchfab;
-    private TextView date, teacher, place, dayremain;
+    private TextView date, teacher, place, dayremain, classname_home, classname_home2, classname_home3, keyword_home1, keyword_home3, keyword_home2;
+    private ImageView place_icon;
     private Date d;
+    private RelativeLayout cardview_recent, cardview_recent2, cardview_recent3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +74,11 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
     @Override
     public void onResume() {
         super.onResume();
+        if (course!=null){
+            course.removeAll(course);
+            filteredJob.removeAll(filteredJob);
+        }
+        getClassdetail();
     }
 
     private void initInstances(View rootView) {
@@ -89,6 +99,7 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
         date = rootView.findViewById(R.id.date);
         teacher = rootView.findViewById(R.id.teacher);
         place = rootView.findViewById(R.id.place);
+        place_icon = rootView.findViewById(R.id.place_icon);
         dayremain = rootView.findViewById(R.id.dayremain); //upcomingclass count
 
         //fab
@@ -100,6 +111,21 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
                 startActivity(intent);
             }
         });
+
+        //relativelayout
+        cardview_recent = rootView.findViewById(R.id.cardview_recent);
+        cardview_recent2 = rootView.findViewById(R.id.cardview_recent2);
+        cardview_recent3 = rootView.findViewById(R.id.cardview_recent3);
+        RelativeLayout content = rootView.findViewById(R.id.content);
+        Animation uptodown = AnimationUtils.loadAnimation(getActivity(),R.anim.uptodownanim);
+        content.setAnimation(uptodown);
+
+        classname_home = rootView.findViewById(R.id.classname_home);
+        classname_home2 = rootView.findViewById(R.id.classname_home2);
+        classname_home3 = rootView.findViewById(R.id.classname_home3);
+        keyword_home1 = rootView.findViewById(R.id.keyword_home1);
+        keyword_home2 = rootView.findViewById(R.id.keyword_home2);
+        keyword_home3 = rootView.findViewById(R.id.keyword_home3);
 
         //first recycle -> star tutor
         recyclerView = rootView.findViewById(R.id.recyclerView_star_tutor);
@@ -114,18 +140,87 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
         recyclerView2.setNestedScrollingEnabled(false);
 
 
-        getClassdetail();
-
     }
 
+    private void getclassidSearchRecent() {
+        mAPIService = ApiUtils.getAPIService();
+        sendOject o = new sendOject();
+        mAPIService.getSearchRecent(o.getUser_id()).enqueue(new Callback<AccessToken>() {
+            @Override
+            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                if (response.code() == 200) {
+                    if (response.body().getSearch_recent() == "") {
+                        cardview_recent.setVisibility(View.GONE);
+                        cardview_recent2.setVisibility(View.GONE);
+                        cardview_recent3.setVisibility(View.GONE);
+                    } else {
+                        String[] parts = response.body().getSearch_recent().split(",");
+                        String part1 = parts[0];
+                        if (parts.length == 1) {
+                            for (Course each : course) {
+                                if (each.getId().toString().equals(part1)) {
+                                    classname_home.setText(each.getCourse_name());
+                                    keyword_home1.setText(each.getTags());
+                                }
+                            }
+                        } else if (parts.length == 2) {
+                            String part2 = parts[1];
+                            for (Course each : course) {
+                                if (each.getId().toString().equals(part1)) {
+                                    classname_home.setText(each.getCourse_name());
+                                    keyword_home1.setText(each.getTags());
+                                }
+                                if (each.getId().toString().equals(part2)) {
+                                    classname_home2.setText(each.getCourse_name());
+                                    keyword_home2.setText(each.getTags());
+                                }
+                            }
+                        } else if (parts.length == 3) {
+                            String part2 = parts[1];
+                            String part3 = parts[2];
+                            for (Course each : course) {
+                                if (each.getId().toString().equals(part1)) {
+                                    classname_home.setText(each.getCourse_name());
+                                    keyword_home1.setText(each.getTags());
+                                }
+                                if (each.getId().toString().equals(part2)) {
+                                    classname_home2.setText(each.getCourse_name());
+                                    keyword_home2.setText(each.getTags());
+                                }
+                                if (each.getId().toString().equals(part3)) {
+                                    classname_home3.setText(each.getCourse_name());
+                                    keyword_home3.setText(each.getTags());
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<AccessToken> call, Throwable t) {
+
+            }
+        });
+    }
+
+    //    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser) {
+//            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+//        }
+//    }
 
     public void getClassdetail() {
         mAPIService = ApiUtils.getAPIService();
-        mAPIService.getCoursedetail().enqueue(new Callback<List<Course>>() {
+        mAPIService.getAllCoursedetail().enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 course = response.body();
                 searchClass();
+                getclassidSearchRecent();
 
 
                 Log.w(TAG, "onResponse: ");
@@ -171,6 +266,7 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
             for (Course_user each1 : courseEnroll) {
                 if (each.getId().equals(each1.getCourse_id())) {
                     filteredJob.add(each);
+//                    Log.w(TAG, "find course id" + each.getId() + "  " + each1.getCourse_id());
                 }
             }
         }
@@ -198,51 +294,63 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
             }
         }
         filteredJob.removeAll(deletelist);
-        place.setText(filteredJob.get(0).getPlace());
-        //start time
-        String timestartst = filteredJob.get(0).getStart_time();
-        String[] timestartpart = timestartst.split(":");
-        String timestart1 = timestartpart[0];
-        String timestart2 = timestartpart[1];
-        String timestart3 = timestartpart[2];
-        String timestart = timestart1 + "." + timestart2;
+        if (filteredJob.size() > 0) {
+            place_icon.setVisibility(View.VISIBLE);
+            place.setText(filteredJob.get(0).getPlace());
+            //start time
+            String timestartst = filteredJob.get(0).getStart_time();
+            String[] timestartpart = timestartst.split(":");
+            String timestart1 = timestartpart[0];
+            String timestart2 = timestartpart[1];
+            String timestart3 = timestartpart[2];
+            String timestart = timestart1 + "." + timestart2;
 //
-        int hour = Integer.parseInt(timestart1) % 12;
-        int starthour = Integer.parseInt(timestart1);
-        int startminute = Integer.parseInt(timestart2);
-        String starttime = String.format("%02d.%02d %s", hour == 0 ? 12 : hour,
-                startminute, starthour < 12 ? "am" : "pm");
-        //start day
-        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
-        Date today = Calendar.getInstance().getTime();
-        try {
-            d = input.parse(filteredJob.get(0).getDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+            int hour = Integer.parseInt(timestart1) % 12;
+            int starthour = Integer.parseInt(timestart1);
+            int startminute = Integer.parseInt(timestart2);
+            String starttime = String.format("%02d.%02d %s", hour == 0 ? 12 : hour,
+                    startminute, starthour < 12 ? "am" : "pm");
+            //start day
+            SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
+            Date today = Calendar.getInstance().getTime();
+            try {
+                d = input.parse(filteredJob.get(0).getDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 //        holder.date.setText("" + output.format(d));
-        String scheduledate = output.format(d);
-        String day = (String) DateFormat.format("dd", d);
-        String to_day = (String) DateFormat.format("dd", today);
+            String scheduledate = output.format(d);
+            String day = (String) DateFormat.format("dd", d);
+            String to_day = (String) DateFormat.format("dd", today);
 
-        Date day2 = new Date();//day 2
-        Calendar c = Calendar.getInstance();
-        c.setTime(day2);
-        c.add(Calendar.DATE, 1);
-        day2 = c.getTime();
-        String day_2 = (String) DateFormat.format("dd", day2);
+            Date day2 = new Date();//day 2
+            Calendar c = Calendar.getInstance();
+            c.setTime(day2);
+            c.add(Calendar.DATE, 1);
+            day2 = c.getTime();
+            String day_2 = (String) DateFormat.format("dd", day2);
 
-        if (day.equals(to_day)){
-            date.setText("Today "+starttime);
-        }else if (day.equals(day_2)){
-            date.setText("Tomorrow "+starttime);
-        }else {
-            date.setText(scheduledate+" "+starttime);
+            if (day.equals(to_day)) {
+                date.setText("Today " + starttime);
+            } else if (day.equals(day_2)) {
+                date.setText("Tomorrow " + starttime);
+            } else {
+                date.setText(scheduledate + " " + starttime);
+            }
+
+            teacher.setText(filteredJob.get(0).getCourse_name() + " class");
+            dayremain.setText("" + filteredJob.size());
+
+            Log.w(TAG, "upcoming class size: "+filteredJob.size());
+            Log.w(TAG, "course size: "+course.size());
+        } else {
+            teacher.setText("No Upcoming class now");
+            dayremain.setText("0");
+            place.setText("");
+            date.setText("");
+            place_icon.setVisibility(View.INVISIBLE);
         }
-
-        teacher.setText(filteredJob.get(0).getCourse_name()+" class");
-        dayremain.setText("" + filteredJob.size());
 
         adapter = new MyRecyclerViewAdapter(courseList, getActivity());
         recyclerView.setAdapter(adapter);

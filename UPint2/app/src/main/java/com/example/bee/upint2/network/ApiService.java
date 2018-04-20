@@ -63,6 +63,9 @@ public interface ApiService {
     @GET("Allcoursedetail")
     Call<List<Course>> getCoursedetail();
 
+    @GET("getAllcoursedetail")
+    Call<List<Course>> getAllCoursedetail();
+
 
     @GET("userDetailswithId/{id}")
     Call<UserProfile> userDetailswithId(@Path("id") String id);
@@ -87,9 +90,27 @@ public interface ApiService {
     Call<List<Course>> courseListening(@Path("user_id") int user_id);
 
     @GET("courseDetails/{course_id}")
-    Call<Course> courseDetailswithId(@Path("course_id") int course_id);
+    Call<Course> courseDetailswithId(@Path("course_id") String course_id);
 
     @GET("CheckEmailRegister/{email}")
     Call<AccessToken> checkUserEmailforRegister(@Path("email") String email);
+
+    @POST("addSearchRecent")
+    @Multipart
+    Call<AccessToken> updateSearchRecent(@Part("id") RequestBody user_id, @Part("search_recent") RequestBody search_data);
+
+    @GET("getSerchRecent/{user_id}")
+    Call<AccessToken> getSearchRecent(@Path("user_id") String user_id);
+
+    @GET("logout")
+    Call<AccessToken> Logout(@Query("token") String token);
+
+    @POST("addCommenttoFeedback")
+    @Multipart
+    Call<AccessToken> addCommenttoFeedback(@Part("user_id") RequestBody user_id, @Part("comment") RequestBody comment);
+
+    @GET("getCommentfromFeedback")
+    Call<AccessToken> getCommentfromFeedback(@Query("user_id") String user_id);
+
 
 }

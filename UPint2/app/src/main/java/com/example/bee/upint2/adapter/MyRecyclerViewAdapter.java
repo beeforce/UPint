@@ -98,6 +98,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
 
             if (tagpart.length == 1){
+                holder.tag3.setVisibility(View.GONE);
                 holder.tag2.setVisibility(View.GONE);
                 holder.tag1.setText(taglist.get(0));
             }

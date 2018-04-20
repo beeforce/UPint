@@ -36,7 +36,7 @@ import retrofit2.Response;
 public class Classdetail_searchclass extends AppCompatActivity {
 
     private ApiService mAPIService;
-    private String user_id, course_id, image_path;
+    private String user_id, course_id, image_path, teacher_id;
     private TextView numberofstudent_searchclass, teacher, course_name, price_searchclass, numberofstudent_searchclass2, place_searchclass, description_searchclass, target_searchclass, classdetailcourse_name,
             levelofdifficult, costclassdetail, classdetailschedule, classdetailscheduletime, classdetailplace, termclassdetail, numberclassdetail;
     private Button buttontags1_searchclass, buttontags2_searchclass, buttontags3_searchclass, book, payment;
@@ -77,7 +77,7 @@ public class Classdetail_searchclass extends AppCompatActivity {
         numberclassdetail = (TextView) findViewById(R.id.numberclassdetail);
 
         //get extra string
-        user_id = getIntent().getStringExtra("user_id");
+        teacher_id = getIntent().getStringExtra("teacher_id");
         course_id = getIntent().getStringExtra("course_id");
         course_name.setText(getIntent().getStringExtra("course_name"));
         price_searchclass.setText(getIntent().getStringExtra("cost"));
@@ -125,6 +125,8 @@ public class Classdetail_searchclass extends AppCompatActivity {
             public void onClick(View v) {
                 showProgressDialog();
                 mAPIService = ApiUtils.getAPIService();
+                sendOject o = new sendOject();
+                user_id = o.getUser_id();
                 RequestBody user_idR = RequestBody.create(MultipartBody.FORM, user_id);
                 RequestBody course_idR = RequestBody.create(MultipartBody.FORM, course_id);
 
@@ -133,13 +135,15 @@ public class Classdetail_searchclass extends AppCompatActivity {
                     public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                         dismissProgressDialog();
                         if (response.isSuccessful()) {
-                            if (response.body().isSuccess()) {
+                            if (response.body().isSuccess()) {  //can book
                                 showProgressDialogSuccess();
-                            } else {
+                            } else {    //already booked
                                 showProgressDialogWarning();
                             }
 
-                        } else {
+                        }else if (response.code() == 201) {  //class is full
+                            showProgressDialogWarning();
+                        }else {
 
                         }
                     }

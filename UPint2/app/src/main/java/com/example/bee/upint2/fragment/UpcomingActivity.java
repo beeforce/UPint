@@ -109,7 +109,7 @@ public class UpcomingActivity extends AppCompatActivity implements SwipeRefreshL
 
     public void getClassdetail() {
         mAPIService = ApiUtils.getAPIService();
-        mAPIService.getCoursedetail().enqueue(new Callback<List<Course>>() {
+        mAPIService.getAllCoursedetail().enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 course = response.body();
@@ -157,7 +157,7 @@ public class UpcomingActivity extends AppCompatActivity implements SwipeRefreshL
             for (Course_user each1 : courseEnroll) {
                 if (each.getId().equals(each1.getCourse_id())) {
                     filteredJob.add(each);
-                    Log.w(TAG, "find course id" + each.getId() + "  " + each1.getCourse_id());
+//                    Log.w(TAG, "find course id" + each.getId() + "  " + each1.getCourse_id());
                 }
             }
         }
