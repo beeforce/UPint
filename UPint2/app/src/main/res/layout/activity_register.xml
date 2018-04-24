@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
     android:id="@+id/activity_register_layout"
     tools:context="com.example.bee.upint2.Register">
 
@@ -12,8 +11,6 @@
         android:id="@+id/relay1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
-        android:visibility="gone"
         >
 
         <TextView
@@ -23,6 +20,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:text="What is your name ?"
+            android:fontFamily="sans-serif-medium"
             android:textSize="32dp" />
 
 
@@ -80,7 +78,6 @@
         android:id="@+id/relay2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
         android:visibility="gone">
 
         <TextView
@@ -91,6 +88,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="50dp"
+            android:fontFamily="sans-serif-medium"
             android:text="Your e-mail will be ID on UPint"
             android:textSize="32dp" />
 
@@ -174,7 +172,8 @@
         android:id="@+id/relay3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true">
+        android:visibility="gone"
+        >
 
         <TextView
             android:id="@+id/yournumber"
@@ -183,6 +182,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="50dp"
+            android:fontFamily="sans-serif-medium"
             android:text="What is your
 phonenumber"
             android:textSize="32dp" />
@@ -195,7 +195,8 @@ phonenumber"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="8dp"
-            android:text="You need to cerification. Plase ....."
+            android:fontFamily="sans-serif-medium"
+            android:text="You need to cerification. Plase input your phone number"
             android:textSize="20dp" />
 
         <android.support.design.widget.TextInputLayout
@@ -281,7 +282,6 @@ phonenumber"
         android:id="@+id/relay4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
         android:visibility="gone"
         >
 
@@ -292,6 +292,7 @@ phonenumber"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="50dp"
+            android:fontFamily="sans-serif-medium"
             android:text="Tell us about
 your education"
             android:textSize="32dp" />
@@ -381,7 +382,7 @@ your education"
         android:id="@+id/relay5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
+        android:visibility="gone"
         >
 
         <TextView
@@ -391,6 +392,7 @@ your education"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="50dp"
+            android:fontFamily="sans-serif-medium"
             android:text="Please upload a portrait that clealy shows your face"
             android:textSize="30dp" />
 
@@ -458,4 +460,339 @@ your education"
             android:background="@drawable/next_icon" />
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/student_resume_layout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/addregion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="50dp"
+            android:text="Add your region"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="32dp" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/localtionTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addregion"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="50dp">
+
+            <EditText
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Location"
+                android:inputType="textPersonName"
+                android:backgroundTint="#000000"
+                android:imeOptions="actionDone"
+                android:textSize="30dp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <ListView
+            android:id="@+id/province_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/localtionTextlayout"></ListView>
+
+
+        <Button
+            android:id="@+id/nextbtregion1"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/next_icon" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/student_resume_layout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/select_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select university you can teach"
+            android:layout_centerHorizontal="true"
+            android:textSize="22dp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="10dp"/>
+
+        <RelativeLayout
+            android:id="@+id/search_university_Textlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/select_textview"
+            android:background="#d0cfcf"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:layout_centerHorizontal="true"
+                android:id="@+id/search_university_edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Search"
+                android:textAllCaps="false"
+                android:layout_gravity="center"
+                android:textColor="#8a8888"
+                android:textSize="18dp"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/ic_search_black"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textStyle="bold"
+                android:imeOptions="actionDone"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_line_addresume"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/search_university_Textlayout"
+            android:background="@drawable/background_2dp_border"
+            android:layout_marginTop="10dp">
+
+        </RelativeLayout>
+        <ListView
+            android:layout_below="@+id/layout_line_addresume"
+            android:layout_marginTop="3dp"
+            android:id="@+id/university_list_view"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+
+        <Button
+            android:id="@+id/resume_save"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="23dp"
+            android:background="@drawable/mydefault_button_login"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/student_resume_layout3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/introducetv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32dp"
+            android:text="Introduce yourself"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:fontFamily="sans-serif-medium"
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/introducetv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/background_border_cardview">
+
+            <EditText
+                android:id="@+id/introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@android:color/transparent"
+                android:fontFamily="serif-monospace"
+                android:gravity="top|left"
+                android:hint="Input something about yourself"
+                android:imeOptions="actionNext"
+                android:inputType="textCapSentences|text|textMultiLine"
+                android:lines="4"
+                android:maxLines="10"
+                android:minLines="4"
+                android:scrollbars="vertical"
+                android:singleLine="false"
+                android:textSize="25dp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/nextbtregion3"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/next_icon" />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/student_resume_layout4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/verifytv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32dp"
+            android:text="Verify your ID card"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_centerHorizontal="true"
+            />
+
+        <RelativeLayout
+            android:id="@+id/photo_shutter_layout"
+            android:layout_width="250dp"
+            android:layout_height="220dp"
+            android:layout_below="@+id/verifytv"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/id_card_image"
+                android:layout_width="match_parent"
+                android:layout_height="165dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:id="@+id/image_shutter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/camera_shutter"/>
+
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/id_card"/>
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="180dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/camera_shutter"/>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/photo_shutter_layout"
+            android:orientation="horizontal">
+
+
+
+        <RelativeLayout
+            android:id="@+id/id_card_photo_mode"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:background="@drawable/background_oval_blue">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="9dp"
+                android:src="@drawable/ic_camera_black"/>
+        </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/id_card_photo_gallery"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:background="@drawable/background_oval_blue">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="9dp"
+                    android:src="@drawable/gallery_image"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/nextbtregion4"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/next_icon" />
+
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="4dp">
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_gravity="center" />
+
+    </FrameLayout>
+
+
+
 </RelativeLayout>

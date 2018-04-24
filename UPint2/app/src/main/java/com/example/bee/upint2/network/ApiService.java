@@ -34,6 +34,15 @@ public interface ApiService {
                                @Part("school") RequestBody school, @Part("major") RequestBody major, @Part("state") RequestBody state,
                                @Part("Date_graduated") RequestBody date_gradated, @Part MultipartBody.Part photo);
 
+
+    @POST("teacherRegister")
+    @Multipart
+    Call<AccessToken> Teacherregister(@Part("first_name") RequestBody first_name, @Part("last_name") RequestBody last_name, @Part("email") RequestBody email,
+                               @Part("password") RequestBody password, @Part("c_password") RequestBody repassword, @Part("phone_number") RequestBody phonenumber,
+                               @Part("school") RequestBody school, @Part("major") RequestBody major, @Part("state") RequestBody state,
+                               @Part("Date_graduated") RequestBody date_gradated, @Part MultipartBody.Part photo, @Part("location_city") RequestBody location_city,
+                                      @Part("university_can_teach") RequestBody university_can_teach, @Part MultipartBody.Part id_card, @Part("introduce") RequestBody introduce);
+
 //    @POST("register")
 //    @FormUrlEncoded
 //    Call<AccessToken> register(@Field("first_name") String first_name, @Field("last_name") String last_name, @Field("email") String email,

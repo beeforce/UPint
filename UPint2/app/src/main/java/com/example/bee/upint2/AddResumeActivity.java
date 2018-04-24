@@ -38,9 +38,9 @@ public class AddResumeActivity extends AppCompatActivity {
     private ListViewAdapterProvince adapter;
     private ListViewAdapterUniversity adapter2;
     private ListView listView,listView2;
-    private EditText editText, editText2;
-    private RelativeLayout relay1, relay2;
-    private Button next1,save;
+    private EditText location_edittext, search_university_edittext;
+    private RelativeLayout relay6, relay7;
+    private Button next6,save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,18 +65,18 @@ public class AddResumeActivity extends AppCompatActivity {
         search_university_edittextr.setCompoundDrawables(drawable_search,null,null,null);
         search_university_edittextr.setCompoundDrawablePadding(5);
 
-        relay1 = findViewById(R.id.student_resume_layout1);
-        relay2 = findViewById(R.id.student_resume_layout2);
+        relay6 = findViewById(R.id.student_resume_layout1);
+        relay7 = findViewById(R.id.student_resume_layout2);
 
-        next1 = findViewById(R.id.nextbtregion1);
-        next1.setOnClickListener(new View.OnClickListener() {
+        next6 = findViewById(R.id.nextbtregion1);
+        next6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                relay1.setVisibility(View.GONE);
-                relay2.setVisibility(View.VISIBLE);
-                editText2.requestFocus();
+                relay6.setVisibility(View.GONE);
+                relay7.setVisibility(View.VISIBLE);
+                location_edittext.requestFocus();
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(editText2, InputMethodManager.SHOW_IMPLICIT);
+                imm.showSoftInput(search_university_edittext, InputMethodManager.SHOW_IMPLICIT);
 
             }
         });
@@ -84,19 +84,19 @@ public class AddResumeActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AddResumeActivity.this, Main2Activity.class);
-                startActivity(i);
+//                Intent i = new Intent(AddResumeActivity.this, Main2Activity.class);
+//                startActivity(i);
             }
         });
 
         listView = findViewById(R.id.province_list_view);
         listView2 = findViewById(R.id.university_list_view);
 
-        editText = findViewById(R.id.location);
-        editText2 = findViewById(R.id.search_university_edittext);
+        location_edittext = findViewById(R.id.location);
+        search_university_edittext = findViewById(R.id.search_university_edittext);
 
-        editText.addTextChangedListener(mTextEditorWatcher);
-        editText2.addTextChangedListener(mTextEditorWatcher2);
+        location_edittext.addTextChangedListener(mTextEditorWatcher);
+        search_university_edittext.addTextChangedListener(mTextEditorWatcher2);
 
         provinceList.addAll(Arrays.asList("Amnat Charoen", "Ang Thong", "Bangkok", "Bueng Kan",
                 "Buriram", "Chachoengsao", "Chai Nat", "Chaiyaphum",
@@ -192,8 +192,8 @@ public class AddResumeActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                editText.setText(provinceList.get(position).toString());
-                editText.clearComposingText();
+                location_edittext.setText(provinceList.get(position).toString());
+                location_edittext.clearComposingText();
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                 listView.setVisibility(View.INVISIBLE);
@@ -204,8 +204,8 @@ public class AddResumeActivity extends AppCompatActivity {
         listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                editText2.setText(universityList.get(position).toString());
-                editText2.clearComposingText();
+                search_university_edittext.setText(universityList.get(position).toString());
+                search_university_edittext.clearComposingText();
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                 listView2.setVisibility(View.INVISIBLE);
@@ -240,7 +240,7 @@ public class AddResumeActivity extends AppCompatActivity {
 
         public void afterTextChanged(Editable s)
         {
-            String who = editText.getText().toString().toLowerCase(Locale.getDefault());
+            String who = location_edittext.getText().toString().toLowerCase(Locale.getDefault());
             adapter.myFilter(who);
             listView.setAdapter(adapter);
         }
@@ -253,7 +253,7 @@ public class AddResumeActivity extends AppCompatActivity {
         public void beforeTextChanged(CharSequence s, int start, int count, int after)
         {
             listView2.setVisibility(View.VISIBLE);
-            editText2.setTextColor(Color.parseColor("#98c428"));
+            search_university_edittext.setTextColor(Color.parseColor("#98c428"));
         }
 
         public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -262,7 +262,7 @@ public class AddResumeActivity extends AppCompatActivity {
 
         public void afterTextChanged(Editable s)
         {
-            String who = editText2.getText().toString().toLowerCase(Locale.getDefault());
+            String who = search_university_edittext.getText().toString().toLowerCase(Locale.getDefault());
             adapter2.myFilter(who);
             listView2.setAdapter(adapter2);
         }
