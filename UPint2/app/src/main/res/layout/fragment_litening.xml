@@ -4,6 +4,18 @@
     android:layout_height="match_parent"
     android:background="#98c428">
 
+    <Button
+        android:id="@+id/makeclassbt"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Make Class"
+        android:textColor="#313131"
+        android:textStyle="bold"
+        android:background="@drawable/button_makeclass"
+        android:visibility="gone"/>
+
     <FrameLayout
         android:id="@+id/contentContainer3"
         android:layout_width="match_parent"

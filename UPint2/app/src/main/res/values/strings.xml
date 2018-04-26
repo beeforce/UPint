@@ -31,4 +31,28 @@
         <item>3</item>
         <item>4</item>
     </string-array>
+
+    <string-array name="levelofdifficult">
+        <item>Beginner</item>
+        <item>Normal</item>
+        <item>Difficult</item>
+        <item>Advanced</item>
+        <item>Expert</item>
+    </string-array>
+
+    <string-array name="taglist">
+        <item>#Writing</item>
+        <item>#Communication</item>
+        <item>#Interpretive Practices</item>
+        <item>#Professional Seminar</item>
+        <item>#Tutoring</item>
+        <item>#Argument</item>
+    </string-array>
+
+    <string-array name="placelist">
+        <item>The Chalatte Chiangmai</item>
+        <item>Sweet Stories patisserie</item>
+        <item>Damnoen Saduak</item>
+    </string-array>
+
 </resources>

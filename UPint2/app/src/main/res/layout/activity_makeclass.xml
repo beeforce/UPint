@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context="com.example.bee.upint2.MakeclassActivity">
+
 
     <RelativeLayout
         android:id="@+id/makeclassrelay1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <RelativeLayout
             android:id="@+id/photomakeclass"
@@ -153,48 +156,50 @@
         android:id="@+id/makeclassrelay2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="gone"
+        >
 
 
 
             <EditText
                 android:id="@+id/termmakeclass"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="35dp"
                 android:layout_marginTop="35dp"
                 android:backgroundTint="#268434"
-                android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
-                android:hint="Term"
-                android:inputType="text"
+                android:hint="Terms and agreement"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:minLines="3"
+                android:maxLines="4"
+                android:lineSpacingExtra="2dp"
+                android:imeOptions="actionNext"
                 android:textSize="16dp" />
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/levelTextlayout"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_below="@+id/termmakeclass"
-            android:layout_marginRight="35dp"
-            android:layout_marginLeft="35dp"
-            >
 
             <EditText
                 android:id="@+id/levelclass"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="#268434"
+                android:layout_height="70dp"
+                android:layout_below="@+id/termmakeclass"
+                android:layout_marginRight="35dp"
+                android:layout_marginLeft="35dp"
                 android:hint="Level of difficult"
                 android:inputType="text"
+                android:clickable="true"
+                android:focusable="false"
+                android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
                 android:textSize="16dp" />
 
-        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/totalnumberstudentTextlayout"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_below="@+id/levelTextlayout"
+            android:layout_below="@+id/levelclass"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             >
@@ -222,10 +227,12 @@
                 android:hint="@string/description_hint"
                 android:singleLine="false"
                 android:scrollbars="vertical"
-                android:minLines="2"
-                android:maxLines="3"
+                android:minLines="3"
+                android:lines="3"
+                android:maxLines="4"
                 android:imeOptions="actionNext"
                 android:inputType="textMultiLine"
+                android:lineSpacingExtra="2dp"
                 android:textSize="16dp" />
 
         <EditText
@@ -238,7 +245,9 @@
             android:backgroundTint="#268434"
             android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
             android:hint="Tag"
-            android:inputType="text"
+            android:inputType="textMultiLine"
+            android:clickable="true"
+            android:focusable="false"
             android:textSize="16dp" />
 
 
@@ -303,25 +312,22 @@
             android:textSize="16dp" />
 
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/PlaceTextlayout"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_below="@+id/Schdule"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="35dp"
-            android:layout_marginTop="5dp">
-
             <EditText
                 android:id="@+id/Place"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/Schdule"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="5dp"
                 android:backgroundTint="#268434"
                 android:hint="Place"
                 android:inputType="text"
+                android:clickable="true"
+                android:focusable="false"
+                android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
                 android:textSize="16dp" />
 
-        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/confirmsetschedule"

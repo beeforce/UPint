@@ -1,6 +1,7 @@
 package com.example.bee.upint2.fragment;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,7 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.bee.upint2.MakeclassActivity;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.adapter.RecycleAdapterListening;
 import com.example.bee.upint2.adapter.RecyclerViewClickListener;
@@ -53,7 +56,7 @@ public class Listenfragment extends android.support.v4.app.Fragment implements S
     private ApiService mAPIService;
     private Animator spruceAnimator;
     private String class_count;
-
+    private Button makeclass_button;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,6 +74,15 @@ public class Listenfragment extends android.support.v4.app.Fragment implements S
 
     private void initInstances(View rootView) {
 
+
+        makeclass_button = rootView.findViewById(R.id.makeclassbt);
+        makeclass_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MakeclassActivity.class);
+                startActivity(intent);
+            }
+        });
 
         swipeRefreshLayout = rootView.findViewById(R.id.refresh2);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -165,6 +177,9 @@ public class Listenfragment extends android.support.v4.app.Fragment implements S
 
         for (Course each : courseList) {
             Log.w(TAG, "class id" + each.getId());
+        }
+        if (courseList == null) {
+            makeclass_button.setVisibility(View.VISIBLE);
         }
 
         adapter = new RecycleAdapterListening(courseList, getActivity());

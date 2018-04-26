@@ -279,6 +279,7 @@
                 android:layout_toRightOf="@+id/dateplace"
                 android:layout_below="@id/bordertime"
                 android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
                 android:textColor="#000"
                 android:text="place"/>
 
@@ -288,7 +289,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_toRightOf="@+id/centercourse"
-                android:layout_below="@+id/dateplace"
+                android:layout_below="@+id/course_place"
                 android:background="@drawable/background_2dp_border"
                 android:layout_marginLeft="7dp"
                 />

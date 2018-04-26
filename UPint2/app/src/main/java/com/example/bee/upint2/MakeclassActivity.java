@@ -1,6 +1,7 @@
 package com.example.bee.upint2;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,6 +38,14 @@ import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
 import com.example.bee.upint2.utils.FileUtils;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.kd.dynamic.calendar.generator.ImageGenerator;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.squareup.timessquare.CalendarPickerView;
@@ -50,6 +59,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -78,12 +88,17 @@ public class MakeclassActivity extends AppCompatActivity {
     private Button confirmsetschedule;
     private SweetAlertDialog pDialog;
     private TextInputLayout PriceperStudentTextlayout, tillClassnameTextlayout,
-            tillUniversityTextlayout, tillMajormakeclassTextlayout,
-            tilllevelTextlayout, tilltotalnumberstudentTextlayout, tillPlaceTextlayout;
-    private EditText scheduleEt, descriptionEt, termmakeclassEt, tagmakeclassEt;
+            tillUniversityTextlayout, tillMajormakeclassTextlayout, tilltotalnumberstudentTextlayout;
+    private EditText scheduleEt, descriptionEt, termmakeclassEt, tagmakeclassEt, levelclass, placeET;
     private Uri resultUri;
     private Vibrator vibrator;
     private Animation anim;
+    private String[] listLevel, taglist, listplace;
+    private boolean[] checkitems;
+    private ArrayList<Integer> tagArraylist = new ArrayList<>();
+    private int count = 0;
+    private AlertDialog mdialog;
+    private String Selectedplace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +115,11 @@ public class MakeclassActivity extends AppCompatActivity {
 
         //set api service
         mAPIService = ApiUtils.getAPIService();
+
+        listLevel = getResources().getStringArray(R.array.levelofdifficult);
+        taglist = getResources().getStringArray(R.array.taglist);
+        listplace = getResources().getStringArray(R.array.placelist);
+        checkitems = new boolean[taglist.length];
 
         mImageGenerator = new ImageGenerator(this);
         mDisplayGeneratorImage = (ImageView) findViewById(R.id.imageGen);
@@ -201,9 +221,9 @@ public class MakeclassActivity extends AppCompatActivity {
         tillClassnameTextlayout = (TextInputLayout) findViewById(R.id.ClassnameTextlayout);
         tillUniversityTextlayout = (TextInputLayout) findViewById(R.id.UniversityTextlayout);
         tillMajormakeclassTextlayout = (TextInputLayout) findViewById(R.id.MajormakeclassTextlayout);
-        tilllevelTextlayout = (TextInputLayout) findViewById(R.id.levelTextlayout);
+        levelclass = findViewById(R.id.levelclass);
         tilltotalnumberstudentTextlayout = (TextInputLayout) findViewById(R.id.totalnumberstudentTextlayout);
-        tillPlaceTextlayout = (TextInputLayout) findViewById(R.id.PlaceTextlayout);
+        placeET = (EditText) findViewById(R.id.Place);
         //textview
         Bookingdatemakeclass = (TextView) findViewById(R.id.datetimemakeclass);
         Bookingtime = (TextView) findViewById(R.id.bookingTime);
@@ -266,7 +286,7 @@ public class MakeclassActivity extends AppCompatActivity {
                         !checktotalnumber() | !checkdescription() |
                         !checktagmakeclass()){
                     termmakeclassEt.setAnimation(anim);
-                    tilllevelTextlayout.setAnimation(anim);
+                    levelclass.setAnimation(anim);
                     tilltotalnumberstudentTextlayout.setAnimation(anim);
                     descriptionEt.setAnimation(anim);
                     tagmakeclassEt.setAnimation(anim);
@@ -388,7 +408,7 @@ public class MakeclassActivity extends AppCompatActivity {
                     String target_major = tillMajormakeclassTextlayout.getEditText().getText().toString();
                     String target_year = yearsmakeclass;
                     String term = termmakeclassEt.getText().toString();
-                    String level = tilllevelTextlayout.getEditText().getText().toString();
+                    String level = levelclass.getText().toString();
                     String totalstudent = tilltotalnumberstudentTextlayout.getEditText().getText().toString();
                     String datest = bookingdate;
                     String descriptionst = descriptionEt.getText().toString();
@@ -398,7 +418,7 @@ public class MakeclassActivity extends AppCompatActivity {
                     sendOject o = new sendOject();
                     String user_id = o.getUser_id();
                     String price_per_studentst = PriceperStudentTextlayout.getEditText().getText().toString();
-                    String place = tillPlaceTextlayout.getEditText().getText().toString();
+                    String place = placeET.getText().toString();
 
 
                     File originalFile = FileUtils.getFile(MakeclassActivity.this, resultUri);
@@ -492,7 +512,174 @@ public class MakeclassActivity extends AppCompatActivity {
 
             }
         });
+        levelclass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mbuilder = new AlertDialog.Builder(MakeclassActivity.this);
+                mbuilder.setTitle("Select level of difficult");
+                mbuilder.setSingleChoiceItems(listLevel, 0, null);
+                mbuilder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                        int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+                        levelclass.setText(listLevel[selectedPosition]);
+                    }
+                });
+                mbuilder.setCancelable(false);
+                AlertDialog mdialog = mbuilder.create();
+                mdialog.show();
+
+            }
+        });
+
+        tagmakeclassEt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MakeclassActivity.this);
+                mBuilder.setTitle("Select tag of class");
+                mBuilder.setMultiChoiceItems(taglist, checkitems, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int position, boolean isChecked) {
+                        if(isChecked){
+                            if(count > 2) {
+                                Toast.makeText(getApplicationContext(), "Can't selected more than 3.", Toast.LENGTH_SHORT).show();
+                                checkitems[position] = false;
+                                ((AlertDialog) dialog).getListView().setItemChecked(position, false);
+                            }else{
+                                count++;
+                                tagArraylist.add(position);
+                            }
+                        }else{
+                            tagArraylist.remove((Integer.valueOf(position)));
+                            count--;
+                        }
+                    }
+                });
+                mBuilder.setCancelable(false);
+                mBuilder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        String item = "";
+                        tagmakeclassEt.setText("");
+                        for (int i = 0; i < tagArraylist.size(); i++) {
+                            item = item + taglist[tagArraylist.get(i)];
+                            if (i != tagArraylist.size() - 1) {
+                                item = item + ", ";
+                            }
+                        }
+                        tagmakeclassEt.setText(item);
+                    }
+                });
+
+                mBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                mBuilder.setNeutralButton("Clear all", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        for (int i = 0; i < checkitems.length; i++) {
+                            checkitems[i] = false;
+                            tagArraylist.clear();
+                            tagmakeclassEt.setText("");
+                        }
+                    }
+                });
+                AlertDialog mDialog = mBuilder.create();
+                mDialog.show();
+            }
+        });
+        placeET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mbuilder = new AlertDialog.Builder(MakeclassActivity.this);
+                mbuilder.setTitle("The best cafe list");
+                Selectedplace = listplace[0];
+                mbuilder.setSingleChoiceItems(listplace, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+                        Selectedplace = listplace[selectedPosition];
+                    }
+                });
+                mbuilder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                        int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+                        placeET.setText(listplace[selectedPosition]);
+                    }
+                });
+                mbuilder.setNeutralButton("Map", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        showMapDialog(Selectedplace);
+                    }
+                });
+                mbuilder.setCancelable(false);
+                mdialog = mbuilder.create();
+                mdialog.show();
+            }
+        });
     }
+
+    private void showMapDialog(final String place){
+        AlertDialog.Builder builder2 = new AlertDialog.Builder(MakeclassActivity.this);
+        View view = getLayoutInflater().inflate(R.layout.viewlocation_map_dialog,null);
+        builder2.setView(view);
+        final AlertDialog alertDialog2 = builder2.create();
+        alertDialog2.show();
+        alertDialog2.setCancelable(false);
+        alertDialog2.getWindow().setLayout(700, 1000);
+        GoogleMap googleMap;
+        MapView mMapView =  view.findViewById(R.id.mapView);
+        ImageView close = view.findViewById(R.id.close);
+        close.setClickable(true);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog2.dismiss();
+                mdialog.show();
+            }
+        });
+        MapsInitializer.initialize(MakeclassActivity.this);
+        mMapView.onCreate(alertDialog2.onSaveInstanceState());
+        mMapView.onResume();// needed to get the map to display immediately
+        mMapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                LatLng chalette = new LatLng(18.792791, 98.952560);
+                Marker chaletemark = googleMap.addMarker(new MarkerOptions().position(chalette)
+                        .title("The Chalatte Chiangmai"));
+                LatLng Sweet_Stories = new LatLng(18.792871, 98.953082);
+                Marker Sweet_Storiesmark = googleMap.addMarker(new MarkerOptions().position(Sweet_Stories)
+                        .title("Sweet Stories patisserie"));
+                LatLng damneon = new LatLng(18.792863, 98.952865);
+                Marker damneonmark = googleMap.addMarker(new MarkerOptions().position(damneon)
+                        .title("Damnoen Saduak"));
+
+                if (place.equals("The Chalatte Chiangmai")){
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(chalette,18));
+                    chaletemark.showInfoWindow();
+                }else if (place.equals("Sweet Stories patisserie")){
+
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Sweet_Stories,18));
+                    Sweet_Storiesmark.showInfoWindow();
+
+                }else if (place.equals("Damnoen Saduak")){
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(damneon,18));
+                    damneonmark.showInfoWindow();
+
+                }
+
+            }
+        });
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -577,8 +764,8 @@ public class MakeclassActivity extends AppCompatActivity {
     }
 
     private boolean checklevel() {
-        if (tilllevelTextlayout.getEditText().getText().toString().trim().isEmpty()) {
-            tilllevelTextlayout.getEditText().setError("Please enter a level of difficult");
+        if (levelclass.getText().toString().trim().isEmpty()) {
+            levelclass.setError("Please enter a level of difficult");
             return false;
         }
         return true;
@@ -609,8 +796,8 @@ public class MakeclassActivity extends AppCompatActivity {
     }
 
     private boolean checkplace() {
-        if (tillPlaceTextlayout.getEditText().getText().toString().trim().isEmpty()) {
-            tillPlaceTextlayout.getEditText().setError("Please select tag");
+        if (placeET.getText().toString().trim().isEmpty()) {
+            placeET.setError("Please select tag");
             return false;
         }
         return true;
@@ -618,7 +805,7 @@ public class MakeclassActivity extends AppCompatActivity {
 
     private boolean checkpriceperstudent() {
         if (PriceperStudentTextlayout.getEditText().getText().toString().trim().isEmpty()) {
-            tillPlaceTextlayout.getEditText().setError("Please select tag");
+            placeET.setError("Please select tag");
             return false;
         }
         return true;
