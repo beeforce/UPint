@@ -272,7 +272,10 @@ public class MakeclassActivity extends AppCompatActivity {
                     checktargetUniversity();
                     vibrator.vibrate(120);
                     return;
-                }else {
+                }else if (makeclassuploadpicture.getDrawable() == null) {
+                    showWarningUploadClassImage();
+                }
+                else {
                     relay1.setVisibility(View.INVISIBLE);
                     relay2.setVisibility(View.VISIBLE);
                 }
@@ -651,13 +654,13 @@ public class MakeclassActivity extends AppCompatActivity {
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
-                LatLng chalette = new LatLng(18.792791, 98.952560);
+                LatLng chalette = new LatLng(18.792545, 98.952561);
                 Marker chaletemark = googleMap.addMarker(new MarkerOptions().position(chalette)
                         .title("The Chalatte Chiangmai"));
                 LatLng Sweet_Stories = new LatLng(18.792871, 98.953082);
                 Marker Sweet_Storiesmark = googleMap.addMarker(new MarkerOptions().position(Sweet_Stories)
                         .title("Sweet Stories patisserie"));
-                LatLng damneon = new LatLng(18.792863, 98.952865);
+                LatLng damneon = new LatLng(18.792843, 98.952855);
                 Marker damneonmark = googleMap.addMarker(new MarkerOptions().position(damneon)
                         .title("Damnoen Saduak"));
 
@@ -723,6 +726,14 @@ public class MakeclassActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void showWarningUploadClassImage() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        pDialog.setTitleText("ERROR!");
+        pDialog.setContentText("Please select a Class image");
+        pDialog.setConfirmText("Ok");
+        pDialog.show();
     }
 
     private boolean checkClassname() {

@@ -42,6 +42,7 @@ import android.widget.Toast;
 
 import com.example.bee.upint2.adapter.ListViewAdapterProvince;
 import com.example.bee.upint2.adapter.ListViewAdapterUniversity;
+import com.example.bee.upint2.model.sendOject;
 import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
@@ -154,7 +155,7 @@ public class Register extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar2);
         progressBar.setProgress(11);
-        if (userType.equals("Student")){
+        if (userType != null && userType.equals("Student")){
             progressBar.setProgress(20);
         }
         progressBar.setProgressTintList(ColorStateList.valueOf(Color
@@ -357,14 +358,10 @@ public class Register extends AppCompatActivity {
                     vibrator.vibrate(120);
                     return;
                 } else {
-//                    String code = cerificationcode.getText().toString();
-//                    PhoneAuthCredential credential =
-//                            PhoneAuthProvider.getCredential(phoneVerificationId, code);
-//                    signInWithPhoneAuthCredential(credential);
-                    relay3.startAnimation(centertoleft);
-                    relay3.setVisibility(View.GONE);
-                    relay4.setVisibility(View.VISIBLE);
-                    relay4.startAnimation(righttoleft);
+                    String code = cerificationcode.getText().toString();
+                    PhoneAuthCredential credential =
+                            PhoneAuthProvider.getCredential(phoneVerificationId, code);
+                    signInWithPhoneAuthCredential(credential);
                 }
 
             }
@@ -493,9 +490,15 @@ public class Register extends AppCompatActivity {
                 }
             }
         });
-        email.setText(bundle.getString("userFacebookemail"));
-        firstname.setText(bundle.getString("userFacebookfirstname"));
-        lastname.setText(bundle.getString("userFacebooklastname"));
+        if (bundle.getString("userFacebookemail") != null) {
+            email.setText(bundle.getString("userFacebookemail"));
+            emailTextlayout.setEnabled(false);
+            emailTextlayout.setFocusable(false);
+            email.setEnabled(false);
+            email.setFocusable(false);
+            firstname.setText(bundle.getString("userFacebookfirstname"));
+            lastname.setText(bundle.getString("userFacebooklastname"));
+        }
         date_graduated = getDateFromDatePicker(datepicker);
 
         //add resume
@@ -752,20 +755,20 @@ public class Register extends AppCompatActivity {
             final Uri imageUri = data.getData();
             resultUri = imageUri;
             mprofileimage.setImageURI(resultUri);
-            mprofileimage.setScaleType(ImageView.ScaleType.FIT_XY);
+            mprofileimage.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
         if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             final Uri imageUri = data.getData();
             resultUri2 = imageUri;
             id_card_image.setImageURI(resultUri2);
-            id_card_image.setScaleType(ImageView.ScaleType.FIT_XY);
+            id_card_image.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
         if (requestCode == CAMERA_PIC_REQUEST) {
             if (resultCode != RESULT_CANCELED) {
                 Bitmap image = (Bitmap) data.getExtras().get("data");
                 resultUri = getImageUri(Register.this, image);
                 mprofileimage.setImageURI(resultUri);
-                mprofileimage.setScaleType(ImageView.ScaleType.FIT_XY);
+                mprofileimage.setScaleType(ImageView.ScaleType.CENTER_CROP);
             }
         }
         if (requestCode == CAMERA_PIC_REQUEST2) {
@@ -773,7 +776,7 @@ public class Register extends AppCompatActivity {
                 Bitmap image = (Bitmap) data.getExtras().get("data");
                 resultUri2 = getImageUri(Register.this, image);
                 id_card_image.setImageURI(resultUri2);
-                id_card_image.setScaleType(ImageView.ScaleType.FIT_XY);
+                id_card_image.setScaleType(ImageView.ScaleType.CENTER_CROP);
             }
         }
         if (mprofileimage.getDrawable() == null) {
@@ -1036,6 +1039,13 @@ public class Register extends AppCompatActivity {
         pDialog.setContentText("Your Email has already registered");
         pDialog.setConfirmText("Ok");
         pDialog.show();
+        pDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                finish();
+                finish();
+            }
+        });
     }
 
     private void showProgressDialogWarning() {
@@ -1111,8 +1121,66 @@ public class Register extends AppCompatActivity {
         pDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                startActivity(new Intent(Register.this, LoginActivity.class));
-                finish();
+
+                mAPIService = ApiUtils.getAPIService();
+                final String email = emailTextlayout.getEditText().getText().toString();
+                String password = passwordagainTextlayout.getEditText().getText().toString();
+                RequestBody emailR = RequestBody.create(MultipartBody.FORM, email);
+                RequestBody passwordR = RequestBody.create(MultipartBody.FORM, password);
+                RequestBody user_typeR = RequestBody.create(MultipartBody.FORM, userType);
+
+                mAPIService.login(emailR, passwordR, user_typeR).enqueue(new Callback<AccessToken>() {
+                    @Override
+                    public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                        Log.w(TAG, "onResponse: " + response);
+                        dismissProgressDialog();
+                        if (response.code() == 200) {
+                            Log.w(TAG, "onResponse: " + response.body().getAccessToken());
+                            Log.w(TAG, "user id: " + response.body().getUser_id());
+                            sendOject se = new sendOject();
+                            se.setAccesstoken(response.body().getAccessToken());
+                            sendOject se2 = new sendOject();
+                            se2.setUser_id(response.body().getUser_id());
+                            dismissProgressDialog();
+                            showProgressDialogLoginSuccess();
+                        } else if (response.code() == 400) {   // wrong password
+                            dismissProgressDialog();
+                            showProgressDialogWarning();
+                        } else if (response.code() == 401) {    // wrong user type
+                            dismissProgressDialog();
+                        } else {
+                            dismissProgressDialog();
+                            showProgressDialogWarningConnection();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AccessToken> call, Throwable t) {
+                        Log.w(TAG, "onFailure: " + t.getMessage());
+                        dismissProgressDialog();
+                        showProgressDialogWarningConnection();
+
+                    }
+                });
+            }
+        });
+    }
+
+    private void showProgressDialogLoginSuccess() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
+        pDialog.setTitleText("SUCCESS!");
+        pDialog.setContentText("You're logged in!");
+        pDialog.show();
+        pDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (userType.equals("Teacher")) {
+                    startActivity(new Intent(Register.this, Main2Activity.class));
+                    finish();
+                } else {
+                    startActivity(new Intent(Register.this, AppfeedActivity.class));
+                    finish();
+                }
             }
         });
     }

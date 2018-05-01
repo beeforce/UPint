@@ -8,77 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/tvProjectName4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Upcmoming"
-                android:textSize="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:background="#fff">
-                <TextView
-                    android:id="@+id/tvName4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/ivAvatar"
-                    android:layout_centerHorizontal="true"
-                    android:text="Hello World2"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvTruckId4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="\@LSLS2" />
-
-                <TextView
-                    android:id="@+id/tvAddress4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvTruckId"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="6dp"
-                    android:gravity="center"
-                    android:text="Chiang Mai2" />
-                <Button
-                    android:id="@+id/searchclassbt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="search"/>
-
-                <Button
-                    android:id="@+id/searchclasskeywordbt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="search keyword"/>
-
-                <Button
-                    android:id="@+id/Appffeedbt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="App feed"/>
-
-
-                <Button
-                    android:id="@+id/AddLocationinformation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add region and university"/>
-
-            </LinearLayout>
 
 
         </LinearLayout>

@@ -122,11 +122,12 @@ public class Schedulefragment extends android.support.v4.app.Fragment implements
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 if (response.isSuccessful()) {
+                    dismissProgressDialog();
                     course = response.body();
                     onSuccess(course);
                     Log.w(TAG, "onResponse: " + course.size());
                 } else {
-
+                    dismissProgressDialog();
                     Log.w(TAG, "onResponseFail: " + response.body());
                 }
             }
@@ -237,9 +238,7 @@ public class Schedulefragment extends android.support.v4.app.Fragment implements
     }
 
     private void dismissProgressDialog() {
-        if (pDialog != null && pDialog.isShowing()) {
             pDialog.dismiss();
-        }
     }
 
 }

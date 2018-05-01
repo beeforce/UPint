@@ -54,8 +54,8 @@ public class Listenfragment extends android.support.v4.app.Fragment implements S
     private RecycleAdapterListening adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ApiService mAPIService;
-    private Animator spruceAnimator;
     private String class_count;
+    private Animator spruceAnimator;
     private Button makeclass_button;
 
     @Override
@@ -99,16 +99,18 @@ public class Listenfragment extends android.support.v4.app.Fragment implements S
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
 
-        getClassdetailwithId();
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (spruceAnimator != null) {
+        if (course != null) {
+            course.clear();
+            courselistenList.clear();
             spruceAnimator.start();
         }
+        getClassdetailwithId();
     }
 
     @Override
@@ -135,6 +137,11 @@ public class Listenfragment extends android.support.v4.app.Fragment implements S
                 if (response.isSuccessful()) {
                     course = response.body();
                     onSuccess(course);
+                    if (course.size() == 0) {
+                        makeclass_button.setVisibility(View.VISIBLE);
+                    }else{
+                        makeclass_button.setVisibility(View.GONE);
+                    }
                     Log.w(TAG, "onResponse: " + course.size());
                 } else {
 
@@ -177,9 +184,6 @@ public class Listenfragment extends android.support.v4.app.Fragment implements S
 
         for (Course each : courseList) {
             Log.w(TAG, "class id" + each.getId());
-        }
-        if (courseList == null) {
-            makeclass_button.setVisibility(View.VISIBLE);
         }
 
         adapter = new RecycleAdapterListening(courseList, getActivity());

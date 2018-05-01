@@ -2,71 +2,172 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:agendaCalendar="http://schemas.android.com/apk/res-auto"
-    android:background="#6aa615">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
         android:id="@+id/contentContainer3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="25dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-            <TextView
-                android:id="@+id/tvProjectName3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Status"
-                android:textSize="26dp"
-                android:textStyle="bold"
-                android:textColor="#ffffff" />
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="#fff">
+                android:background="#ffff">
 
-                <RelativeLayout
-                    android:id="@+id/relaymonth"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/UPgreen">
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/month"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:textColor="#ffff"
-                        android:text="Month" />
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                <com.github.tibolte.agendacalendarview.AgendaCalendarView
-                    android:layout_below="@+id/relaymonth"
-                    android:id="@+id/agenda_calendar_view"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#000000"
+                            android:textSize="18dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Income"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:textSize="18dp"
+                            android:text="See All >"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp">
+                        <com.jjoe64.graphview.GraphView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:seriesColor="@color/UPgreen"
+                            android:id="@+id/graph3" />
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/background_2dp_border"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#000000"
+                            android:textSize="18dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Status"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:textSize="18dp"
+                            android:text="See All >"/>
+                    </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    agendaCalendar:agendaCurrentDayTextColor="#98c428"
-                    agendaCalendar:calendarColor="@android:color/white"
-                    agendaCalendar:calendarCurrentDayTextColor="@color/calendar_text_current_day"
-                    agendaCalendar:calendarDayTextColor="#6aa615"
-                    agendaCalendar:calendarHeaderColor="#6aa615"
-                    agendaCalendar:calendarPastDayTextColor="@android:color/darker_gray"
-                    agendaCalendar:fabColor="@color/UPgreen" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp">
+                <com.jjoe64.graphview.GraphView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:seriesColor="@color/UPgreen"
+                    android:id="@+id/graph" />
+                </RelativeLayout>
 
-            </LinearLayout>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/background_2dp_border"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#000000"
+                            android:textSize="18dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Review"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:textSize="18dp"
+                            android:text="See All >"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp">
+                        <com.jjoe64.graphview.GraphView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:seriesColor="@color/UPgreen"
+                            android:id="@+id/graph2" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/background_2dp_border"/>
+
+        </LinearLayout>
 
 
 

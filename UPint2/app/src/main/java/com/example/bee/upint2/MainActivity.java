@@ -162,12 +162,6 @@ public class MainActivity extends AppCompatActivity {
                             Log.d(TAG, "facebook:onSuccess:" + loginResult);
 //                            handleFacebookAccessToken(loginResult.getAccessToken());
                             getUserDetailsFromFB(loginResult.getAccessToken());
-
-
-                            Toast.makeText(MainActivity.this, "You're Logged in", Toast.LENGTH_LONG);
-                            Intent intent = new Intent(MainActivity.this, Register.class);
-                            startActivity(intent);
-                            dismissProgressDialog();
                         }
 
                         @Override
@@ -278,6 +272,7 @@ public class MainActivity extends AppCompatActivity {
                     i.putExtra("userFacebooklastname", lastname);
                     i.putExtra("Usertype", type);
                     startActivity(i);
+                    dismissProgressDialog();
                     LoginManager.getInstance().logOut();
 
                 }catch (JSONException e)

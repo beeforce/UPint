@@ -53,6 +53,7 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     implementation 'com.google.android.gms:play-services-maps:11.0.2'
     implementation 'com.google.android.gms:play-services-location:11.0.2'
+    implementation 'com.jjoe64:graphview:4.2.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

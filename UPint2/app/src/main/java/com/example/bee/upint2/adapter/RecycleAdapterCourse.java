@@ -125,14 +125,21 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
                     startminute, starthour < 12 ? "am" : "pm");
             scheduletime = starttime + " - " + finishtime;
 
+            Date day2 = new Date();//day 2
+            Calendar c = Calendar.getInstance();
+            c.setTime(day2);
+            c.add(Calendar.DATE, 1);
+            day2 = c.getTime();
+            String day_2 = (String) DateFormat.format("dd", day2);
+
             if (days > 0) {
                 int a = 1;
                 int b = (int) days;
                 holder.dateremain.setText("D-" + (a + b));
-            } else if (days == 0 & hour > 0 && day != to_day) {
-                holder.dateremain.setText("D-1");
-            } else if (day.equals(to_day)) {
+            } if (day.equals(to_day)) {
                 holder.dateremain.setText("Today");
+            } else if (day.equals(day_2)) {
+                holder.dateremain.setText("Tomorrow");
             }
 
             ArrayList<String> taglist = new ArrayList<>();
@@ -154,8 +161,7 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
             } else {
                 holder.tag1.setText(taglist.get(0));
                 holder.tag2.setText(taglist.get(1));
-                holder.tag3.setText(taglist.get(2));
-
+                holder.tag3.setVisibility(View.GONE);
             }
 
             mAPIService = ApiUtils.getAPIService();

@@ -27,60 +27,11 @@ import com.example.bee.upint2.SearchclassActivity_Keyword;
 
 public class Settingfragment extends android.support.v4.app.Fragment {
 
-    private RecyclerView recyclerView;
-
-    private Context mContext;
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_setting, container, false);
 
-        initInstances(rootView);
         return rootView;
-    }
-
-
-    private void initInstances(View rootView) {
-
-        TextView tvProjectName = rootView.findViewById(R.id.tvProjectName4);
-        Button button = rootView.findViewById(R.id.searchclassbt);
-        tvProjectName.setText(Html.fromHtml("<b>Setting</b>"));
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SeachclassActivity.class);
-                startActivity(intent);
-            }
-        });
-        Button button2 = rootView.findViewById(R.id.searchclasskeywordbt);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SearchclassActivity_Keyword.class);
-                startActivity(intent);
-            }
-        });
-        Button button3 = rootView.findViewById(R.id.Appffeedbt);
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AppfeedActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button button4 = rootView.findViewById(R.id.AddLocationinformation);
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AddResumeActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
     }
 }

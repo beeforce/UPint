@@ -9,14 +9,18 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.bee.upint2.adapter.SectionPageAdapter;
 import com.example.bee.upint2.fragment.Listenfragment;
@@ -45,6 +49,7 @@ public class Main2Activity extends AppCompatActivity {
     private Statusfragment statusfragment;
     private Settingfragment settingfragment;
     private boolean doubleBackToExitPressedOnce = false;
+    private Toolbar toolbar;
 
 
     @Override
@@ -59,6 +64,17 @@ public class Main2Activity extends AppCompatActivity {
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
         setContentView(R.layout.activity_main2);
+
+        toolbar = findViewById(R.id.toolbar);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setText(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
+        setSupportActionBar(toolbar);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeButtonEnabled(true);
+        actionbar.setDisplayShowTitleEnabled(false);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_dehaze_black);
 
 
         initBottomNavigation();
@@ -90,21 +106,21 @@ public class Main2Activity extends AppCompatActivity {
                         switch (item.getItemId()) {
                             case R.id.action_upcoming:
                                 viewPager.setCurrentItem(0);
-                                break;
+                                return true;
 
                             case R.id.action_listening:
                                 viewPager.setCurrentItem(1);
-                                break;
+                                return true;
 
                             case R.id.action_schedule:
                                 viewPager.setCurrentItem(2);
-                                break;
+                                return true;
                             case R.id.action_static:
                                 viewPager.setCurrentItem(3);
-                                break;
+                                return true;
                             case R.id.action_setting:
                                 viewPager.setCurrentItem(4);
-                                break;
+                                return true;
 
 
                         }
@@ -215,24 +231,24 @@ public class Main2Activity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
-        String current = simpleDateFormat.format(new Date());
-
-        MySharedPreference.putPref(MySharedPreference.LAST_ACTIVE_TIME, current, getApplicationContext());
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+//        String current = simpleDateFormat.format(new Date());
+//
+//        MySharedPreference.putPref(MySharedPreference.LAST_ACTIVE_TIME, current, getApplicationContext());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        Boolean isActiveOverHalfHour = Validator.isActiveOverHalfHour(getApplicationContext());
-
-        if (isActiveOverHalfHour){
-            MySharedPreference.clearPref(getApplicationContext());
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        }
+//        Boolean isActiveOverHalfHour = Validator.isActiveOverHalfHour(getApplicationContext());
+//
+//        if (isActiveOverHalfHour){
+//            MySharedPreference.clearPref(getApplicationContext());
+//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
+//        }
     }
 }
 class BottomNavigationViewHelper {
