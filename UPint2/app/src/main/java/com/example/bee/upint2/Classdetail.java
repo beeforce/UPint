@@ -68,8 +68,6 @@ public class Classdetail extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Classdetail.this, Main2Activity.class);
-                startActivity(i);
                 finish();
             }
         });
