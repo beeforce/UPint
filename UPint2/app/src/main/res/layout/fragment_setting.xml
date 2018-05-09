@@ -10,11 +10,141 @@
 
 
             <LinearLayout
+                android:id="@+id/setting_page"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:background="#fff">
 
+                <RelativeLayout
+                    android:id="@+id/feedbackbt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:background="@drawable/layout_selector">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Feedback to Us!"
+                        android:textSize="19dp"
+                        android:drawableStart="@drawable/ic_feedback_twotone"
+                        android:drawablePadding="7dp"
+                        android:paddingLeft="5dp"
+                        android:layout_margin="10dp"
+                        android:textStyle="bold"
+                        android:textColor="#343434"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_2_dp"
+                    android:background="@drawable/background_2dp_border"/>
+
+                <RelativeLayout
+                    android:id="@+id/signoutbt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:background="@drawable/layout_selector">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sign out"
+                        android:textSize="19dp"
+                        android:drawableStart="@drawable/ic_logout"
+                        android:drawablePadding="7dp"
+                        android:paddingLeft="5dp"
+                        android:layout_margin="10dp"
+                        android:textStyle="bold"
+                        android:textColor="#343434"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_2_dp"
+                    android:background="@drawable/background_2dp_border"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/feedback_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#fff"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/feedbacktv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif"
+                android:text="Feedback to us !"
+                android:textColor="#6dd634"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/feedbacktv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/background_border_cardview">
+
+                <EditText
+                    android:id="@+id/comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="top|left"
+                    android:hint="Input your feedback"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences|text|textMultiLine"
+                    android:lines="6"
+                    android:maxLines="10"
+                    android:minLines="6"
+                    android:scrollbars="vertical"
+                    android:singleLine="false"
+                    android:textSize="20dp" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/mydefault_button_login"
+                android:fontFamily="sans-serif"
+                android:text="Submit"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/resubmit"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/mydefault_button_login"
+                android:fontFamily="sans-serif"
+                android:text="Resubmit"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </FrameLayout>

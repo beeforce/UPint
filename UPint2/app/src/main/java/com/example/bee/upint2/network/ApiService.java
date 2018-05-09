@@ -3,6 +3,7 @@ package com.example.bee.upint2.network;
 
 
 import com.example.bee.upint2.model.Course;
+import com.example.bee.upint2.model.CourseStatistic;
 import com.example.bee.upint2.model.Course_user;
 import com.example.bee.upint2.model.UserProfile;
 
@@ -75,6 +76,9 @@ public interface ApiService {
     @GET("getAllcoursedetail")
     Call<List<Course>> getAllCoursedetail();
 
+    @GET("getallCourseforHistory")
+    Call<List<Course>> getallCourseforHistory();
+
 
     @GET("userDetailswithId/{id}")
     Call<UserProfile> userDetailswithId(@Path("id") String id);
@@ -120,6 +124,14 @@ public interface ApiService {
 
     @GET("getCommentfromFeedback")
     Call<AccessToken> getCommentfromFeedback(@Query("user_id") String user_id);
+
+    @GET("getAllStatprice")
+    Call<List<CourseStatistic>> get7daysStat(@Query("user_id") String user_id);
+
+    @GET("getAllStatClasscount")
+    Call<List<CourseStatistic>> getclassStat(@Query("user_id") String user_id);
+
+
 
 
 }

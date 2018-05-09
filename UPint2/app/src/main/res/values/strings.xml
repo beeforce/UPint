@@ -6,7 +6,7 @@
     <string name="tab_upcoming">Upcoming</string>
     <string name="tab_listening">Your listening</string>
     <string name="tab_schedule">Schedule</string>
-    <string name="tab_status">Status</string>
+    <string name="tab_statistic">Statistic</string>
     <string name="tab_setting">Setting</string>
 
     <!--Action Bar-->

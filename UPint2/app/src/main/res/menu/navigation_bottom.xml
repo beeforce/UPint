@@ -24,7 +24,7 @@
         android:id="@+id/action_static"
         android:enabled="true"
         android:icon="@drawable/ic_assessment"
-        android:title="@string/tab_status"
+        android:title="@string/tab_statistic"
         app:showAsAction="always"/>
 
     <item

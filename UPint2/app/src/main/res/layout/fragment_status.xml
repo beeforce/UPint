@@ -36,17 +36,20 @@
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="10dp"
                             android:textColor="#000000"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:fontFamily="sans-serif"
                             android:text="Income"/>
 
                         <TextView
+                            android:id="@+id/seeall_incomeStatistic"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="15dp"
                             android:layout_marginTop="10dp"
-                            android:textSize="18dp"
+                            android:textColor="@color/seeall_textcolor"
+                            android:clickable="true"
+                            android:textSize="16dp"
                             android:text="See All >"/>
                     </RelativeLayout>
                     <RelativeLayout
@@ -86,17 +89,20 @@
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="10dp"
                             android:textColor="#000000"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:fontFamily="sans-serif"
-                            android:text="Status"/>
+                            android:text="Class"/>
 
                         <TextView
+                            android:id="@+id/seeall_classamount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="15dp"
                             android:layout_marginTop="10dp"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
+                            android:textColor="@color/seeall_textcolor"
+                            android:clickable="true"
                             android:text="See All >"/>
                     </RelativeLayout>
                 <RelativeLayout
@@ -135,9 +141,9 @@
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="10dp"
                             android:textColor="#000000"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:fontFamily="sans-serif"
-                            android:text="Review"/>
+                            android:text="Status"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -145,7 +151,8 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="15dp"
                             android:layout_marginTop="10dp"
-                            android:textSize="18dp"
+                            android:textColor="@color/seeall_textcolor"
+                            android:textSize="16dp"
                             android:text="See All >"/>
                     </RelativeLayout>
                     <RelativeLayout

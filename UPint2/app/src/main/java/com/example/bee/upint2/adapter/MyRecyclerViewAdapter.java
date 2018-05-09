@@ -3,6 +3,8 @@ package com.example.bee.upint2.adapter;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
@@ -37,12 +39,10 @@ import java.util.Locale;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewholder> {
 
-    private List<Course> course;
+    private List<String> cafe_name, CafeImage_path;
     private Context context;
     private static RecyclerViewClickListener itemListener;
-    private Date d;
     private static final String TAG = "RecycleAdapterCourse";
-    public static String scheduletime, scheduledate;
 
     // data is passed into the constructor
     public MyRecyclerViewAdapter(Context context, RecyclerViewClickListener itemListener) {
@@ -50,8 +50,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         this.itemListener = itemListener;
     }
 
-    public MyRecyclerViewAdapter(List<Course> course, Context context) {
-        this.course = course;
+    public MyRecyclerViewAdapter(List<String> name, List<String> image_path, Context context) {
+        this.cafe_name = name;
+        this.CafeImage_path = image_path;
         this.context = context;
     }
 
@@ -60,63 +61,16 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public MyViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item, parent, false);
-        return new MyViewholder(view, context, course);
+        return new MyViewholder(view, context, cafe_name,CafeImage_path);
     }
 
     @Override
     public void onBindViewHolder(MyViewholder holder, int position) {
         holder.getView().setAnimation(AnimationUtils.loadAnimation(holder.getcontext(),R.anim.zoom_in));
-        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
-        Date today = Calendar.getInstance().getTime();
-        try {
-            d = input.parse(course.get(position).getDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        scheduledate = output.format(d);
 
-        //get remain date
-        long date_remain = d.getTime() - today.getTime();
-        long seconds = date_remain / 1000;
-        long minutes = seconds / 60;
-        long hours = minutes / 60;
-        long days = hours / 24;
-        Log.w(TAG, "date" + days);
-        if (days == 0 | !d.before(today)) {
-            holder.Name.setText(course.get(position).getCourse_name());
-            holder.price.setText(course.get(position).getPrice_per_student() + "B");
-            holder.numberofstudent.setText("0/" + course.get(position).getTotal_student());
-
-            ArrayList<String> taglist = new ArrayList<>();
-
-            String tag = course.get(position).getTags().toString();
-            String[] tagpart = tag.split(",");
-            for (int i=0; i < tagpart.length;i++){
-                taglist.add(tagpart[i]);
-            }
-
-
-            if (tagpart.length == 1){
-                holder.tag3.setVisibility(View.GONE);
-                holder.tag2.setVisibility(View.GONE);
-                holder.tag1.setText(taglist.get(0));
-            }
-            else if (tagpart.length == 2){
-                holder.tag3.setVisibility(View.GONE);
-                holder.tag1.setText(taglist.get(0));
-                holder.tag2.setText(taglist.get(1));
-            }else {
-                holder.tag1.setText(taglist.get(0));
-                holder.tag2.setText(taglist.get(1));
-                holder.tag3.setText(taglist.get(2));
-
-            }
-
-
-            holder.course_numberstudent.setText("" + course.get(position).getTotal_student());
+            holder.Name.setText(cafe_name.get(position));
             //string part url
-            String string = course.get(position).getCourse_image_path();
+            String string = CafeImage_path.get(position);
             String[] parts = string.split("/");
             String part1 = parts[0];
             String part4 = parts[3];
@@ -147,9 +101,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     .centerCrop()
                     .into(holder.img);
 
-        } else {
-            holder.classinfolayout.setVisibility(View.GONE);
-        }
+        final int semiTransparentGrey = Color.argb(60, 10, 10, 10);
+        holder.img.setColorFilter(semiTransparentGrey, PorterDuff.Mode.SRC_ATOP);
 
     }
 
@@ -157,7 +110,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // total number of rows
     @Override
     public int getItemCount() {
-        return course.size();
+        return cafe_name.size();
     }
 
     // stores and recycles views as they are scrolled off screen
@@ -165,23 +118,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         private ImageView img;
         private View view;
-        private TextView Name, price, numberofstudent, tag1, tag2, tag3, course_numberstudent;
-        private RelativeLayout classinfolayout;
+        private TextView Name;
         private Context ctx;
-        private List<Course> course = new ArrayList<Course>();
 
-        public MyViewholder(View itemView, Context ctx, List<Course> course) {
+
+        public MyViewholder(View itemView, Context ctx, List<String> name, List<String> image_path) {
             super(itemView);
             img = itemView.findViewById(R.id.course_photo);
             Name = itemView.findViewById(R.id.course_name);
-            price = itemView.findViewById(R.id.price_appfeed);
-            tag1 = itemView.findViewById(R.id.buttontags1_keyword);
-            tag2 = itemView.findViewById(R.id.buttontags2_keyword);
-            tag3 = itemView.findViewById(R.id.buttontags3_keyword);
-            numberofstudent = itemView.findViewById(R.id.numberofstudent3);
-            course_numberstudent = itemView.findViewById(R.id.totalofstudent3);
-            classinfolayout = itemView.findViewById(R.id.classinfolayout3);
-            this.course = course;
             this.ctx = ctx;
             this.view = itemView;
             itemView.setOnClickListener(this);
@@ -197,20 +141,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         @Override
         public void onClick(View v) {
             v.setAnimation(AnimationUtils.loadAnimation(getcontext(),R.anim.zoom_in));
-            int position = getAdapterPosition();
-            Course course = this.course.get(position);
-            Intent i = new Intent(v.getContext(), Classdetail.class);
-            i.putExtra("course_id", course.getId().toString());
-//            i.putExtra("scheduletime", scheduletime.toString());
-            i.putExtra("course_name", course.getCourse_name().toString());
-            i.putExtra("level", course.getLevel_of_difficult());
-            i.putExtra("description", course.getDescription());
-            i.putExtra("cost", course.getPrice_per_student());
-            i.putExtra("scheduledate", scheduledate.toString());
-            i.putExtra("place", course.getPlace());
-            i.putExtra("term", course.getTerms());
-            i.putExtra("totalstudent", course.getTotal_student().toString());
-            v.getContext().startActivity(i);
+//            int position = getAdapterPosition();
+//            Course course = this.course.get(position);
         }
     }
 }

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.SeachclassActivity;
 import com.example.bee.upint2.adapter.MyRecyclerViewAdapter;
+import com.example.bee.upint2.adapter.MyRecyclerViewAdapterTeacherStar;
 import com.example.bee.upint2.adapter.RecyclerViewClickListener;
 import com.example.bee.upint2.model.Course;
 import com.example.bee.upint2.model.Course_user;
@@ -49,13 +50,14 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
 
     private RecyclerView recyclerView, recyclerView2;
     private RecyclerView.LayoutManager layoutManager;
-    private List<Course> course;
+    private List<Course> course, course_searchrecent;
     private List<Course_user> courseEnroll;
     private List<Course> filteredJob = new ArrayList<Course>();
     //    private RecycleAdapterCourse adapter;
     private static final String TAG = "HomeappFragment";
     private ApiService mAPIService;
     private MyRecyclerViewAdapter adapter;
+    private MyRecyclerViewAdapterTeacherStar adapter2;
     private FloatingActionButton searchfab;
     private TextView date, teacher, place, dayremain, classname_home, classname_home2, classname_home3, keyword_home1, keyword_home3, keyword_home2;
     private ImageView place_icon;
@@ -79,6 +81,7 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
             filteredJob.removeAll(filteredJob);
         }
         getClassdetail();
+        AllgetClassdetail();
     }
 
     private void initInstances(View rootView) {
@@ -157,7 +160,7 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
                         String[] parts = response.body().getSearch_recent().split(",");
                         String part1 = parts[0];
                         if (parts.length == 1) {
-                            for (Course each : course) {
+                            for (Course each : course_searchrecent) {
                                 if (each.getId().toString().equals(part1)) {
                                     classname_home.setText(each.getCourse_name());
                                     keyword_home1.setText(each.getTags());
@@ -165,7 +168,7 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
                             }
                         } else if (parts.length == 2) {
                             String part2 = parts[1];
-                            for (Course each : course) {
+                            for (Course each : course_searchrecent) {
                                 if (each.getId().toString().equals(part1)) {
                                     classname_home.setText(each.getCourse_name());
                                     keyword_home1.setText(each.getTags());
@@ -178,7 +181,7 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
                         } else if (parts.length == 3) {
                             String part2 = parts[1];
                             String part3 = parts[2];
-                            for (Course each : course) {
+                            for (Course each : course_searchrecent) {
                                 if (each.getId().toString().equals(part1)) {
                                     classname_home.setText(each.getCourse_name());
                                     keyword_home1.setText(each.getTags());
@@ -212,6 +215,21 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
 //            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
 //        }
 //    }
+
+    public void AllgetClassdetail() {
+        mAPIService = ApiUtils.getAPIService();
+        mAPIService.getallCourseforHistory().enqueue(new Callback<List<Course>>() {
+            @Override
+            public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
+                course_searchrecent = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<Course>> call, Throwable t) {
+                Log.w(TAG, "get fail");
+            }
+        });
+    }
 
     public void getClassdetail() {
         mAPIService = ApiUtils.getAPIService();
@@ -352,8 +370,19 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
             place_icon.setVisibility(View.INVISIBLE);
         }
 
-        adapter = new MyRecyclerViewAdapter(courseList, getActivity());
-        recyclerView.setAdapter(adapter);
+        ArrayList<String> CafeList = new ArrayList<>();
+        CafeList.add("Sweet Stories");
+        CafeList.add("Damnoen Saduak");
+        CafeList.add("Chalatte");
+        ArrayList<String> Cafeimage_path = new ArrayList<>();
+        Cafeimage_path.add("http://localhost/UPint/public/images/uploads/Cafe_image/Sweet_Stories.jpg");
+        Cafeimage_path.add("http://localhost/UPint/public/images/uploads/Cafe_image/DNSD.jpg");
+        Cafeimage_path.add("http://localhost/UPint/public/images/uploads/Cafe_image/Chalatte_Chaingmai.jpg");
+
+
+        adapter2 = new MyRecyclerViewAdapterTeacherStar(courseList,getActivity());
+        recyclerView.setAdapter(adapter2);
+        adapter = new MyRecyclerViewAdapter(CafeList,Cafeimage_path, getActivity());
         recyclerView2.setAdapter(adapter);
     }
 
@@ -384,6 +413,7 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
     public void recyclerViewListClicked(View v, int position) {
         v.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_in));
         adapter = new MyRecyclerViewAdapter(getActivity(), this);
+        adapter2 = new MyRecyclerViewAdapterTeacherStar(getActivity(),this);
 
     }
 }
