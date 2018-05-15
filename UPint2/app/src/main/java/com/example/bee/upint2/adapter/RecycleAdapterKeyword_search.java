@@ -281,6 +281,7 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
             Intent i = new Intent(v.getContext(), Classdetail_searchclass.class);
             i.putExtra("course_id", course.get(getAdapterPosition()).getId().toString());
             i.putExtra("teacher_id", course.get(getAdapterPosition()).getUser_id());
+            i.putExtra("teacher_name", teacher_name.getText().toString());
             i.putExtra("tags", course.get(getAdapterPosition()).getTags());
             i.putExtra("target_year", course.get(getAdapterPosition()).getTarget_years());
             i.putExtra("scheduletime", scheduletime.toString());
@@ -339,8 +340,9 @@ public class RecycleAdapterKeyword_search extends RecyclerView.Adapter<RecycleAd
                             }
                         }
                         updateSearchRecentdata();
-                        Log.w("SearchRecent", "onResponse: "+search_recent);
                     } else {
+                        course_id = course.get(getAdapterPosition()).getId().toString();
+                        updateSearchRecentdata();
                     }
                 }
 

@@ -6,8 +6,14 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -39,6 +45,8 @@ public class Classdetail_searchclass extends AppCompatActivity {
     private String user_id, course_id, image_path, teacher_id;
     private TextView numberofstudent_searchclass, teacher, course_name, price_searchclass, numberofstudent_searchclass2, place_searchclass, description_searchclass, target_searchclass, classdetailcourse_name,
             levelofdifficult, costclassdetail, classdetailschedule, classdetailscheduletime, classdetailplace, termclassdetail, numberclassdetail;
+    private TextView teachername, subject, date, schedule, place_payment, totalpayment, PriceperStudent, amountofstudent;
+    private EditText numberofstudent, message;
     private Button buttontags1_searchclass, buttontags2_searchclass, buttontags3_searchclass, book, payment;
     private ImageView class_picture;
     private ImageView back, back2;
@@ -53,6 +61,8 @@ public class Classdetail_searchclass extends AppCompatActivity {
 
         mAPIService = ApiUtils.getAPIService();
 
+
+        //layout page1
         //set textview
         numberofstudent_searchclass = findViewById(R.id.numberofstudent_searchclass);
         teacher = findViewById(R.id.teacher);
@@ -66,7 +76,6 @@ public class Classdetail_searchclass extends AppCompatActivity {
         description_searchclass = findViewById(R.id.description_searchclass);
         target_searchclass = findViewById(R.id.target_searchclass);
         class_picture = findViewById(R.id.class_picture);
-
         classdetailcourse_name = (TextView) findViewById(R.id.classdetailcourse_name);
         levelofdifficult = (TextView) findViewById(R.id.levelofdifficult);
         costclassdetail = (TextView) findViewById(R.id.costclassdetail);
@@ -95,6 +104,81 @@ public class Classdetail_searchclass extends AppCompatActivity {
         layout1 = (RelativeLayout) findViewById(R.id.layout1);
         layout2 = (LinearLayout) findViewById(R.id.layout2);
 
+        //layout page2
+        teachername = findViewById(R.id.teacher_name);
+        subject = findViewById(R.id.subject);
+        date = findViewById(R.id.date);
+        schedule = findViewById(R.id.schedule);
+        place_payment = findViewById(R.id.place_payment);
+        totalpayment = findViewById(R.id.totalpayment);
+        PriceperStudent = findViewById(R.id.PriceperStudent);
+        amountofstudent = findViewById(R.id.amountofstudent);
+
+
+        numberofstudent = findViewById(R.id.numberofstudent);
+        message = findViewById(R.id.message);
+
+        mAPIService = ApiUtils.getAPIService();
+
+        mAPIService.userDetailswithId(teacher_id).enqueue(new Callback<UserProfile>() {
+            @Override
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                if (response.isSuccessful()) {
+                    teacher.setText(response.body().getFirst_name()+" "+response.body().getLast_name());
+                    teachername.setText(response.body().getFirst_name()+" "+response.body().getLast_name());
+                }else{
+                    ////-----do nothing
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UserProfile> call, Throwable t) {
+
+            }
+        });
+        subject.setText(getIntent().getStringExtra("course_name"));
+        date.setText(getIntent().getStringExtra("scheduledate"));
+        schedule.setText(getIntent().getStringExtra("scheduletime"));
+        place_payment.setText(getIntent().getStringExtra("place"));
+        PriceperStudent.setText(getIntent().getStringExtra("cost") + " B");
+
+        numberofstudent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    message.requestFocus();
+                }
+                return false;
+            }
+        });
+        message.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        message.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
+        numberofstudent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!numberofstudent.getText().toString().equals("")) {
+                    int cost = Integer.parseInt(getIntent().getStringExtra("cost"));
+                    int number = Integer.parseInt(numberofstudent.getText().toString());
+                    totalpayment.setText(cost * number + " B");
+                    amountofstudent.setText(number + "");
+                } else {
+                    totalpayment.setText(" B");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
         back = (ImageView) findViewById(R.id.backclassdetail);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +200,7 @@ public class Classdetail_searchclass extends AppCompatActivity {
             public void onClick(View v) {
                 layout2.setVisibility(View.VISIBLE);
                 layout1.setVisibility(View.GONE);
+                numberofstudent.requestFocus();
             }
         });
 
@@ -129,21 +214,23 @@ public class Classdetail_searchclass extends AppCompatActivity {
                 user_id = o.getUser_id();
                 RequestBody user_idR = RequestBody.create(MultipartBody.FORM, user_id);
                 RequestBody course_idR = RequestBody.create(MultipartBody.FORM, course_id);
+                RequestBody numberStudent = RequestBody.create(MultipartBody.FORM, numberofstudent.getText().toString());
 
-                mAPIService.bookClass(user_idR, course_idR).enqueue(new Callback<AccessToken>() {
+                mAPIService.bookClass(user_idR, course_idR, numberStudent).enqueue(new Callback<AccessToken>() {
                     @Override
                     public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                         dismissProgressDialog();
-                        if (response.isSuccessful()) {
+                        if (response.code() == 202) {
+                            showProgressDialogAlreadyBook();
+                        } else if (response.code() == 200) {
                             if (response.body().isSuccess()) {  //can book
                                 showProgressDialogSuccess();
                             } else {    //already booked
                                 showProgressDialogWarning();
                             }
-
-                        }else if (response.code() == 201) {  //class is full
+                        } else if (response.code() == 201) {  //class is full
                             showProgressDialogWarning();
-                        }else {
+                        } else {
 
                         }
                     }
@@ -254,6 +341,7 @@ public class Classdetail_searchclass extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
                 teacher.setText(response.body().getFirst_name());
+                teachername.setText(response.body().getFirst_name());
 
             }
 
@@ -298,6 +386,20 @@ public class Classdetail_searchclass extends AppCompatActivity {
         pDialog.setContentText("Can not book a class");
         pDialog.setConfirmText("Ok!");
         pDialog.show();
+    }
+
+    private void showProgressDialogAlreadyBook() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        pDialog.setTitleText("ERROR!");
+        pDialog.setContentText("You have enroll this class already");
+        pDialog.setConfirmText("Ok!");
+        pDialog.show();
+        pDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                finish();
+            }
+        });
     }
 
     private void showProgressDialogerrorconnection() {

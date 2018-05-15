@@ -101,7 +101,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     .centerCrop()
                     .into(holder.img);
 
-        final int semiTransparentGrey = Color.argb(60, 10, 10, 10);
+        final int semiTransparentGrey = Color.argb(100, 10, 10, 10);
         holder.img.setColorFilter(semiTransparentGrey, PorterDuff.Mode.SRC_ATOP);
 
     }

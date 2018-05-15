@@ -31,6 +31,19 @@ public class CourseStatistic implements Serializable {
     @Expose
     int count;
 
+    public void setHour(float hour) {
+        this.hour = hour;
+    }
+
+    public float getHour() {
+        return hour;
+    }
+
+    @SerializedName("hour")
+    @Expose
+    float hour;
+
+
 
     public void setPrice_per_student(String price_per_student) {
         this.price_per_student = price_per_student;

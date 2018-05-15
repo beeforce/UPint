@@ -5,6 +5,7 @@ package com.example.bee.upint2.network;
 import com.example.bee.upint2.model.Course;
 import com.example.bee.upint2.model.CourseStatistic;
 import com.example.bee.upint2.model.Course_user;
+import com.example.bee.upint2.model.Teacher;
 import com.example.bee.upint2.model.UserProfile;
 
 import java.util.List;
@@ -94,7 +95,7 @@ public interface ApiService {
 
     @POST("bookClass")
     @Multipart
-    Call<AccessToken> bookClass(@Part("user_id") RequestBody user_id, @Part("course_id") RequestBody course_id);
+    Call<AccessToken> bookClass(@Part("user_id") RequestBody user_id, @Part("course_id") RequestBody course_id,@Part("numberStudent") RequestBody numberStudent);
 
     @GET("courseEnroll/{user_id}")
     Call<List<Course_user>> searchclassEnroll(@Path("user_id") int user_id);
@@ -130,6 +131,12 @@ public interface ApiService {
 
     @GET("getAllStatClasscount")
     Call<List<CourseStatistic>> getclassStat(@Query("user_id") String user_id);
+
+    @GET("getAllStatHour")
+    Call<List<CourseStatistic>> getAllStatHour(@Query("user_id") String user_id);
+
+    @GET("getTeacherInformation")
+    Call<List<Teacher>> getTeacherInformation();
 
 
 

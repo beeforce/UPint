@@ -21,7 +21,7 @@ public class Validator {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    public final static boolean isActiveOverHalfHour(Context context) {
+    public final static boolean isActiveOverHour(Context context) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
         String current = simpleDateFormat.format(new Date());
         String lastActive = MySharedPreference.getPref(MySharedPreference.LAST_ACTIVE_TIME, context);
@@ -35,7 +35,7 @@ public class Validator {
                 long diffMin = (int) (currentDate.getTime() - lastFetchDate.getTime()) / (1000 * 60);
 
 
-                if (diffMin >= 30) {
+                if (diffMin >= 60) {
                     result = true;
                 }
             } catch (ParseException e) {

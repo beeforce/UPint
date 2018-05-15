@@ -46,4 +46,15 @@ public class Course_user implements Serializable {
     @SerializedName("course_id")
     @Expose
     int course_id;
+    @SerializedName("count")
+    @Expose
+    int count;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 }

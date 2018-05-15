@@ -63,7 +63,7 @@ public class Classdetail extends AppCompatActivity {
         user_id = o.getUser_id();
 
 
-        book = (Button) findViewById(R.id.book);
+//        book = (Button) findViewById(R.id.book);
         back = (ImageView) findViewById(R.id.backclassdetail);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,38 +71,38 @@ public class Classdetail extends AppCompatActivity {
                 finish();
             }
         });
-        book.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showProgressDialog();
-                mAPIService = ApiUtils.getAPIService();
-                RequestBody user_idR = RequestBody.create(MultipartBody.FORM, user_id);
-                RequestBody course_idR = RequestBody.create(MultipartBody.FORM, course_id);
-
-                mAPIService.bookClass(user_idR,course_idR).enqueue(new Callback<AccessToken>() {
-                    @Override
-                    public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
-                        dismissProgressDialog();
-                        if (response.isSuccessful()) {
-                            if (response.body().isSuccess()) {
-                                showProgressDialogSuccess();
-                            }else {
-                                showProgressDialogWarning();
-                            }
-
-                        }else{
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<AccessToken> call, Throwable t) {
-                        showProgressDialogerrorconnection();
-
-                    }
-                });
-            }
-        });
+//        book.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showProgressDialog();
+//                mAPIService = ApiUtils.getAPIService();
+//                RequestBody user_idR = RequestBody.create(MultipartBody.FORM, user_id);
+//                RequestBody course_idR = RequestBody.create(MultipartBody.FORM, course_id);
+//
+//                mAPIService.bookClass(user_idR,course_idR).enqueue(new Callback<AccessToken>() {
+//                    @Override
+//                    public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+//                        dismissProgressDialog();
+//                        if (response.isSuccessful()) {
+//                            if (response.body().isSuccess()) {
+//                                showProgressDialogSuccess();
+//                            }else {
+//                                showProgressDialogWarning();
+//                            }
+//
+//                        }else{
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<AccessToken> call, Throwable t) {
+//                        showProgressDialogerrorconnection();
+//
+//                    }
+//                });
+//            }
+//        });
     }
     private void showProgressDialog() {
         pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);

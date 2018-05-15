@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,7 +19,6 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -28,8 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class IncomeStatistic extends AppCompatActivity {
-
+public class HourStatistic extends AppCompatActivity {
 
     private GraphView graph;
     private ApiService mAPIService;
@@ -40,7 +37,7 @@ public class IncomeStatistic extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_income_statistic);
+        setContentView(R.layout.activity_hour_statistic);
 
         ImageView back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -55,11 +52,10 @@ public class IncomeStatistic extends AppCompatActivity {
 
 
     }
-
     public void getStatisticdetail() {
         sendOject o = new sendOject();
         mAPIService = ApiUtils.getAPIService();
-        mAPIService.get7daysStat(o.getUser_id()).enqueue(new Callback<List<CourseStatistic>>() {
+        mAPIService.getAllStatHour(o.getUser_id()).enqueue(new Callback<List<CourseStatistic>>() {
             @Override
             public void onResponse(Call<List<CourseStatistic>> call, Response<List<CourseStatistic>> response) {
                 course = response.body();
@@ -94,7 +90,6 @@ public class IncomeStatistic extends AppCompatActivity {
         ctd.setTime(today);
         ctd.add(Calendar.DATE, 2);
         today = ctd.getTime();
-//        Date today = Calendar.getInstance().getTime();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             StartDate = format.parse(start_date);
@@ -120,11 +115,10 @@ public class IncomeStatistic extends AppCompatActivity {
                 day = c.getTime();
                 String day_3_format = (String) DateFormat.format("yyyy-MM-dd", day);
                 date_index--;
-                newlist[index_listview] = new DataPoint(c.getTime(), index_listview);
+                newlist[index_listview] = new DataPoint(day.getTime(), 0);
                 for (CourseStatistic each : courseList) {
                     if (each.getDate().equals(day_3_format)) {
-                        int price = Integer.parseInt(each.getPrice_per_student());
-                        newlist[index_listview] = new DataPoint(c.getTime(), price);
+                        newlist[index_listview] = new DataPoint(day.getTime(), each.getHour());
                     }
                 }
                 index_listview--;
@@ -142,16 +136,6 @@ public class IncomeStatistic extends AppCompatActivity {
             graph.getViewport().setMaxX(day.getTime());
             graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getApplicationContext()));
             graph.getGridLabelRenderer().setNumHorizontalLabels(3);
-        }else{
-            newlist = new DataPoint[1];
-            newlist[0] = new DataPoint(today.getTime(),0);
-            LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(newlist);
-            graph.addSeries(series);
-            graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getApplicationContext()));
-            graph.getGridLabelRenderer().setNumHorizontalLabels(1);
-            graph.setTitle("No Statistic yet");
-            graph.setTitleColor(Color.parseColor("#98c428"));
-
         }
 
     }

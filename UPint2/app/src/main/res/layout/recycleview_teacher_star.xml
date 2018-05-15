@@ -1,175 +1,98 @@
-<android.support.v7.widget.CardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view_appfeed"
-    android:layout_width="178dp"
-    android:layout_height="165dp"
-    android:layout_marginLeft="7dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginBottom="5dp"
+    android:orientation="vertical"
+    android:layout_weight="1"
     >
 
 
 
-    <RelativeLayout
-        android:id="@+id/classinfolayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:layout_width="175dp"
+        android:layout_height="165dp">
 
-
-        <ImageView
-            android:id="@+id/course_photo"
-            android:layout_width="180dp"
-            android:layout_height="165dp"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:src="@drawable/sky" />
-
-        <TextView
-            android:id="@+id/course_name"
-            android:layout_width="155dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="@string/app_name"
-            android:textColor="#ffff"
-            android:layout_marginTop="@dimen/common_10_dp"
-            android:layout_marginLeft="@dimen/common_10_dp"
-            android:layout_alignParentLeft="true"
-            />
-
-        <TextView
-            android:id="@+id/teacher_name"
-            android:layout_width="155dp"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:layout_below="@+id/course_name"
-            android:text="course name"
-            android:textColor="#ffff"
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="@dimen/common_10_dp"
-            android:layout_alignParentLeft="true"
-            />
-
-        <ImageView
-            android:id="@+id/moneyicon"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@drawable/ic_money"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="110dp"
-            />
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/classinfolayout3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            android:layout_below="@+id/moneyicon"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/buttontags1_keyword"
-                android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+
+
+            <ImageView
+                android:id="@+id/course_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sky" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/star_tutor_icon"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/teacher_name"
+                android:layout_width="155dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:layout_below="@+id/moneyicon"
-                android:text="#keyword"
-                android:textSize="8dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:background="@drawable/tags_button"
-                android:paddingRight="6dp"
-                android:paddingLeft="6dp"
-                android:paddingTop="1dp"
-                android:paddingBottom="2dp"
-                android:minHeight="0dp" android:minWidth="0dp"
-                android:textAllCaps="false"
+                android:text="@string/app_name"
+                android:textColor="#ffff"
+                android:layout_marginTop="@dimen/common_10_dp"
+                android:layout_marginLeft="@dimen/common_10_dp"
+                android:layout_alignParentLeft="true"
+                android:shadowColor="#000000"
+                android:shadowDx="-1"
+                android:shadowDy="-1"
+                android:shadowRadius="1"
                 />
 
-            <Button
-                android:id="@+id/buttontags2_keyword"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/teacher_surname"
+                android:layout_width="155dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:text="#keyword"
-                android:textSize="8dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:background="@drawable/tags_button"
-                android:paddingRight="6dp"
-                android:paddingLeft="6dp"
-                android:paddingTop="1dp"
-                android:paddingBottom="2dp"
-                android:minHeight="0dp" android:minWidth="0dp"
-                android:textAllCaps="false"
+                android:text="@string/app_name"
+                android:layout_below="@+id/teacher_name"
+                android:textColor="#ffff"
+                android:layout_marginLeft="@dimen/common_10_dp"
+                android:layout_alignParentLeft="true"
+                android:shadowColor="#000000"
+                android:shadowDx="-1"
+                android:shadowDy="-1"
+                android:shadowRadius="1"
                 />
 
-            <Button
-                android:id="@+id/buttontags3_keyword"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/University"
+                android:layout_width="155dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:text="#keyword"
-                android:textSize="8dp"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:paddingRight="6dp"
-                android:paddingLeft="6dp"
-                android:paddingTop="1dp"
-                android:paddingBottom="2dp"
-                android:minHeight="0dp" android:minWidth="0dp"
-                android:background="@drawable/tags_button"
+                android:textSize="15dp"
+                android:layout_below="@+id/teacher_surname"
+                android:text="Chiangmai University"
+                android:textColor="#ffff"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="@dimen/common_10_dp"
+                android:layout_alignParentLeft="true"
+                android:shadowColor="#000000"
+                android:shadowDx="-1"
+                android:shadowDy="-1"
+                android:shadowRadius="1"
                 />
-        </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/price_appfeed"
-            android:text="price"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:textSize="11dp"
-            android:layout_toRightOf="@+id/moneyicon"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="110dp"
 
-            />
 
-        <ImageView
-            android:id="@+id/peopleicon"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@drawable/ic_people"
-            android:layout_toRightOf="@+id/price_appfeed"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="110dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/totalofstudent3"
-            android:text="15"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:textSize="11dp"
-            android:layout_toRightOf="@+id/numberofstudent3"
-            android:layout_marginTop="110dp"
+        </RelativeLayout>
 
-            />
+    </android.support.v7.widget.CardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/numberofstudent3"
-            android:text="15"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:textSize="11dp"
-            android:layout_toRightOf="@+id/peopleicon"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="110dp"
 
-            />
-
-    </RelativeLayout>
-
-</android.support.v7.widget.CardView>
+</LinearLayout>

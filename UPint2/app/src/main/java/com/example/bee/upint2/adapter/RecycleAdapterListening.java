@@ -91,8 +91,22 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
         Log.w(TAG, "date" + days);
         if (days >= 0 | !d.before(today)) {
             holder.Name.setText(course.get(position).getCourse_name());
+            mAPIService = ApiUtils.getAPIService();
+            mAPIService.classCount(course.get(position).getId().toString()).enqueue(new Callback<UserProfile>() {
+                @Override
+                public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                    if (response.isSuccessful()) {
+                        holder.numberofstudent.setText(response.body().getCount());
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<UserProfile> call, Throwable t) {
+
+                }
+            });
             holder.price.setText(course.get(position).getPrice_per_student() + "B");
-            holder.numberofstudent.setText("" + course.get(position).getTotal_student());
             //string part timestart
             String timestartst = course.get(position).getStart_time();
             String[] timestartpart = timestartst.split(":");
@@ -177,6 +191,9 @@ public class RecycleAdapterListening extends RecyclerView.Adapter<RecycleAdapter
             } else if (years.equals("4")) {
                 holder.targetyear.setText("Fourth year student");
             }
+
+
+
             ArrayList<String> taglist = new ArrayList<>();
 
             String tag = course.get(position).getTags().toString();

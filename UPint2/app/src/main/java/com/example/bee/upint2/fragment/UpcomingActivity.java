@@ -31,7 +31,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -157,10 +159,12 @@ public class UpcomingActivity extends AppCompatActivity implements SwipeRefreshL
             for (Course_user each1 : courseEnroll) {
                 if (each.getId().equals(each1.getCourse_id())) {
                     filteredJob.add(each);
-//                    Log.w(TAG, "find course id" + each.getId() + "  " + each1.getCourse_id());
+                    each.setCount(each1.getCount());
+                    Log.w(TAG, "count class enroll: "+each.getCount()+" | "+each1.getCount() );
                 }
             }
         }
+
         adapter = new RecycleAdapterCourse(filteredJob, getApplicationContext());
         recyclerView.setAdapter(adapter);
     }

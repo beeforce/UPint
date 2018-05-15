@@ -95,7 +95,7 @@ public class AppfeedActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
                 username.setText(response.body().getFirst_name()+" "+response.body().getLast_name());
-                user_university.setText(response.body().getSchool()+" University");
+                user_university.setText(response.body().getSchool());
 
                 String string = response.body().getImage();
                 String[] parts = string.split("/");

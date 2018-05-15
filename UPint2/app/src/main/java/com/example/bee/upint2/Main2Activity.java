@@ -17,6 +17,7 @@ import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,12 +70,14 @@ public class Main2Activity extends AppCompatActivity {
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setText(Html.fromHtml("<font color='#6caa22'><b>UP</b></font><font color='#559e2e'><i>int<i></font>"));
         setSupportActionBar(toolbar);
-
         ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeButtonEnabled(true);
         actionbar.setDisplayShowTitleEnabled(false);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_dehaze_black);
+
+//        ActionBar actionbar = getSupportActionBar();
+//        actionbar.setDisplayHomeAsUpEnabled(true);
+//        actionbar.setHomeButtonEnabled(true);
+//        actionbar.setDisplayShowTitleEnabled(false);
+//        actionbar.setHomeAsUpIndicator(R.drawable.ic_dehaze_black);
 
 
         initBottomNavigation();
@@ -83,6 +86,30 @@ public class Main2Activity extends AppCompatActivity {
 
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_addclass) {
+            Intent i = new Intent(Main2Activity.this,MakeclassActivity.class);
+            startActivity(i);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initBottomNavigation() {
 
         bottomNavigationView = (BottomNavigationView)
@@ -200,55 +227,31 @@ public class Main2Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //Checking for fragment count on backstack
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
-        } else if (!doubleBackToExitPressedOnce) {
-            this.doubleBackToExitPressedOnce = true;
-
-            UserInterfaceUtils.showToast(getApplicationContext(),
-                    getResources().getString(R.string.double_back_exit));
-
-            new Handler().postDelayed(new Runnable() {
-
-                @Override
-                public void run() {
-                    doubleBackToExitPressedOnce = false;
-                }
-            }, 2000);
-        } else {
-            super.onBackPressed();
-            return;
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+        super.onBackPressed();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
 
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
-//        String current = simpleDateFormat.format(new Date());
-//
-//        MySharedPreference.putPref(MySharedPreference.LAST_ACTIVE_TIME, current, getApplicationContext());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+        String current = simpleDateFormat.format(new Date());
+
+        MySharedPreference.putPref(MySharedPreference.LAST_ACTIVE_TIME, current, getApplicationContext());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-//        Boolean isActiveOverHalfHour = Validator.isActiveOverHalfHour(getApplicationContext());
-//
-//        if (isActiveOverHalfHour){
-//            MySharedPreference.clearPref(getApplicationContext());
-//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(intent);
-//        }
+        Boolean isActiveOverHour = Validator.isActiveOverHour(getApplicationContext());
+
+        if (isActiveOverHour){
+            MySharedPreference.clearPref(getApplicationContext());
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
     }
 }
 class BottomNavigationViewHelper {

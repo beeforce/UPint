@@ -48,7 +48,7 @@ public class Explorefragment extends android.support.v4.app.Fragment implements 
     private static String TAG = "Explorefragment";
     private String keywordbt1, keywordbt2, keywordbt3, keywordbt4, keywordbt5
             ,keywordbt6;
-    private List<Course> course;
+    private List<Course> course = null;
     private ArrayList<Course> courselist = new ArrayList<>();
     private ArrayList<Course> courseArrayList = new ArrayList<>();
     private RecycleAdapterKeyword_search adapterKeyword_search;
@@ -94,6 +94,13 @@ public class Explorefragment extends android.support.v4.app.Fragment implements 
 
         buttontagsAll_searchclasskeyword.setSelected(true);
         buttonDate1_searchclasskeyword.setSelected(true);
+
+        keywordbt1 ="#Writing";
+        keywordbt2 ="#Communication";
+        keywordbt3 ="#Interpretive Practices";
+        keywordbt4 ="#Professional Seminar";
+        keywordbt5 ="#Tutoring";
+        keywordbt6 ="#Argument";
 
         initOnclick();
     }
@@ -688,7 +695,6 @@ public class Explorefragment extends android.support.v4.app.Fragment implements 
                     buttontags1_searchclasskeyword.setSelected(true);
                     buttontagsAll_searchclasskeyword.setSelected(false);
                     buttontagsAll_searchclasskeyword.setPressed(false);
-                    keywordbt1 ="#Writing";
                     myFilter(keywordbt1);
                     onSuccess(courseArrayList);
                 }
@@ -733,7 +739,6 @@ public class Explorefragment extends android.support.v4.app.Fragment implements 
                     buttontags2_searchclasskeyword.setSelected(true);
                     buttontagsAll_searchclasskeyword.setSelected(false);
                     buttontagsAll_searchclasskeyword.setPressed(false);
-                    keywordbt2 ="#Communication";
                     myFilter(keywordbt2);
                     onSuccess(courseArrayList);
                 }else {
@@ -777,7 +782,6 @@ public class Explorefragment extends android.support.v4.app.Fragment implements 
                     buttontags3_searchclasskeyword.setSelected(true);
                     buttontagsAll_searchclasskeyword.setSelected(false);
                     buttontagsAll_searchclasskeyword.setPressed(false);
-                    keywordbt3 ="#Interpretive Practices";
                     myFilter(keywordbt3);
                     onSuccess(courseArrayList);
                 }else {
@@ -821,7 +825,6 @@ public class Explorefragment extends android.support.v4.app.Fragment implements 
                     buttontags4_searchclasskeyword.setSelected(true);
                     buttontagsAll_searchclasskeyword.setSelected(false);
                     buttontagsAll_searchclasskeyword.setPressed(false);
-                    keywordbt4 ="#Professional Seminar";
                     myFilter(keywordbt4);
                     onSuccess(courseArrayList);
                 }else {
@@ -866,7 +869,6 @@ public class Explorefragment extends android.support.v4.app.Fragment implements 
                     buttontags5_searchclasskeyword.setSelected(true);
                     buttontagsAll_searchclasskeyword.setSelected(false);
                     buttontagsAll_searchclasskeyword.setPressed(false);
-                    keywordbt5 ="#Tutoring";
                     myFilter(keywordbt5);
                     onSuccess(courseArrayList);
                 }else {
@@ -911,7 +913,6 @@ public class Explorefragment extends android.support.v4.app.Fragment implements 
                     buttontags6_searchclasskeyword.setSelected(true);
                     buttontagsAll_searchclasskeyword.setSelected(false);
                     buttontagsAll_searchclasskeyword.setPressed(false);
-                    keywordbt6 ="#Argument";
                     myFilter(keywordbt6);
                     onSuccess(courseArrayList);
                 }else {
@@ -957,7 +958,7 @@ public class Explorefragment extends android.support.v4.app.Fragment implements 
                 course = response.body();
                 Date today = Calendar.getInstance().getTime();// today
                 String to_day = (String) DateFormat.format("dd", today);
-                FilterbyDate(to_day);
+                    FilterbyDate(to_day);
                 buttonDate1_searchclasskeyword.setText(to_day);
 
                 Date day2 = new Date();//day 2
@@ -1034,11 +1035,12 @@ public class Explorefragment extends android.support.v4.app.Fragment implements 
     public void myFilter(String name){
 
         name = name.toLowerCase(Locale.getDefault());
-        for (Course each : courselist){
-            if (each.getTags().toLowerCase(Locale.getDefault()).contains(name)){
-                courseArrayList.remove(each);
-            }
-    }
+//        for (Course each : courselist){
+//            if (each.getTags().toLowerCase(Locale.getDefault()).contains(name)){
+//                courseArrayList.remove(each);
+//            }
+//    }
+        courseArrayList.removeAll(courseArrayList);
         for (Course each : courselist){
             if (each.getTags().toLowerCase(Locale.getDefault()).contains(name)){
                 courseArrayList.add(each);
@@ -1049,27 +1051,49 @@ public class Explorefragment extends android.support.v4.app.Fragment implements 
 
     public void FilterbyDate(String date){
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
-        for (Course each : course){
-            try {
-                d = input.parse(each.getDate());
-            } catch (ParseException e) {
-                e.printStackTrace();
+//        for (Course each : course){
+//            try {
+//                d = input.parse(each.getDate());
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//            String day = (String) DateFormat.format("dd", d);
+//            if (day.equals(date)){
+//                courselist.remove(each);
+//            }
+//        }
+        courselist.removeAll(courselist);
+
+            for (Course each : course) {
+                try {
+                    d = input.parse(each.getDate());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                String day = (String) DateFormat.format("dd", d);
+                if (day.equals(date)) {
+                    courselist.add(each);
+                }
             }
-            String day = (String) DateFormat.format("dd", d);
-            if (day.equals(date)){
-                courselist.remove(each);
-            }
+
+
+        if (buttontags1_searchclasskeyword.isSelected()){
+            myFilter(keywordbt1);
         }
-        for (Course each : course){
-            try {
-                d = input.parse(each.getDate());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            String day = (String) DateFormat.format("dd", d);
-            if (day.equals(date)){
-                courselist.add(each);
-            }
+        if (buttontags2_searchclasskeyword.isSelected()){
+            myFilter(keywordbt2);
+        }
+        if (buttontags3_searchclasskeyword.isSelected()){
+            myFilter(keywordbt3);
+        }
+        if (buttontags4_searchclasskeyword.isSelected()){
+            myFilter(keywordbt4);
+        }
+        if (buttontags5_searchclasskeyword.isSelected()){
+            myFilter(keywordbt5);
+        }
+        if (buttontags6_searchclasskeyword.isSelected()){
+            myFilter(keywordbt6);
         }
         onSuccess(courselist);
 

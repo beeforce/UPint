@@ -22,6 +22,7 @@ import com.example.bee.upint2.Classdetail;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.model.Course;
 import com.example.bee.upint2.model.UserProfile;
+import com.example.bee.upint2.model.sendOject;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
 
@@ -182,7 +183,11 @@ public class RecycleAdapterCourse extends RecyclerView.Adapter<RecycleAdapterCou
 
 
             holder.course_place.setText(course.get(position).getPlace());
-            holder.course_numberstudent.setText("" + course.get(position).getTotal_student());
+            if (course.get(position).getCount() != 0){
+                holder.course_numberstudent.setText("" + course.get(position).getCount());
+            }else {
+                holder.course_numberstudent.setText("" + course.get(position).getTotal_student());
+            }
             //string part url
             String string = course.get(position).getCourse_image_path();
             String[] parts = string.split("/");

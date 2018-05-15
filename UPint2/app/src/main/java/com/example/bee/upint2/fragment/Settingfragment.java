@@ -2,9 +2,6 @@ package com.example.bee.upint2.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +10,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.example.bee.upint2.AppfeedActivity;
 import com.example.bee.upint2.MainActivity;
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.model.sendOject;
@@ -36,7 +33,7 @@ import retrofit2.Response;
 
 public class Settingfragment extends android.support.v4.app.Fragment{
 
-    private Animation righttoleft, centertoleft;
+    private Animation righttoleft, centertoleft, lefttocenter, centertoright;
     private LinearLayout setting_page, feedback_page;
     private ApiService mAPIService;
     private EditText comment;
@@ -49,6 +46,8 @@ public class Settingfragment extends android.support.v4.app.Fragment{
         //Animation
         righttoleft = AnimationUtils.loadAnimation(getContext(),R.anim.righttoleftanim);
         centertoleft = AnimationUtils.loadAnimation(getContext(),R.anim.centertoleft);
+        centertoright = AnimationUtils.loadAnimation(getContext(),R.anim.centertoright);
+        lefttocenter = AnimationUtils.loadAnimation(getContext(),R.anim.lefttocenter);
 
         RelativeLayout gotoFeedback = rootView.findViewById(R.id.feedbackbt);
         RelativeLayout signOut = rootView.findViewById(R.id.signoutbt);
@@ -66,6 +65,17 @@ public class Settingfragment extends android.support.v4.app.Fragment{
                 feedback_page.setVisibility(View.VISIBLE);
                 feedback_page.startAnimation(righttoleft);
 
+            }
+        });
+
+        ImageView backtosetting = rootView.findViewById(R.id.backtosetting);
+        backtosetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                feedback_page.setVisibility(View.GONE);
+                feedback_page.startAnimation(centertoright);
+                setting_page.setVisibility(View.VISIBLE);
+                setting_page.startAnimation(lefttocenter);
             }
         });
 

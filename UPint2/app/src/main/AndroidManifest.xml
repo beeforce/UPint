@@ -73,8 +73,15 @@
         <activity
             android:name=".IncomeStatistic"
             android:screenOrientation="sensorLandscape" />
-        <activity android:name=".ClassamountStatistic"
-            android:screenOrientation="sensorLandscape"/>
+        <activity
+            android:name=".ClassamountStatistic"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".HourStatistic"
+            android:screenOrientation="sensorLandscape" />
+        <activity android:name=".TeacherProfilePage" />
+        <activity android:name=".SeeallStarTutor" />
+        <activity android:name=".SeeallBestcafe"></activity>
     </application>
 
 </manifest>

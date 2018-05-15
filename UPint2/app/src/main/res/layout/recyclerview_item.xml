@@ -1,12 +1,18 @@
-<android.support.v7.widget.CardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view_appfeed"
-    android:layout_width="178dp"
-    android:layout_height="165dp"
-    android:layout_marginLeft="7dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginBottom="5dp"
+    android:orientation="vertical"
+    android:layout_weight="1"
     >
 
 
+    <android.support.v7.widget.CardView
+        android:layout_width="175dp"
+        android:layout_height="165dp">
 
     <RelativeLayout
         android:id="@+id/classinfolayout3"
@@ -16,8 +22,8 @@
 
         <ImageView
             android:id="@+id/course_photo"
-            android:layout_width="180dp"
-            android:layout_height="165dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
@@ -42,5 +48,6 @@
 
 
     </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
-</android.support.v7.widget.CardView>
+</LinearLayout>

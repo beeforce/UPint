@@ -74,14 +74,23 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="#fff"
-            android:visibility="gone">
+            android:visibility="gone"
+            >
+
+            <ImageView
+                android:id="@+id/backtosetting"
+                android:layout_width="@dimen/common_30_dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:clickable="true"
+                android:src="@drawable/ic_arrow_left_back"/>
 
             <TextView
                 android:id="@+id/feedbacktv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
                 android:fontFamily="sans-serif"
                 android:text="Feedback to us !"
                 android:textColor="#6dd634"

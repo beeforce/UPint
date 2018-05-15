@@ -66,6 +66,18 @@ public class Course implements Serializable {
     @SerializedName("course_image")
     @Expose
     String course_image_path;
+    @SerializedName("count")
+    @Expose
+    int count;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
 
     boolean success = true;
 

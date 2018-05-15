@@ -19,15 +19,20 @@ import android.widget.TextView;
 
 import com.example.bee.upint2.R;
 import com.example.bee.upint2.SeachclassActivity;
+import com.example.bee.upint2.SeeallBestcafe;
+import com.example.bee.upint2.SeeallStarTutor;
 import com.example.bee.upint2.adapter.MyRecyclerViewAdapter;
 import com.example.bee.upint2.adapter.MyRecyclerViewAdapterTeacherStar;
 import com.example.bee.upint2.adapter.RecyclerViewClickListener;
 import com.example.bee.upint2.model.Course;
 import com.example.bee.upint2.model.Course_user;
+import com.example.bee.upint2.model.Teacher;
 import com.example.bee.upint2.model.sendOject;
 import com.example.bee.upint2.network.AccessToken;
 import com.example.bee.upint2.network.ApiService;
 import com.example.bee.upint2.network.ApiUtils;
+
+import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,6 +56,7 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
     private RecyclerView recyclerView, recyclerView2;
     private RecyclerView.LayoutManager layoutManager;
     private List<Course> course, course_searchrecent;
+    private List<Teacher> teacherList;
     private List<Course_user> courseEnroll;
     private List<Course> filteredJob = new ArrayList<Course>();
     //    private RecycleAdapterCourse adapter;
@@ -81,6 +87,7 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
             filteredJob.removeAll(filteredJob);
         }
         getClassdetail();
+        getTeacherInformation();
         AllgetClassdetail();
     }
 
@@ -104,6 +111,24 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
         place = rootView.findViewById(R.id.place);
         place_icon = rootView.findViewById(R.id.place_icon);
         dayremain = rootView.findViewById(R.id.dayremain); //upcomingclass count
+
+        TextView seeall_tutor = rootView.findViewById(R.id.seeall_Startutor);
+        seeall_tutor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), SeeallStarTutor.class);
+                startActivity(i);
+            }
+        });
+
+        TextView seeall_Cafe = rootView.findViewById(R.id.seeall_Bestcafe);
+        seeall_Cafe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), SeeallBestcafe.class);
+                startActivity(i);
+            }
+        });
 
         //fab
         searchfab = rootView.findViewById(R.id.search_class_fab);
@@ -152,6 +177,7 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                 if (response.code() == 200) {
+                    Log.w(TAG, "onResponse code is 200 "+response.body() );
                     if (response.body().getSearch_recent() == "") {
                         cardview_recent.setVisibility(View.GONE);
                         cardview_recent2.setVisibility(View.GONE);
@@ -166,6 +192,9 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
                                     keyword_home1.setText(each.getTags());
                                 }
                             }
+                            cardview_recent.setVisibility(View.VISIBLE);
+                            cardview_recent2.setVisibility(View.GONE);
+                            cardview_recent3.setVisibility(View.GONE);
                         } else if (parts.length == 2) {
                             String part2 = parts[1];
                             for (Course each : course_searchrecent) {
@@ -178,6 +207,9 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
                                     keyword_home2.setText(each.getTags());
                                 }
                             }
+                            cardview_recent.setVisibility(View.VISIBLE);
+                            cardview_recent2.setVisibility(View.VISIBLE);
+                            cardview_recent3.setVisibility(View.GONE);
                         } else if (parts.length == 3) {
                             String part2 = parts[1];
                             String part3 = parts[2];
@@ -195,15 +227,21 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
                                     keyword_home3.setText(each.getTags());
                                 }
                             }
+                            cardview_recent.setVisibility(View.VISIBLE);
+                            cardview_recent2.setVisibility(View.VISIBLE);
+                            cardview_recent3.setVisibility(View.VISIBLE);
                         }
                     }
+                }else {
+                    cardview_recent.setVisibility(View.GONE);
+                    cardview_recent2.setVisibility(View.GONE);
+                    cardview_recent3.setVisibility(View.GONE);
                 }
 
             }
 
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
-
             }
         });
     }
@@ -380,8 +418,6 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
         Cafeimage_path.add("http://localhost/UPint/public/images/uploads/Cafe_image/Chalatte_Chaingmai.jpg");
 
 
-        adapter2 = new MyRecyclerViewAdapterTeacherStar(courseList,getActivity());
-        recyclerView.setAdapter(adapter2);
         adapter = new MyRecyclerViewAdapter(CafeList,Cafeimage_path, getActivity());
         recyclerView2.setAdapter(adapter);
     }
@@ -415,5 +451,21 @@ public class HomeappFragment extends android.support.v4.app.Fragment implements 
         adapter = new MyRecyclerViewAdapter(getActivity(), this);
         adapter2 = new MyRecyclerViewAdapterTeacherStar(getActivity(),this);
 
+    }
+
+    public void getTeacherInformation() {
+        mAPIService = ApiUtils.getAPIService();
+        mAPIService.getTeacherInformation().enqueue(new Callback<List<Teacher>>() {
+            @Override
+            public void onResponse(Call<List<Teacher>> call, Response<List<Teacher>> response) {
+                teacherList = response.body();
+                adapter2 = new MyRecyclerViewAdapterTeacherStar(teacherList,getActivity());
+                recyclerView.setAdapter(adapter2);
+            }
+            @Override
+            public void onFailure(Call<List<Teacher>> call, Throwable t) {
+
+            }
+        });
     }
 }

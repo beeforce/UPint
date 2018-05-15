@@ -1,5 +1,6 @@
 package com.example.bee.upint2;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -57,7 +58,19 @@ public class ClassamountStatistic extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<CourseStatistic>> call, Response<List<CourseStatistic>> response) {
                 course = response.body();
-                getGraphinformation(course);
+                if (course.size() > 0) {
+                    getGraphinformation(course);
+                } else {
+                    Date today = Calendar.getInstance().getTime();
+                    newlist = new DataPoint[1];
+                    newlist[0] = new DataPoint(today.getTime(),0);
+                    LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(newlist);
+                    graph.addSeries(series);
+                    graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getApplicationContext()));
+                    graph.setTitle("No Statistic yet");
+                    graph.setTitleColor(Color.parseColor("#98c428"));
+                    graph.getGridLabelRenderer().setNumHorizontalLabels(1);
+                }
 
             }
 
@@ -68,10 +81,14 @@ public class ClassamountStatistic extends AppCompatActivity {
         });
     }
 
-    public void getGraphinformation(List<CourseStatistic> courseList){
+    public void getGraphinformation(List<CourseStatistic> courseList) {
         String start_date = courseList.get(0).getDate();
-        String last_date = courseList.get(courseList.size()-1).getDate();
-        Date today = Calendar.getInstance().getTime();
+        String last_date = courseList.get(courseList.size() - 1).getDate();
+        Date today = new Date();
+        Calendar ctd = Calendar.getInstance();
+        ctd.setTime(today);
+        ctd.add(Calendar.DATE, 2);
+        today = ctd.getTime();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             StartDate = format.parse(start_date);
@@ -79,37 +96,46 @@ public class ClassamountStatistic extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        long diff = today.getTime() - StartDate.getTime();
-        long seconds = diff / 1000;
-        long minutes = seconds / 60;
-        long hours = minutes / 60;
-        long days = hours / 24;
-        int date_remain = (Math.round(days));
-        newlist = new DataPoint[date_remain+1];
-        int date_index = 0;
-        int index_listview = newlist.length-1;
-        for (int i = newlist.length-1;i >= 0; i--){
+        if (today.getTime() > StartDate.getTime()) {
+            long diff = today.getTime() - StartDate.getTime();
+            long seconds = diff / 1000;
+            long minutes = seconds / 60;
+            long hours = minutes / 60;
+            long days = hours / 24;
+            int date_remain = (Math.round(days));
+            newlist = new DataPoint[date_remain + 1];
+            int date_index = 1;
+            int index_listview = newlist.length - 1;
+            for (int i = newlist.length - 1; i >= 0; i--) {
+                Date day = new Date();
+                Calendar c = Calendar.getInstance();
+                c.setTime(day);
+                c.add(Calendar.DATE, date_index);
+                day = c.getTime();
+                String day_3_format = (String) DateFormat.format("yyyy-MM-dd", day);
+                date_index--;
+                newlist[index_listview] = new DataPoint(day.getTime(), 0);
+                for (CourseStatistic each : courseList) {
+                    if (each.getDate().equals(day_3_format)) {
+                        newlist[index_listview] = new DataPoint(day.getTime(), each.getCount());
+                    }
+                }
+                index_listview--;
+            }
+
+
+            LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(newlist);
+            graph.addSeries(series);
+            graph.setCursorMode(true);
             Date day = new Date();
             Calendar c = Calendar.getInstance();
             c.setTime(day);
-            c.add(Calendar.DATE, date_index);
+            c.add(Calendar.DATE, 2);
             day = c.getTime();
-            String day_3_format = (String) DateFormat.format("yyyy-MM-dd", day);
-            date_index--;
-            newlist[index_listview] = new DataPoint(c.getTime(),0);
-            for (CourseStatistic each : courseList) {
-                if (each.getDate().equals(day_3_format)){
-                    newlist[index_listview] = new DataPoint(day.getTime(),each.getCount());
-                }
-            }
-            index_listview--;
+            graph.getViewport().setMaxX(day.getTime());
+            graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getApplicationContext()));
+            graph.getGridLabelRenderer().setNumHorizontalLabels(3);
         }
-
-
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(newlist);
-        graph.addSeries(series);
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getApplicationContext()));
-        graph.getGridLabelRenderer().setNumHorizontalLabels(5);
 
 
     }
